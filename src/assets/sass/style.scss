@@ -1,0 +1,1662 @@
+@use "sass:map";
+
+// $main-color: #3ea1d1;
+$main-color: #3ea1d1;
+$font-base: "Noto Serif JP", serif;
+$color-base: #333333;
+$background-base: #ffffff;
+$font-size-base: 16px;
+$line-height-base: 1.7;
+//ヘッダーの高さは後々使うかもしれないので
+$header-height-sp: 60px; //spのときのヘッダーセクションの高さが60pxだと、デザインカンプにあるため。
+$header-height-pc: 70px;
+
+$width-inner: 1280px;
+// $breakpoints: (
+//   sm: "screen and (min-width: 600px)",
+//   pc: "screen and (min-width: 768px)",
+//   lg: "screen and (min-width: 900px)",
+//   xl: "screen and (min-width: 1200px)",
+// );
+$breakpoints: (
+  sm: "screen and (min-width: 600px)",
+  pc: "screen and (min-width: 768px)",
+  lg: "screen and (min-width: 900px)",
+  xl: "screen and (min-width: 1200px)",
+);
+
+@mixin mq($breakpoint: pc) {
+  @media #{map.get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
+
+body {
+  font-family: $font-base;
+  color: $color-base;
+  background-color: $background-base;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  font-weight: 300;
+}
+
+.inner {
+  padding-inline: 15px;
+  //pcの最大幅が1200pxであり、左右の余白を担保しつつ、内側を1200pxにするため。
+  @include mq(pc) {
+    max-width: calc(1200px + 40px * 2);
+    //要素を左右中央揃えにするため。このスタイルを適用すると、指定した要素の左右のマージンが同等になり、結果として要素はその親要素内で中央に配置される。
+    margin-inline: auto;
+    padding-inline: 40px;
+  }
+}
+
+.pc-br {
+  display: none;
+
+  @include mq(pc) {
+    display: block;
+  }
+}
+
+.sp-br {
+  display: block;
+
+  @include mq(pc) {
+    display: none;
+  }
+}
+
+.heading {
+  font-size: 30px;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  align-items: center;
+  line-height: 100%;
+
+  @include mq(pc) {
+    font-size: 40px;
+    gap: 24px;
+  }
+
+  &::after {
+    width: 60px;
+    height: 1px;
+    content: "";
+    background: $main-color;
+  }
+}
+
+.section {
+  margin-top: 96px;
+
+  @include mq(pc) {
+    margin-top: 160px;
+  }
+}
+
+// .main {
+//   display: grid;
+//   gap: 96px;
+
+//   @include mq(pc) {
+//     gap: 160px;
+//   }
+// }
+
+.area {
+  margin-top: 46px;
+
+  @include mq(pc) {
+    margin-top: 64px;
+  }
+}
+
+// .section__content {
+//   margin-top: 46px;
+
+//   @include mq(pc) {
+//     margin-top: 64px;
+//   }
+// }
+
+.button {
+  letter-spacing: 0.02px;
+  padding: calc(12px - 1px);
+  display: flex;
+  margin-inline: auto;
+  justify-content: center;
+  border: 1px solid $main-color;
+  background: #fff;
+  font-size: 14px;
+  color: $main-color;
+  width: 158px;
+
+  transition: background-color 0.3s, color 0.3s;
+
+  @include mq(pc) {
+    margin-top: 44px;
+    &:hover {
+      background-color: $main-color;
+      color: #fff;
+      transform: scale(1.1, 1.1);
+    }
+  }
+}
+
+// 各セクションの見出しにとぶ。
+// section::before {
+//   content: "";
+//   display: block;
+//   padding-top: $header-height-sp;
+//   margin-top: -$header-height-sp;
+
+//   @include mq(pc) {
+//     padding-top: $header-height-pc;
+//     margin-top: -$header-height-pc;
+//   }
+// }
+
+// スムーススクロール
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: $header-height-sp;
+  @include mq(pc) {
+    scroll-padding-top: $header-height-pc;
+  }
+}
+
+// .button {
+//   display: inline-block;
+//   min-width: 158px;
+//   padding: calc(12px - 1px);
+//   text-align: center;
+//   border: 1px solid $main-color;
+//   background: #fff;
+//   color: $main-color;
+//   font-size: 14px;
+//   letter-spacing: 0.02px;
+//   transition: background-color 0.3s, color 0.3s;
+
+//   &:hover {
+//     background-color: $main-color;
+//     color: #fff;
+
+//   }
+// }
+
+/*-------------------------
+   ヘッダー
+  -------------------------*/
+
+.header {
+  height: $header-height-sp;
+  // スクロールしても、ヘッダーを上部に固定できる。
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+  background: #fff;
+
+  @include mq(pc) {
+    height: $header-height-pc;
+  }
+}
+
+.header__inner {
+  //要素の高さを親要素から継承する。これにより、.header__innerの高さは親要素の.headerと同じになる。
+  height: inherit;
+  //親要素に対して子要素を横並びにする。
+  display: flex;
+  //横並びの要素を両端揃えで均等に配置する。
+  justify-content: space-between;
+  // height: $header-height-sp;
+  // 子要素（flexアイテム）を上下中央に揃える指定です。親要素（flexコンテナ）の中で中央揃えになります。
+  align-items: center;
+}
+
+.header__logo {
+  a {
+    img {
+      width: 120px;
+      //ブロックレベルの特性を与える。これにより、画像が親要素の幅いっぱいに広がる。
+      display: block;
+    }
+  }
+
+  @include mq(pc) {
+    transition: opacity 0.3s;
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+}
+
+.header__nav {
+  background: $main-color;
+  width: 270px;
+  //全体の高さからヘッダーの高さを引いた値
+  height: calc(100% - $header-height-sp);
+  //HTML要素を画面上の固定位置に配置するため。これにより要素がスクロールしても画面上の指定された位置に固定される。
+  position: fixed;
+  right: 0;
+  top: $header-height-sp;
+  padding: calc(40px - 8px) 15px;
+  // X 軸（横方向）の位置を画面の右側に見えないように移動させる
+  transform: translateX(100%);
+  //transformの変化は0.4秒間で行われ、変化の速度は一定（linear）
+  transition: transform 0.4s linear;
+
+  &.is-checked {
+    //要素は元の位置（水平方向に0%分移動）に戻る。画面の外に隠した要素を画面内に表示する。
+    transform: translateX(0);
+  }
+  //これで消えていたメニューが戻ってくる。
+  @include mq(pc) {
+    //背景を透明にする。
+    background: transparent;
+    width: auto;
+    height: auto;
+    //要素の位置を通常の文書フローに設定する。これにより、要素はposition: fixed;やposition: absolute;などの他の位置指定から解除され、通常の文書フローに従って配置される。
+    position: static;
+    //パディングは取られる。パディングとは余白のことで、padding プロパティを指定しない場合は、余白部分は要素の背景色が適用される。
+    padding: 0;
+    //要素は元の位置（水平方向に0%分移動）に戻る。こうしないとメニューが元の位置に戻らない。
+    transform: translateX(0);
+  }
+}
+
+.header__lists {
+  display: flex;
+  //要素を上から下に垂直方向に並べる
+  flex-direction: column;
+  //フレックスアイテムを交差軸（この場合は水平軸）の終端に配置。これにより、フレックスアイテムは各行の右端に揃えられる。
+  align-items: flex-end;
+  gap: calc(32px - 8px * 2);
+
+  @include mq(pc) {
+    //要素を左から右に並べる
+    flex-direction: row;
+    align-items: center;
+    gap: 47px;
+    margin-top: 4px;
+  }
+}
+.header__list {
+}
+.header__link {
+  //要素をインラインブロックとして表示します。これにより、要素はインライン要素のように行内に配置されますが、ブロック要素のように幅と高さを指定できます。
+  display: inline-block;
+  padding-block: 8px;
+  color: #fff;
+  font-size: 18px;
+
+  @include mq(pc) {
+    color: $color-base;
+    font-size: $font-size-base;
+    transition: color 0.3s;
+
+    // ホバーすると文字の色が変わる。
+    &:hover {
+      color: $main-color;
+    }
+  }
+}
+.drawer-content__link {
+}
+
+.header__open {
+  // margin-top: 2px;
+  @include mq(pc) {
+    display: none;
+  }
+}
+
+.drawer-icon {
+  width: 30px;
+  height: 18px;
+  //position: relative;を設定した要素は、その子要素にposition: absolute;が設定されている場合の基準点（ポジショニングコンテキスト）となります。これは、絶対位置指定された子要素が、この相対位置指定された親要素に対して位置を決定するための基準となる
+  position: relative;
+  // z-index: 51;
+  margin-top: -3px;
+
+  &.is-checked {
+    .drawer-icon__bar {
+      &:nth-of-type(1) {
+        top: 11px;
+        transform: rotate(44.89deg);
+      }
+
+      &:nth-of-type(2) {
+        display: none;
+      }
+
+      &:nth-of-type(3) {
+        top: 11px;
+        transform: rotate(-44.904deg);
+      }
+    }
+  }
+}
+
+.drawer-icon__bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: $main-color;
+  transition: transform 0.4s linear, top 0.4s linear;
+
+  &:nth-of-type(1) {
+  }
+
+  &:nth-of-type(2) {
+    top: 8px;
+  }
+
+  &:nth-of-type(3) {
+    top: 16px;
+  }
+}
+
+/*-------------------------
+   ファーストビュー
+  -------------------------*/
+
+.fv {
+  // position: relative;
+}
+
+.fv__inner {
+  //動画
+  position: relative;
+}
+
+.inner {
+}
+
+.fv__image {
+  //動画
+  @include mq(pc) {
+    max-width: 990px;
+    //margin-left: auto を使用すると、使用可能なスペースのすべてを左マージンとして使用するため、要素は右側に移動する。
+    margin-left: auto;
+    display: block;
+  }
+  　 img {
+    // width: 345px;
+    // display: block;
+
+    // @include mq(pc) {
+    //   width: 990px;
+    //   float: right;
+    // }
+  }
+}
+
+.fv__message {
+  margin-top: 30px;
+  // @include mq(pc) {
+  //   position: absolute;
+  //   margin-block: 171px;
+  //   background: rgb(255, 255, 255, 1);
+  //   left: 0;
+  //   width: 367px;
+  //   height: 318px;
+  //   padding: 50px 40px;
+  //   flex-direction: column;
+  //   justify-content: center;
+  //   align-items: flex-start;
+  // }
+
+  @include mq(pc) {
+    position: absolute;
+    //notion解説
+    inset-block: 0;
+    //notion解説
+    margin-block: auto;
+    left: 0;
+    padding: 80px 40px;
+    background: #fff;
+    //notion解説
+    height: fit-content;
+  }
+}
+.fv__title {
+  // margin-top: 30px;　messageの方にいれる。
+  margin-left: -1px;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.fv__text {
+  // padding-top: 16px;
+  margin-top: 16px;
+}
+
+/*-------------------------
+   concept
+  -------------------------*/
+
+.concept {
+  margin-top: 94px;
+
+  @include mq(pc) {
+    margin-top: 160px;
+  }
+}
+
+.concept__inner {
+}
+
+.heading {
+}
+
+.concept__content {
+  flex-direction: column;
+  display: flex;
+  // 動画
+  gap: 34px;
+
+  @include mq(pc) {
+    // gap: 80px;
+    //レスポンシブチェックしたときにただの80pxだと、大きすぎて表示が崩れるから。
+    gap: calc(80px / 1200px * 100%);
+    flex-direction: row;
+    //動画
+    align-items: center;
+  }
+}
+
+.concept__image {
+  //動画
+  text-align: center;
+
+  @include mq(pc) {
+    //動画
+    //親要素であるconcept__contentの幅が1200pxだから、600pxになる。だから、割合で出す。
+    //calc(600px / 1200px * 100%)という式は、600pxを1200pxで割った後、その結果を100倍してパーセンテージを求めています。つまり、要素の幅を親要素の幅に対する50%に設定しようとしています。
+    width: calc(600px / 1200px * 100%);
+    //画像が縮まないようにするため。
+    flex-shrink: 0;
+    // width: 600px;
+  }
+
+  img {
+    //動画
+    width: 100%;
+  }
+}
+
+.concept__message {
+  //pcの時に横並びにしたいから、スマホのときはflex-direction: column;で縦に並べるため必要ない
+  // margin-top: 34px;
+
+  @include mq(pc) {
+    // padding-top: 67px;
+    // margin-block: auto;
+
+    //動画
+    flex-grow: 1;
+  }
+}
+
+.concept__sub-title {
+  font-size: 20px;
+  font-weight: 600;
+
+  // 動画
+
+  @include mq(pc) {
+    font-size: 18px;
+  }
+
+  @include mq(lg) {
+    font-size: 20px;
+  }
+}
+
+.concept__text {
+  margin-top: 21px;
+
+  @include mq(pc) {
+    margin-top: 40px;
+  }
+}
+
+/*-------------------------
+   feature
+  -------------------------*/
+
+.feature {
+}
+
+.feature__inner {
+}
+
+.feature__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 49px;
+  margin-top: 45px;
+
+  @include mq(pc) {
+    gap: 40px;
+    flex-direction: row;
+    margin-top: 65px;
+  }
+  //レスポンシブ対応。動画を観て写した。
+  @include mq(lg) {
+    gap: 60px;
+  }
+
+  @include mq(xl) {
+    gap: 90px;
+  }
+}
+
+.feature__card {
+  background: #fff;
+  box-shadow: 3px 3px 15px 0px rgba(96, 96, 96, 0.16);
+}
+.feature-card__image {
+  img {
+    //動画では指定なし
+    width: 100%;
+  }
+}
+.feature-card__body {
+  padding-block: 26px;
+}
+.feature-card__text {
+  font-weight: 600;
+  text-align: center;
+}
+
+/*-------------------------
+   about
+  -------------------------*/
+
+// .history {
+// }
+
+// // .history__area {
+// // }
+
+// .history__box {
+//   position: relative;
+// }
+
+// .history__image {
+//   position: absolute;
+
+//   background: url("../img/sp/bg-1.jpg") lightgray 50% / cover no-repeat;
+// }
+
+// .sp {
+//   background: rgba(0, 0, 0, 0.12);
+// }
+
+// .history__story {
+//   position: absolute;
+//   color: #fff;
+//   font-weight: 600;
+//   padding-inline: 15px;
+//   padding-top: 180px;
+
+//   @include mq(pc) {
+//     padding-inline: 40px;
+//     padding-top: 123px;
+//   }
+// }
+// .history__title {
+//   font-size: 20px;
+
+//   @include mq(pc) {
+//     font-size: 22px;
+//   }
+// }
+// .history__text {
+//   font-size: 14px;
+
+//   padding-top: 24px;
+//   // padding-bottom: 50px;
+
+//   @include mq(pc) {
+//     font-size: $font-base;
+//   }
+// }
+
+.about {
+  // backgroundで画像を記述。background-imageにすると、画像が表示されない。
+  background: url("../img/sp/bg-1.jpg") no-repeat top center / cover;
+  position: relative;
+  padding-block: 180px 50px;
+
+  @include mq(pc) {
+    background-image: url("../img/pc/bg-2.jpg");
+    padding-block: 123px 122px;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.12);
+    z-index: 1;
+  }
+}
+
+.about__content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  font-weight: 600;
+
+  @include mq(pc) {
+    width: calc(600px / 1200px * 100%);
+  }
+}
+.about__title {
+  font-size: 20px;
+
+  @include mq(pc) {
+    font-size: 22px;
+  }
+}
+.about__text {
+  font-size: 14px;
+  margin-top: 24px;
+
+  @include mq(pc) {
+    font-size: $font-size-base;
+  }
+}
+
+/*-------------------------
+   products
+  -------------------------*/
+
+.products {
+  margin-top: 97px;
+
+  @include mq(pc) {
+    margin-top: 157px;
+  }
+}
+
+.products__inner {
+  padding-inline: 56px;
+  //動画を観てから
+  @include mq(pc) {
+    max-width: calc(940px + 40px * 2);
+    padding-inline: 40px;
+  }
+}
+
+.products__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 39px;
+
+  @include mq(pc) {
+    flex-direction: row;
+    justify-content: center;
+    gap: 50px;
+  }
+
+  @include mq(lg) {
+    gap: 80px;
+  }
+}
+
+.products__card {
+  @include mq(pc) {
+    &:hover {
+      .products-card__image {
+        img {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+}
+
+.products-card__image {
+  img {
+    // 動画を観てから
+    width: 100%;
+  }
+
+  @include mq(pc) {
+    // 画像がホバーで拡大したときにはみ出さないようにする。
+    overflow: hidden;
+
+    img {
+      transition: transform 0.5s;
+    }
+  }
+}
+
+.products-card__body {
+  margin-top: 21px;
+  font-size: 14px;
+
+  @include mq(pc) {
+    margin-top: 18px;
+  }
+}
+.products-card__title {
+}
+.products-card__price {
+  color: #989898;
+  margin-top: 10px;
+
+  @include mq(pc) {
+    // padding-top: 12px;
+  }
+}
+
+.products__button {
+  // 動画ではtext-align: center;でボタンの位置を中央にしている。
+  // text-align: center;
+  margin-top: 42px;
+  @include mq(pc) {
+    margin-top: 44px;
+  }
+}
+
+/*-------------------------
+   news
+  -------------------------*/
+
+.news {
+}
+
+.news__inner {
+  @include mq(pc) {
+    max-width: calc(1040px + 40px * 2);
+    padding-inline: 40px;
+  }
+}
+
+.news__cards {
+  // //動画では
+  // display: flex;
+  // flex-direction: column;
+  // gap: 28px;
+
+  // @include mq(pc) {
+  //   gap: 28px;
+  // }
+}
+
+.news__card {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+
+  @include mq(pc) {
+    // flex-direction: row;
+    gap: 24px;
+
+    // &:hover {
+    //   .news-card__image {
+    //     img {
+    //       transform: scale(1.1);
+    //     }
+    //   }
+    // }
+  }
+
+  //動画では
+  // padding-bottom: 28px;
+  // border-bottom: 1px solid #e0e0e0;
+
+  // @include mq(pc) {
+  //   padding-bottom: 24px;
+  // }
+}
+
+.news-card {
+  padding-bottom: 28px;
+  background: #fff;
+  box-shadow: 0px 1px 0px 0px #e0e0e0;
+
+  @include mq(pc) {
+    display: flex;
+    gap: 40px;
+    padding-bottom: 24px;
+
+    &:hover {
+      .news-card__image {
+        img {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    // 動画では
+    // display: flex;
+    // align-items: flex-start;
+    // gap: 40px;
+  }
+}
+
+.news-card__image {
+  img {
+    width: 100%;
+
+    @include mq(pc) {
+      width: 260px;
+      //動画では
+      // flex-shrink: 0;
+      // 画像がホバーで拡大したときにはみ出さないようにする。
+      overflow: hidden;
+      transition: transform 0.5s;
+    }
+  }
+}
+.news-card__body {
+  //動画では、 margin-top: 16px;を当てている。
+  @include mq(pc) {
+    max-width: 736px;
+  }
+
+  //動画では
+  // @include mq(pc) {
+  //   flex-grow: 1;
+  // }
+}
+.news-card__date {
+  font-size: 14px;
+  margin-top: 17px;
+
+  @include mq(pc) {
+    margin-top: 0;
+  }
+}
+.news-card__title {
+  font-weight: 600;
+  margin-top: 9px;
+
+  @include mq(pc) {
+    font-size: 18px;
+    margin-top: 16px;
+  }
+}
+.news-card__text {
+  color: #888;
+  font-size: 14px;
+  margin-top: 14px;
+
+  @include mq(pc) {
+    margin-top: 10px;
+  }
+}
+.news-card__button {
+  margin-top: 42px;
+  @include mq(pc) {
+    margin-top: 44px;
+  }
+}
+
+/*-------------------------
+   message
+  -------------------------*/
+
+.message {
+}
+
+.message__inner {
+}
+
+.message__content {
+  //pcの時にflexで横並びにするときは、spの時にflexを当てて、columnで縦並びしておく。そうすることでpcに切り替えたときに、align-items: center;などが適切に働く。
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  @include mq(pc) {
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 40px;
+  }
+  //動画を観てから
+  @include mq(lg) {
+    gap: 60px;
+  }
+
+  @include mq(xl) {
+    gap: 80px;
+  }
+}
+.message__image {
+  img {
+  }
+
+  @include mq(pc) {
+    //動画を観てから
+    width: calc(600px / 1200px * 100%);
+    flex-shrink: 0;
+  }
+}
+.message__body {
+  // margin-top: 32px;
+  @include mq(pc) {
+    //動画を観てから
+    //親要素の残り空間をどれだけの割合で分けるかを決めるもの。これにより、要素は親要素の残り空間を均等に分けて占有します。
+    flex-grow: 1;
+  }
+}
+.message__title {
+  font-size: 20px;
+  font-weight: 600;
+  //動画を観てから
+  @include mq(pc) {
+    font-size: 22px;
+  }
+
+  @include mq(lg) {
+    font-size: 25px;
+  }
+
+  @include mq(xl) {
+    font-size: 28px;
+  }
+}
+
+.message__text {
+  font-size: 14px;
+  margin-top: 22px;
+
+  @include mq(pc) {
+    font-size: $font-size-base;
+    margin-top: 36px;
+  }
+}
+
+/*-------------------------
+   contact
+  -------------------------*/
+
+// .contact {
+//   background: url("../img/sp/contact_bg-1.jpg") no-repeat top center / cover;
+
+//   @include mq(pc) {
+//     background-image: url("../img/pc/contact_bg-2.jpg");
+//   }
+// }
+
+// .contact__inner {
+//   padding-top: 56px;
+
+//   @include mq(pc) {
+//     padding-top: 80px;
+//   }
+// }
+
+// .contact__heading {
+//   color: $main-color;
+// }
+
+// .contact__content {
+// }
+
+// .contact__note {
+//   font-size: 14px;
+//   font-weight: 600;
+//   text-align: center;
+// }
+
+// .contact__note span {
+//   color: #e7728e;
+// }
+
+// .contact__form {
+//   display: flex;
+//   flex-direction: column;
+//   @include mq(pc) {
+//     margin-inline: auto;
+//     align-items: center;
+//     width: 510px;
+//   }
+// }
+
+// .contact__head {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 32px;
+
+//   @include mq(pc) {
+//     width: 510px;
+//   }
+// }
+
+// .contact__field-1 {
+//   color: #fff;
+//   margin-top: 28px;
+
+//   @include mq(pc) {
+//     display: flex;
+//     flex-direction: row;
+//     margin-top: 19px;
+//     gap: 10px;
+//   }
+// }
+
+// .contact-field__label-1 {
+//   background: $main-color;
+//   padding: 4px 16px;
+//   font-size: 14px;
+//   font-weight: 600;
+//   width: calc(345px + 16px * 2);
+
+//   @include mq(pc) {
+//     background: url("../img/pc/bg.png") no-repeat center center / cover;
+//     width: 180px;
+//     height: 40px;
+//     text-align: center;
+//     font-size: 18px;
+//   }
+// }
+
+// .contact-field__label-1 span {
+//   color: #e7728e;
+//   font-size: 10px;
+//   padding-left: 4px;
+
+//   @include mq(pc) {
+//     font-size: 12px;
+//   }
+// }
+
+// .contact-field__text {
+//   display: flex;
+//   margin-top: 3px;
+//   width: calc(345px + 3px * 2);
+//   border: 1px solid #fff;
+
+//   @include mq(pc) {
+//     width: 320px;
+//   }
+// }
+
+// .contact__field {
+//   color: #fff;
+//   @include mq(pc) {
+//     display: flex;
+//     flex-direction: row;
+//     gap: 10px;
+//   }
+// }
+
+// .contact-field__label-2 {
+//   background: $main-color;
+//   padding: 4px 16px;
+//   font-size: 14px;
+//   font-weight: 600;
+
+//   @include mq(pc) {
+//     background: url("../img/pc/bg.png") no-repeat center center / cover;
+//     width:180px;
+//     height: 40px;
+//     font-size: 18px;
+//     text-align: center;
+//   }
+// }
+
+// .contact-field__label-2 span {
+//   color: #e7728e;
+//   font-size: 10px;
+//   padding-left: 4px;
+
+//   @include mq(pc) {
+//     font-size: 12px;
+//   }
+// }
+
+// .contact-field__head {
+//   max-width: calc(118px + 16px * 2);
+
+//   @include mq(pc) {
+//     max-width: none;
+//   }
+// }
+
+// .contact-field__label {
+//   background: $main-color;
+//   padding: 4px 16px;
+//   font-size: 14px;
+//   font-weight: 600;
+
+//   @include mq(pc) {
+//     background: url("../img/pc/bg.png") no-repeat center center / cover;
+//     width: calc(180px + 16px * 2);
+//     height: calc(40px + 4px * 2);
+//     font-size: 18px;
+//     text-align: center;
+//   }
+// }
+
+// .contact-field__label span {
+//   color: #e7728e;
+//   font-size: 10px;
+//   padding-left: 4px;
+//   @include mq(pc) {
+//     font-size: 12px;
+//   }
+// }
+
+// .contact-field__box {
+//   display: flex;
+//   flex-direction: row;
+//   gap: 0;
+//   width: calc(160px + 1px * 2);
+//   border: 1px solid #fff;
+//   margin-top: 3px;
+// }
+
+// .contact-field__box label {
+//   background: #fff;
+//   color: $main-color;
+//   padding: 7px 24px 6px 24px;
+// }
+
+// .contact-field__box input:checked + label {
+//   background: $main-color;
+//   color: #fff;
+// }
+
+// .contact-field__box input {
+//   display: none;
+// }
+
+// .contact-field__label-3 {
+//   background: $main-color;
+//   padding: 4px 16px;
+//   font-size: 14px;
+//   font-weight: 600;
+
+//   @include mq(pc) {
+//     background: url("../img/pc/bg.png") no-repeat center center / cover;
+//     width: calc(180px );
+//     height: 40px;
+//     font-size: 18px;
+//     text-align: center;
+//   }
+// }
+
+// .contact-field__label-3 span {
+//   color: #e7728e;
+//   font-size: 10px;
+//   padding-left: 4px;
+
+//   @include mq(pc) {
+//     font-size: 12px;
+//   }
+// }
+
+// .contact-field__textarea {
+//   border: 1px solid #fff;
+//   margin-top: 3px;
+//   width: calc(345px + 3px * 2);
+//   height: calc(122px + 3px * 2);
+
+//   @include mq(pc) {
+//     width: calc(320px + 3px * 2);
+//   }
+// }
+// .contact-field__privacy {
+//   margin-top: 28px;
+//   text-align: center;
+
+//   @include mq(pc) {
+//     margin-top: 32px;
+//   }
+// }
+// .contact-field__checkbox {
+// }
+// .contact-field__input {
+//   width: 1px;
+//   height: 1px;
+//   position: absolute;
+//   clip: rect(0, 0, 0, 0);
+//   overflow: hidden;
+// }
+
+// .contact-field__input:checked + .contact-checkbox__text::after {
+//   opacity: 1;
+// }
+
+// .contact-checkbox__text {
+//   position: relative;
+//   padding-left: 30px;
+
+//   a {
+//     text-decoration: underline;
+//     font-weight: inherit;
+//     transition: color 0.3s;
+//     color: $main-color;
+//   }
+// }
+
+// .contact-checkbox__text::before,
+// .contact-checkbox__text::after {
+//   content: "";
+//   position: absolute;
+//   left: 0;
+//   top: 50%;
+//   transform: translateY(-50%);
+// }
+
+// .contact-checkbox__text::before {
+//   width: 22px;
+//   height: 22px;
+//   border: 1px solid $main-color;
+//   background: #fff;
+// }
+
+// .contact-checkbox__text::after {
+//   width: calc(19.414px + 1.29px * 2);
+//   height: calc(14.621px + 3.69px * 2);
+//   padding-inline: 1.29px;
+//   padding-block: 3.69px;
+//   background: url(../img/box.png) no-repeat center center / contain;
+//   opacity: 0;
+// }
+
+// .button {
+//   margin-top: 23px;
+//   margin-bottom: 56px;
+
+//   @include mq(pc) {
+//     margin-top: 44px;
+//     margin-bottom: 80px;
+//   }
+// }
+
+/*-------------------------
+ contact
+  -------------------------*/
+
+.contact {
+  //pcの画像をダウンロードすればOK。sp用の画像はダウンロードする必要なし。
+  background: url("../img/pc/contact_bg-2.jpg") no-repeat top center / cover;
+  //解説➀参照。
+  padding-block: 56px;
+
+  @include mq(pc) {
+    padding-block: 80px;
+  }
+}
+
+.contact__inner {
+  //動画ではこっち。しかし、デザインカンプてきにはcontact__formの方が適切。
+  @include mq(pc) {
+    max-width: calc(510px + 40px * 2);
+  }
+}
+
+.contact__heading {
+  color: $main-color;
+  gap: 27px;
+
+  @include mq(pc) {
+    gap: 23px;
+  }
+}
+
+.contact__content {
+}
+
+.contact__form {
+  // @include mq(pc) {
+  //   max-width: 510px;
+  //   margin-inline: auto;
+  // }
+}
+
+.contact__note {
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.is-required {
+  color: #e7728e;
+  //font-weight: 600;はつど書かないと適用されない。
+  font-weight: 600;
+}
+
+.contact__items {
+  // margin-top: 28px;は名前の部分の上の余白。解説➁参照
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  @include mq(pc) {
+    margin-top: 19px;
+  }
+}
+
+.contact__item {
+}
+.contact-control {
+  //contact-control__headと、contact-control__inputの間に3pxのスキマを作るため。
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  @include mq(pc) {
+    flex-direction: row;
+    gap: 10px;
+  }
+}
+
+.contact-control__head {
+  @include mq(pc) {
+    width: 180px;
+    //画像が縮まないようにするため。
+    flex-shrink: 0;
+  }
+}
+
+.form-label {
+  display: inline-flex;
+  color: #fff;
+  //0.7透過させるため。
+  background: rgba($main-color, 0.7);
+  padding: 4px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  //解説➂参照。
+  gap: 3px;
+  align-items: center;
+
+  @include mq(pc) {
+    // width: 100%;にすることで、画面の幅を変えたとしても、自動で画面の幅に合わせて画像のサイズが調整される。だから、レスポンシブデザインを実装するときに便利。
+    width: 100%;
+    justify-content: center;
+    font-size: 18px;
+    padding-top: 5px;
+    padding-bottom: 4px;
+    padding-inline: 4px;
+    //鉛筆みたいなボックスを作成するため。
+    clip-path: polygon(0 0, 97% 0, 100% 50%, 97% 100%, 0% 100%);
+  }
+}
+
+.form-label__required {
+  color: #e7728e;
+  font-size: 10px;
+  font-weight: 600;
+
+  @include mq(pc) {
+    font-size: 12px;
+  }
+}
+
+.contact-control__input {
+  @include mq(pc) {
+    flex-grow: 1;
+  }
+}
+
+.form-text {
+  //解説➃参照
+
+  width: 100%;
+  height: 40px;
+  //要素の境界線をなくすため。
+  border: 0;
+  background: #fff;
+  //右に5px、下に6px、16px分影を広げる、0px分影を追加する。透明度が0.16の灰色
+  box-shadow: 5px 6px 16px 0px rgba(96, 96, 96, 0.16);
+
+  &:focus {
+    outline: $main-color auto 1px;
+    box-shadow: 5px 6px 16px 0px rgba($main-color, 0.16);
+  }
+}
+
+//解説➄参照
+.contact-control__radios {
+  display: flex;
+  align-items: center;
+}
+
+.form-radio {
+  //form-radio__inputのposition: absoluteの位置の基準として使うため。
+  position: relative;
+}
+//デフォルトのradioボタンを非表示にするため。
+.form-radio__input {
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  //表示領域がないようにする。
+  clip: rect(0, 0, 0, 0);
+  // clip: rect(0, 0, 0, 0)により視覚的には全く見えない状態になっていますが、overflow: hidden;によりその中の内容が要素の外にはみ出すことはありません。
+  overflow: hidden;
+
+  //ボタンを押したときに反応する。
+
+  &:checked + .form-radio__text {
+    background: $main-color;
+    color: #fff;
+  }
+
+  &:focus + .form-radio__text {
+    outline: $main-color auto 1px;
+    box-shadow: 5px 6px 16px 0px rgba($main-color, 0.32);
+  }
+}
+
+.form-radio__text {
+  background: #fff;
+  color: $main-color;
+  //文字の間隔
+  letter-spacing: 0.026px;
+  //ボタンのサイズを調整。
+  width: 80px;
+  height: 40px;
+  //解説➅参照。
+  display: grid;
+  place-items: center;
+}
+
+.form-textarea {
+  // width: 100%;にすることで、画面の幅を変えたとしても、自動で画面の幅に合わせて画像のサイズが調整される。だから、レスポンシブデザインを実装するときに便利。
+  width: 100%;
+  margin-top: 1px;
+  height: 122px;
+  border: 0;
+  font-size: 16px;
+  background: #fff;
+  box-shadow: 5px 6px 16px 0px rgba(96, 96, 96, 0.16);
+  //ユーザーが要素のサイズを垂直方向に自由に変更できる。
+  resize: vertical;
+
+  &:focus {
+    outline: $main-color auto 1px;
+    box-shadow: 5px 6px 16px 0px rgba($main-color, 0.16);
+  }
+}
+.contact__footer {
+  margin-top: 26px;
+
+  @include mq(pc) {
+    margin-top: 32px;
+  }
+}
+.contact__privacy {
+  text-align: center;
+}
+.form-checkbox {
+  position: relative;
+}
+.form-checkbox__input {
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+  //チェックボックスボタンを押したら、見えなくなっている矢印が見えるようになる。
+  &:checked + .form-checkbox__text {
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &:focus + .form-checkbox__text {
+    &::before {
+      outline: $main-color auto 1px;
+      box-shadow: 5px 6px 16px 0px rgba($main-color, 0.16);
+    }
+  }
+}
+
+.form-checkbox__text {
+  // 解説➆参照。チェックボックスの幅が22pxでチェックボックスと、テキストの間に8pxの余白があるから。
+  padding-left: 30px;
+  a {
+    //テキストに下線を引く
+    text-decoration: underline;
+    color: $main-color;
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    inset-block: 0;
+    margin-block: auto;
+  }
+  //チェックボックスをデザインする。
+  &::before {
+    width: 22px;
+    height: 22px;
+    border: 1px solid $main-color;
+    background: #fff;
+  }
+  //チェックボックスの中の矢印をデザインする。
+  &::after {
+    //矢印を完全に見えなくする。しかし、見えないだけで、存在はしているので、クリックなどをすることで見えるようにすることができる。
+    opacity: 0;
+    width: 19.414px;
+    height: 14.621px;
+    left: 1.29px;
+    background: url(../img/box.png) no-repeat center center / contain;
+  }
+}
+
+.contact__submit {
+  margin-top: 23px;
+}
+
+// .button {
+//   margin-top: 44px;
+// }
+
+/*-------------------------
+   footer
+  -------------------------*/
+
+.footer {
+  background: #f7f7f7;
+  padding-top: 35px;
+  padding-bottom: 10px;
+
+  @include mq(pc) {
+    padding-bottom: 14px;
+  }
+}
+
+.footer__inner {
+  display: grid;
+  place-items: center;
+}
+
+.footer__logo {
+  a {
+    img {
+      width: 120px;
+    }
+  }
+
+  @include mq(pc) {
+    transition: opacity 0.3s;
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+}
+
+.footer__menu-items {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  align-items: center;
+  margin-top: 22px;
+
+  @include mq(pc) {
+    flex-direction: row;
+    gap: 32px;
+  }
+}
+
+.footer__menu-item {
+}
+
+.footer__menu-link {
+  font-size: 12px;
+
+  @include mq(pc) {
+    transition: opacity 0.3s;
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+}
+
+.footer__nav-list {
+  display: flex;
+  gap: 40px;
+  margin-top: 13px;
+
+  @include mq(pc) {
+    margin-top: 14px;
+  }
+}
+
+.footer__nav-item {
+}
+
+.footer__nav-link {
+}
+
+.footer__sns-img {
+}
+
+.footer__wrapper {
+  margin-top: 19px;
+  text-align: center;
+
+  @include mq(pc) {
+    margin-top: 21px;
+  }
+}
+
+.footer__copyright {
+  color: #888;
+  font-size: 12px;
+}
