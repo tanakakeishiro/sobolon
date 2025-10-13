@@ -18,6 +18,12 @@ import stylelint from "stylelint";
 import prettier from "gulp-prettier";
 import reporter from "postcss-reporter";
 import postcssPresetEnv from "postcss-preset-env";
+import { deleteAsync } from "del";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // ===========================
 // 📌 パスの定義
@@ -130,19 +136,71 @@ function browserInit() {
 // 📌 ファイル監視
 // ===========================
 function watchFiles() {
-  gulp.watch(paths.styles.src, gulp.series(compileSass, browserReload));
-  gulp.watch(paths.scripts.src, gulp.series(minJS, browserReload));
-  gulp.watch(paths.images.src, gulp.series(copyImage, browserReload));
-  gulp.watch(paths.html.src, gulp.series(formatHTML, browserReload));
+  // Sassファイルの監視（削除も検知）
+  gulp.watch(paths.styles.src, { events: "all" }, function (cb) {
+    compileSass();
+    cb();
+  }).on("unlink", function (filepath) {
+    const filePathFromSrc = path.relative(path.resolve("src/assets/sass"), filepath);
+    const destFilePath = path.resolve("public/assets/css", filePathFromSrc.replace(/\.scss$/, ".css"));
+    const destMinFilePath = path.resolve("public/assets/css", filePathFromSrc.replace(/\.scss$/, ".min.css"));
+    deleteAsync([destFilePath, destMinFilePath]).then(() => {
+      browserSync.reload();
+    });
+  });
+
+  // JavaScriptファイルの監視（削除も検知）
+  gulp.watch(paths.scripts.src, { events: "all" }, function (cb) {
+    minJS();
+    cb();
+  }).on("unlink", function (filepath) {
+    const filePathFromSrc = path.relative(path.resolve("src/assets/js"), filepath);
+    const destFilePath = path.resolve("public/assets/js", filePathFromSrc);
+    const destMinFilePath = path.resolve("public/assets/js", filePathFromSrc.replace(/\.js$/, ".min.js"));
+    deleteAsync([destFilePath, destMinFilePath]).then(() => {
+      browserSync.reload();
+    });
+  });
+
+  // 画像ファイルの監視（削除も検知）
+  gulp.watch(paths.images.src, { events: "all" }, function (cb) {
+    copyImage();
+    cb();
+  }).on("unlink", function (filepath) {
+    const filePathFromSrc = path.relative(path.resolve("src/assets/img"), filepath);
+    const destFilePath = path.resolve("public/assets/img", filePathFromSrc);
+    deleteAsync([destFilePath]).then(() => {
+      browserSync.reload();
+    });
+  });
+
+  // HTMLファイルの監視（削除も検知）
+  gulp.watch(paths.html.src, { events: "all" }, function (cb) {
+    formatHTML();
+    cb();
+  }).on("unlink", function (filepath) {
+    const filePathFromSrc = path.relative(path.resolve("src"), filepath);
+    const destFilePath = path.resolve("public", filePathFromSrc);
+    deleteAsync([destFilePath]).then(() => {
+      browserSync.reload();
+    });
+  });
+}
+
+// ===========================
+// 📌 publicフォルダのクリーンアップ
+// ===========================
+function clean() {
+  return deleteAsync(["public/**/*", "!public"]);
 }
 
 // ===========================
 // 📌 タスクのエクスポート
 // ===========================
-export { compileSass, minJS, formatHTML, copyImage, watchFiles, browserInit };
+export { compileSass, minJS, formatHTML, copyImage, watchFiles, browserInit, clean };
 
-export const dev = gulp.parallel(watchFiles, browserInit);
+export const dev = gulp.series(clean, gulp.parallel(compileSass, minJS, formatHTML, copyImage), gulp.parallel(watchFiles, browserInit));
 
-gulp.task("default", gulp.series(compileSass, dev));
+gulp.task("default", gulp.series(clean, compileSass, gulp.parallel(watchFiles, browserInit)));
 
-export const build = gulp.parallel(compileSass, minJS, formatHTML, copyImage);
+export const build = gulp.series(clean, gulp.parallel(compileSass, minJS, formatHTML, copyImage));
