@@ -7,8 +7,8 @@ $color-base: #333333;
 $background-base: #ffffff;
 $font-size-base: 16px;
 $line-height-base: 1.7;
-//ヘッダーの高さは後々使うかもしれないので
-$header-height-sp: 60px; //spのときのヘッダーセクションの高さが60pxだと、デザインカンプにあるため。
+//ヘッダーの高さは後、E��ぁE��もしれなぁE�Eで
+$header-height-sp: 60px; //spのとき�Eヘッダーセクションの高さぁE0pxだと、デザインカンプにあるため、E
 $header-height-pc: 70px;
 
 $width-inner: 1280px;
@@ -42,10 +42,10 @@ body {
 
 .inner {
   padding-inline: 15px;
-  //pcの最大幅が1200pxであり、左右の余白を担保しつつ、内側を1200pxにするため。
+  //pcの最大幁E��1200pxであり、左右の余白を担保しつつ、�E側めE200pxにするため、E
   @include mq(pc) {
     max-width: calc(1200px + 40px * 2);
-    //要素を左右中央揃えにするため。このスタイルを適用すると、指定した要素の左右のマージンが同等になり、結果として要素はその親要素内で中央に配置される。
+    //要素を左右中央揁E��にするため。このスタイルを適用すると、指定した要素の左右のマ�Eジンが同等になり、結果として要素はそ�E親要素冁E��中央に配置される、E
     margin-inline: auto;
     padding-inline: 40px;
   }
@@ -146,7 +146,7 @@ body {
   }
 }
 
-// 各セクションの見出しにとぶ。
+// 吁E��クションの見�Eしにとぶ、E
 // section::before {
 //   content: "";
 //   display: block;
@@ -193,7 +193,7 @@ html {
 
 .header {
   height: $header-height-sp;
-  // スクロールしても、ヘッダーを上部に固定できる。
+  // スクロールしても、�EチE��ーを上部に固定できる、E
   position: sticky;
   top: 0;
   left: 0;
@@ -207,14 +207,14 @@ html {
 }
 
 .header__inner {
-  //要素の高さを親要素から継承する。これにより、.header__innerの高さは親要素の.headerと同じになる。
+  //要素の高さを親要素から継承する。これにより、Eheader__innerの高さは親要素の.headerと同じになる、E
   height: inherit;
-  //親要素に対して子要素を横並びにする。
+  //親要素に対して子要素を横並びにする、E
   display: flex;
-  //横並びの要素を両端揃えで均等に配置する。
+  //横並びの要素を両端揁E��で坁E��に配置する、E
   justify-content: space-between;
   // height: $header-height-sp;
-  // 子要素（flexアイテム）を上下中央に揃える指定です。親要素（flexコンテナ）の中で中央揃えになります。
+  // 子要素�E�ElexアイチE���E�を上下中央に揁E��る指定です。親要素�E�ElexコンチE���E��E中で中央揁E��になります、E
   align-items: center;
 }
 
@@ -222,7 +222,7 @@ html {
   a {
     img {
       width: 120px;
-      //ブロックレベルの特性を与える。これにより、画像が親要素の幅いっぱいに広がる。
+      //ブロチE��レベルの特性を与える。これにより、画像が親要素の幁E��っぱぁE��庁E��る、E
       display: block;
     }
   }
@@ -238,47 +238,47 @@ html {
 .header__nav {
   background: $main-color;
   width: 270px;
-  //全体の高さからヘッダーの高さを引いた値
+  //全体�E高さからヘッダーの高さを引いた値
   height: calc(100% - $header-height-sp);
-  //HTML要素を画面上の固定位置に配置するため。これにより要素がスクロールしても画面上の指定された位置に固定される。
+  //HTML要素を画面上�E固定位置に配置するため。これにより要素がスクロールしても画面上�E持E��された位置に固定される、E
   position: fixed;
   right: 0;
   top: $header-height-sp;
   padding: calc(40px - 8px) 15px;
-  // X 軸（横方向）の位置を画面の右側に見えないように移動させる
+  // X 軸�E�横方向）�E位置を画面の右側に見えなぁE��ぁE��移動させる
   transform: translateX(100%);
-  //transformの変化は0.4秒間で行われ、変化の速度は一定（linear）
+  //transformの変化は0.4秒間で行われ、変化の速度は一定！Einear�E�E
   transition: transform 0.4s linear;
 
   &.is-checked {
-    //要素は元の位置（水平方向に0%分移動）に戻る。画面の外に隠した要素を画面内に表示する。
+    //要素は允E�E位置�E�水平方向に0%刁E��動）に戻る。画面の外に隠した要素を画面冁E��表示する、E
     transform: translateX(0);
   }
-  //これで消えていたメニューが戻ってくる。
+  //これで消えてぁE��メニューが戻ってくる、E
   @include mq(pc) {
-    //背景を透明にする。
+    //背景を透�Eにする、E
     background: transparent;
     width: auto;
     height: auto;
-    //要素の位置を通常の文書フローに設定する。これにより、要素はposition: fixed;やposition: absolute;などの他の位置指定から解除され、通常の文書フローに従って配置される。
+    //要素の位置を通常の斁E��フローに設定する。これにより、要素はposition: fixed;やposition: absolute;などの他�E位置持E��から解除され、E��常の斁E��フローに従って配置される、E
     position: static;
-    //パディングは取られる。パディングとは余白のことで、padding プロパティを指定しない場合は、余白部分は要素の背景色が適用される。
+    //パディングは取られる。パチE��ングとは余白のことで、padding プロパティを指定しなぁE��合�E、余白部刁E�E要素の背景色が適用される、E
     padding: 0;
-    //要素は元の位置（水平方向に0%分移動）に戻る。こうしないとメニューが元の位置に戻らない。
+    //要素は允E�E位置�E�水平方向に0%刁E��動）に戻る。こぁE��なぁE��メニューが�Eの位置に戻らなぁE��E
     transform: translateX(0);
   }
 }
 
 .header__lists {
   display: flex;
-  //要素を上から下に垂直方向に並べる
+  //要素を上から下に垂直方向に並べめE
   flex-direction: column;
-  //フレックスアイテムを交差軸（この場合は水平軸）の終端に配置。これにより、フレックスアイテムは各行の右端に揃えられる。
+  //フレチE��スアイチE��を交差軸�E�この場合�E水平軸�E��E終端に配置。これにより、フレチE��スアイチE��は吁E���E右端に揁E��られる、E
   align-items: flex-end;
   gap: calc(32px - 8px * 2);
 
   @include mq(pc) {
-    //要素を左から右に並べる
+    //要素を左から右に並べめE
     flex-direction: row;
     align-items: center;
     gap: 47px;
@@ -288,7 +288,7 @@ html {
 .header__list {
 }
 .header__link {
-  //要素をインラインブロックとして表示します。これにより、要素はインライン要素のように行内に配置されますが、ブロック要素のように幅と高さを指定できます。
+  //要素をインラインブロチE��として表示します。これにより、要素はインライン要素のように行�Eに配置されますが、ブロチE��要素のように幁E��高さを指定できます、E
   display: inline-block;
   padding-block: 8px;
   color: #fff;
@@ -299,7 +299,7 @@ html {
     font-size: $font-size-base;
     transition: color 0.3s;
 
-    // ホバーすると文字の色が変わる。
+    // ホバーすると斁E���E色が変わる、E
     &:hover {
       color: $main-color;
     }
@@ -318,7 +318,7 @@ html {
 .drawer-icon {
   width: 30px;
   height: 18px;
-  //position: relative;を設定した要素は、その子要素にposition: absolute;が設定されている場合の基準点（ポジショニングコンテキスト）となります。これは、絶対位置指定された子要素が、この相対位置指定された親要素に対して位置を決定するための基準となる
+  //position: relative;を設定した要素は、その子要素にposition: absolute;が設定されてぁE��場合�E基準点�E��EジショニングコンチE��スト）となります。これ�E、絶対位置持E��された子要素が、この相対位置持E��された親要素に対して位置を決定するため�E基準となめE
   position: relative;
   // z-index: 51;
   margin-top: -3px;
@@ -383,7 +383,7 @@ html {
   //動画
   @include mq(pc) {
     max-width: 990px;
-    //margin-left: auto を使用すると、使用可能なスペースのすべてを左マージンとして使用するため、要素は右側に移動する。
+    //margin-left: auto を使用すると、使用可能なスペ�Eスのすべてを左マ�Eジンとして使用するため、要素は右側に移動する、E
     margin-left: auto;
     display: block;
   }
@@ -427,7 +427,7 @@ html {
   }
 }
 .fv__title {
-  // margin-top: 30px;　messageの方にいれる。
+  // margin-top: 30px;　messageの方にぁE��る、E
   margin-left: -1px;
   font-size: 26px;
   font-weight: 600;
@@ -464,7 +464,7 @@ html {
 
   @include mq(pc) {
     // gap: 80px;
-    //レスポンシブチェックしたときにただの80pxだと、大きすぎて表示が崩れるから。
+    //レスポンシブチェチE��したときにただの80pxだと、大きすぎて表示が崩れるから、E
     gap: calc(80px / 1200px * 100%);
     flex-direction: row;
     //動画
@@ -478,10 +478,10 @@ html {
 
   @include mq(pc) {
     //動画
-    //親要素であるconcept__contentの幅が1200pxだから、600pxになる。だから、割合で出す。
-    //calc(600px / 1200px * 100%)という式は、600pxを1200pxで割った後、その結果を100倍してパーセンテージを求めています。つまり、要素の幅を親要素の幅に対する50%に設定しようとしています。
+    //親要素であるconcept__contentの幁E��1200pxだから、E00pxになる。だから、割合で出す、E
+    //calc(600px / 1200px * 100%)とぁE��式�E、E00pxめE200pxで割った後、その結果めE00倍してパ�EセンチE�Eジを求めてぁE��す。つまり、要素の幁E��親要素の幁E��対する50%に設定しようとしてぁE��す、E
     width: calc(600px / 1200px * 100%);
-    //画像が縮まないようにするため。
+    //画像が縮まなぁE��ぁE��するため、E
     flex-shrink: 0;
     // width: 600px;
   }
@@ -493,7 +493,7 @@ html {
 }
 
 .concept__message {
-  //pcの時に横並びにしたいから、スマホのときはflex-direction: column;で縦に並べるため必要ない
+  //pcの時に横並びにしたぁE��ら、スマ�Eのとき�Eflex-direction: column;で縦に並べるため忁E��なぁE
   // margin-top: 34px;
 
   @include mq(pc) {
@@ -549,7 +549,7 @@ html {
     flex-direction: row;
     margin-top: 65px;
   }
-  //レスポンシブ対応。動画を観て写した。
+  //レスポンシブ対応。動画を観て写した、E
   @include mq(lg) {
     gap: 60px;
   }
@@ -565,7 +565,7 @@ html {
 }
 .feature-card__image {
   img {
-    //動画では指定なし
+    //動画では持E��なぁE
     width: 100%;
   }
 }
@@ -594,7 +594,7 @@ html {
 // .history__image {
 //   position: absolute;
 
-//   background: url("../img/sp/bg-1.jpg") lightgray 50% / cover no-repeat;
+//   background: url("../img/bg_about01_sp.jpg") lightgray 50% / cover no-repeat;
 // }
 
 // .sp {
@@ -632,13 +632,13 @@ html {
 // }
 
 .about {
-  // backgroundで画像を記述。background-imageにすると、画像が表示されない。
-  background: url("../img/sp/bg-1.jpg") no-repeat top center / cover;
+  // backgroundで画像を記述。background-imageにすると、画像が表示されなぁE��E
+  background: url("../img/bg_about01_sp.jpg") no-repeat top center / cover;
   position: relative;
   padding-block: 180px 50px;
 
   @include mq(pc) {
-    background-image: url("../img/pc/bg-2.jpg");
+    background-image: url("../img/bg_about01_pc.jpg");
     padding-block: 123px 122px;
   }
 
@@ -736,7 +736,7 @@ html {
   }
 
   @include mq(pc) {
-    // 画像がホバーで拡大したときにはみ出さないようにする。
+    // 画像がホバーで拡大したときにはみ出さなぁE��ぁE��する、E
     overflow: hidden;
 
     img {
@@ -765,7 +765,7 @@ html {
 }
 
 .products__button {
-  // 動画ではtext-align: center;でボタンの位置を中央にしている。
+  // 動画ではtext-align: center;でボタンの位置を中央にしてぁE��、E
   // text-align: center;
   margin-top: 42px;
   @include mq(pc) {
@@ -858,14 +858,14 @@ html {
       width: 260px;
       //動画では
       // flex-shrink: 0;
-      // 画像がホバーで拡大したときにはみ出さないようにする。
+      // 画像がホバーで拡大したときにはみ出さなぁE��ぁE��する、E
       overflow: hidden;
       transition: transform 0.5s;
     }
   }
 }
 .news-card__body {
-  //動画では、 margin-top: 16px;を当てている。
+  //動画では、Emargin-top: 16px;を当ててぁE��、E
   @include mq(pc) {
     max-width: 736px;
   }
@@ -919,7 +919,7 @@ html {
 }
 
 .message__content {
-  //pcの時にflexで横並びにするときは、spの時にflexを当てて、columnで縦並びしておく。そうすることでpcに切り替えたときに、align-items: center;などが適切に働く。
+  //pcの時にflexで横並びにするとき�E、spの時にflexを当てて、columnで縦並びしておく。そぁE��ることでpcに刁E��替えたときに、align-items: center;などが適刁E��働く、E
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -952,7 +952,7 @@ html {
   // margin-top: 32px;
   @include mq(pc) {
     //動画を観てから
-    //親要素の残り空間をどれだけの割合で分けるかを決めるもの。これにより、要素は親要素の残り空間を均等に分けて占有します。
+    //親要素の残り空間をどれだけ�E割合で刁E��るかを決めるも�E。これにより、要素は親要素の残り空間を坁E��に刁E��て占有します、E
     flex-grow: 1;
   }
 }
@@ -988,10 +988,10 @@ html {
   -------------------------*/
 
 // .contact {
-//   background: url("../img/sp/contact_bg-1.jpg") no-repeat top center / cover;
+//   background: url("../img/bg_contact01_sp.jpg") no-repeat top center / cover;
 
 //   @include mq(pc) {
-//     background-image: url("../img/pc/contact_bg-2.jpg");
+//     background-image: url("../img/bg_contact01_pc.jpg");
 //   }
 // }
 
@@ -1060,7 +1060,7 @@ html {
 //   width: calc(345px + 16px * 2);
 
 //   @include mq(pc) {
-//     background: url("../img/pc/bg.png") no-repeat center center / cover;
+//     background: url("../img/bg_label01_pc.png") no-repeat center center / cover;
 //     width: 180px;
 //     height: 40px;
 //     text-align: center;
@@ -1105,7 +1105,7 @@ html {
 //   font-weight: 600;
 
 //   @include mq(pc) {
-//     background: url("../img/pc/bg.png") no-repeat center center / cover;
+//     background: url("../img/bg_label01_pc.png") no-repeat center center / cover;
 //     width:180px;
 //     height: 40px;
 //     font-size: 18px;
@@ -1138,7 +1138,7 @@ html {
 //   font-weight: 600;
 
 //   @include mq(pc) {
-//     background: url("../img/pc/bg.png") no-repeat center center / cover;
+//     background: url("../img/bg_label01_pc.png") no-repeat center center / cover;
 //     width: calc(180px + 16px * 2);
 //     height: calc(40px + 4px * 2);
 //     font-size: 18px;
@@ -1186,7 +1186,7 @@ html {
 //   font-weight: 600;
 
 //   @include mq(pc) {
-//     background: url("../img/pc/bg.png") no-repeat center center / cover;
+//     background: url("../img/bg_label01_pc.png") no-repeat center center / cover;
 //     width: calc(180px );
 //     height: 40px;
 //     font-size: 18px;
@@ -1269,7 +1269,7 @@ html {
 //   height: calc(14.621px + 3.69px * 2);
 //   padding-inline: 1.29px;
 //   padding-block: 3.69px;
-//   background: url(../img/box.png) no-repeat center center / contain;
+//   background: url(../img/icon_checkbox01.png) no-repeat center center / contain;
 //   opacity: 0;
 // }
 
@@ -1288,9 +1288,9 @@ html {
   -------------------------*/
 
 .contact {
-  //pcの画像をダウンロードすればOK。sp用の画像はダウンロードする必要なし。
-  background: url("../img/pc/contact_bg-2.jpg") no-repeat top center / cover;
-  //解説➀参照。
+  //pcの画像をダウンロードすれ�EOK。sp用の画像�Eダウンロードする忁E��なし、E
+  background: url("../img/bg_contact01_pc.jpg") no-repeat top center / cover;
+  //解説➀参�E、E
   padding-block: 56px;
 
   @include mq(pc) {
@@ -1299,7 +1299,7 @@ html {
 }
 
 .contact__inner {
-  //動画ではこっち。しかし、デザインカンプてきにはcontact__formの方が適切。
+  //動画ではこっち。しかし、デザインカンプてきにはcontact__formの方が適刁E��E
   @include mq(pc) {
     max-width: calc(510px + 40px * 2);
   }
@@ -1332,12 +1332,12 @@ html {
 
 .is-required {
   color: #e7728e;
-  //font-weight: 600;はつど書かないと適用されない。
+  //font-weight: 600;はつど書かなぁE��適用されなぁE��E
   font-weight: 600;
 }
 
 .contact__items {
-  // margin-top: 28px;は名前の部分の上の余白。解説➁参照
+  // margin-top: 28px;は名前の部刁E�E上�E余白。解説➁参照
   margin-top: 28px;
   display: flex;
   flex-direction: column;
@@ -1350,7 +1350,7 @@ html {
 .contact__item {
 }
 .contact-control {
-  //contact-control__headと、contact-control__inputの間に3pxのスキマを作るため。
+  //contact-control__headと、contact-control__inputの間に3pxのスキマを作るため、E
   display: flex;
   flex-direction: column;
   gap: 3px;
@@ -1364,7 +1364,7 @@ html {
 .contact-control__head {
   @include mq(pc) {
     width: 180px;
-    //画像が縮まないようにするため。
+    //画像が縮まなぁE��ぁE��するため、E
     flex-shrink: 0;
   }
 }
@@ -1372,24 +1372,24 @@ html {
 .form-label {
   display: inline-flex;
   color: #fff;
-  //0.7透過させるため。
+  //0.7透過させるため、E
   background: rgba($main-color, 0.7);
   padding: 4px 16px;
   font-size: 14px;
   font-weight: 600;
-  //解説➂参照。
+  //解説➂参照、E
   gap: 3px;
   align-items: center;
 
   @include mq(pc) {
-    // width: 100%;にすることで、画面の幅を変えたとしても、自動で画面の幅に合わせて画像のサイズが調整される。だから、レスポンシブデザインを実装するときに便利。
+    // width: 100%;にすることで、画面の幁E��変えたとしても、�E動で画面の幁E��合わせて画像�Eサイズが調整される。だから、レスポンシブデザインを実裁E��るときに便利、E
     width: 100%;
     justify-content: center;
     font-size: 18px;
     padding-top: 5px;
     padding-bottom: 4px;
     padding-inline: 4px;
-    //鉛筆みたいなボックスを作成するため。
+    //鉛筁E��たいなボックスを作�Eするため、E
     clip-path: polygon(0 0, 97% 0, 100% 50%, 97% 100%, 0% 100%);
   }
 }
@@ -1411,14 +1411,14 @@ html {
 }
 
 .form-text {
-  //解説➃参照
+  //解説➁E��照
 
   width: 100%;
   height: 40px;
-  //要素の境界線をなくすため。
+  //要素の墁E��線をなくすため、E
   border: 0;
   background: #fff;
-  //右に5px、下に6px、16px分影を広げる、0px分影を追加する。透明度が0.16の灰色
+  //右に5px、下に6px、E6px刁E��を庁E��る、Epx刁E��を追加する。透�E度ぁE.16の灰色
   box-shadow: 5px 6px 16px 0px rgba(96, 96, 96, 0.16);
 
   &:focus {
@@ -1427,27 +1427,27 @@ html {
   }
 }
 
-//解説➄参照
+//解説➁E��照
 .contact-control__radios {
   display: flex;
   align-items: center;
 }
 
 .form-radio {
-  //form-radio__inputのposition: absoluteの位置の基準として使うため。
+  //form-radio__inputのposition: absoluteの位置の基準として使ぁE��め、E
   position: relative;
 }
-//デフォルトのradioボタンを非表示にするため。
+//チE��ォルト�Eradioボタンを非表示にするため、E
 .form-radio__input {
   width: 1px;
   height: 1px;
   position: absolute;
-  //表示領域がないようにする。
+  //表示領域がなぁE��ぁE��する、E
   clip: rect(0, 0, 0, 0);
-  // clip: rect(0, 0, 0, 0)により視覚的には全く見えない状態になっていますが、overflow: hidden;によりその中の内容が要素の外にはみ出すことはありません。
+  // clip: rect(0, 0, 0, 0)により視覚的には全く見えなぁE��態になってぁE��すが、overflow: hidden;によりそ�E中の冁E��が要素の外にはみ出すことはありません、E
   overflow: hidden;
 
-  //ボタンを押したときに反応する。
+  //ボタンを押したときに反応する、E
 
   &:checked + .form-radio__text {
     background: $main-color;
@@ -1463,18 +1463,18 @@ html {
 .form-radio__text {
   background: #fff;
   color: $main-color;
-  //文字の間隔
+  //斁E���E間隔
   letter-spacing: 0.026px;
-  //ボタンのサイズを調整。
+  //ボタンのサイズを調整、E
   width: 80px;
   height: 40px;
-  //解説➅参照。
+  //解説➁E��照、E
   display: grid;
   place-items: center;
 }
 
 .form-textarea {
-  // width: 100%;にすることで、画面の幅を変えたとしても、自動で画面の幅に合わせて画像のサイズが調整される。だから、レスポンシブデザインを実装するときに便利。
+  // width: 100%;にすることで、画面の幁E��変えたとしても、�E動で画面の幁E��合わせて画像�Eサイズが調整される。だから、レスポンシブデザインを実裁E��るときに便利、E
   width: 100%;
   margin-top: 1px;
   height: 122px;
@@ -1482,7 +1482,7 @@ html {
   font-size: 16px;
   background: #fff;
   box-shadow: 5px 6px 16px 0px rgba(96, 96, 96, 0.16);
-  //ユーザーが要素のサイズを垂直方向に自由に変更できる。
+  //ユーザーが要素のサイズを垂直方向に自由に変更できる、E
   resize: vertical;
 
   &:focus {
@@ -1509,7 +1509,7 @@ html {
   position: absolute;
   clip: rect(0, 0, 0, 0);
   overflow: hidden;
-  //チェックボックスボタンを押したら、見えなくなっている矢印が見えるようになる。
+  //チェチE��ボックスボタンを押したら、見えなくなってぁE��矢印が見えるよぁE��なる、E
   &:checked + .form-checkbox__text {
     &::after {
       opacity: 1;
@@ -1525,10 +1525,10 @@ html {
 }
 
 .form-checkbox__text {
-  // 解説➆参照。チェックボックスの幅が22pxでチェックボックスと、テキストの間に8pxの余白があるから。
+  // 解説➁E��照。チェチE��ボックスの幁E��22pxでチェチE��ボックスと、テキスト�E間に8pxの余白があるから、E
   padding-left: 30px;
   a {
-    //テキストに下線を引く
+    //チE��ストに下線を引く
     text-decoration: underline;
     color: $main-color;
   }
@@ -1541,21 +1541,21 @@ html {
     inset-block: 0;
     margin-block: auto;
   }
-  //チェックボックスをデザインする。
+  //チェチE��ボックスをデザインする、E
   &::before {
     width: 22px;
     height: 22px;
     border: 1px solid $main-color;
     background: #fff;
   }
-  //チェックボックスの中の矢印をデザインする。
+  //チェチE��ボックスの中の矢印をデザインする、E
   &::after {
-    //矢印を完全に見えなくする。しかし、見えないだけで、存在はしているので、クリックなどをすることで見えるようにすることができる。
+    //矢印を完�Eに見えなくする。しかし、見えなぁE��けで、存在はしてぁE��ので、クリチE��などをすることで見えるよぁE��することができる、E
     opacity: 0;
-    width: 19.414px;
-    height: 14.621px;
-    left: 1.29px;
-    background: url(../img/box.png) no-repeat center center / contain;
+  width: 19.414px;
+  height: 14.621px;
+  left: 1.29px;
+  background: url(../img/icon_checkbox01.png) no-repeat center center / contain;
   }
 }
 
