@@ -1,9 +1,9 @@
 @charset "UTF-8";
 body {
-  background-color: #ffffff;
-  color: #333333;
+  background-color: #fff;
+  color: #333;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 1em;
   line-height: 1.7;
   font-family: "Noto Serif JP", serif;
 }
@@ -46,13 +46,13 @@ body {
   align-items: center;
   gap: 28px;
   font-weight: 600;
-  font-size: 30px;
-  line-height: 100%;
+  font-size: 1.875em;
+  line-height: 1;
 }
 @media screen and (min-width: 768px) {
   .heading {
     gap: 24px;
-    font-size: 40px;
+    font-size: 2.5em;
   }
 }
 .heading::after {
@@ -91,7 +91,7 @@ body {
   padding: 11px;
   width: 158px;
   color: #3ea1d1;
-  font-size: 14px;
+  font-size: 0.875em;
   letter-spacing: 0.02px;
 }
 @media screen and (min-width: 768px) {
@@ -115,9 +115,9 @@ html {
   }
 }
 
-/*-------------------------
+/* -------------------------
    ヘッダー
-  -------------------------*/
+  ------------------------- */
 .header {
   position: -webkit-sticky;
   position: sticky;
@@ -199,13 +199,13 @@ html {
   padding-top: 8px;
   padding-bottom: 8px;
   color: #fff;
-  font-size: 18px;
+  font-size: 1.125em;
 }
 @media screen and (min-width: 768px) {
   .header__link {
     transition: color 0.3s;
-    color: #333333;
-    font-size: 16px;
+    color: #333;
+    font-size: 1em;
   }
   .header__link:hover {
     color: #3ea1d1;
@@ -252,9 +252,9 @@ html {
   top: 16px;
 }
 
-/*-------------------------
+/* -------------------------
    ファーストビュー
-  -------------------------*/
+  ------------------------- */
 .fv__inner {
   position: relative;
 }
@@ -288,16 +288,16 @@ html {
 .fv__title {
   margin-left: -1px;
   font-weight: 600;
-  font-size: 26px;
+  font-size: 1.625em;
 }
 
 .fv__text {
   margin-top: 16px;
 }
 
-/*-------------------------
+/* -------------------------
    concept
-  -------------------------*/
+  ------------------------- */
 .concept {
   margin-top: 94px;
 }
@@ -341,16 +341,16 @@ html {
 
 .concept__sub-title {
   font-weight: 600;
-  font-size: 20px;
+  font-size: 1.25em;
 }
 @media screen and (min-width: 768px) {
   .concept__sub-title {
-    font-size: 18px;
+    font-size: 1.125em;
   }
 }
 @media screen and (min-width: 900px) {
   .concept__sub-title {
-    font-size: 20px;
+    font-size: 1.375em;
   }
 }
 
@@ -363,9 +363,9 @@ html {
   }
 }
 
-/*-------------------------
+/* -------------------------
    feature
-  -------------------------*/
+  ------------------------- */
 .feature__cards {
   display: flex;
   flex-direction: column;
@@ -391,7 +391,7 @@ html {
 }
 
 .feature__card {
-  box-shadow: 3px 3px 15px 0px rgba(96, 96, 96, 0.16);
+  box-shadow: 3px 3px 15px 0 rgba(96, 96, 96, 0.16);
   background: #fff;
 }
 
@@ -409,9 +409,9 @@ html {
   text-align: center;
 }
 
-/*-------------------------
+/* -------------------------
    about
-  -------------------------*/
+  ------------------------- */
 .about {
   position: relative;
   background: url("../img/bg_about01_sp.jpg") no-repeat top center/cover;
@@ -449,27 +449,27 @@ html {
 }
 
 .about__title {
-  font-size: 20px;
+  font-size: 1.25em;
 }
 @media screen and (min-width: 768px) {
   .about__title {
-    font-size: 22px;
+    font-size: 1.375em;
   }
 }
 
 .about__text {
   margin-top: 24px;
-  font-size: 14px;
+  font-size: 0.875em;
 }
 @media screen and (min-width: 768px) {
   .about__text {
-    font-size: 16px;
+    font-size: 1em;
   }
 }
 
-/*-------------------------
+/* -------------------------
    products
-  -------------------------*/
+  ------------------------- */
 .products {
   margin-top: 97px;
 }
@@ -529,7 +529,7 @@ html {
 
 .products-card__body {
   margin-top: 21px;
-  font-size: 14px;
+  font-size: 0.875em;
 }
 @media screen and (min-width: 768px) {
   .products-card__body {
@@ -550,9 +550,9 @@ html {
   }
 }
 
-/*-------------------------
+/* -------------------------
    news
-  -------------------------*/
+  ------------------------- */
 @media screen and (min-width: 768px) {
   .news__inner {
     padding-right: 40px;
@@ -573,7 +573,7 @@ html {
 }
 
 .news-card {
-  box-shadow: 0px 1px 0px 0px #e0e0e0;
+  box-shadow: 0 1px 0 0 #e0e0e0;
   background: #fff;
   padding-bottom: 28px;
 }
@@ -607,7 +607,7 @@ html {
 
 .news-card__date {
   margin-top: 17px;
-  font-size: 14px;
+  font-size: 0.875em;
 }
 @media screen and (min-width: 768px) {
   .news-card__date {
@@ -622,14 +622,14 @@ html {
 @media screen and (min-width: 768px) {
   .news-card__title {
     margin-top: 16px;
-    font-size: 18px;
+    font-size: 1.125em;
   }
 }
 
 .news-card__text {
   margin-top: 14px;
   color: #888;
-  font-size: 14px;
+  font-size: 0.875em;
 }
 @media screen and (min-width: 768px) {
   .news-card__text {
@@ -646,9 +646,9 @@ html {
   }
 }
 
-/*-------------------------
+/* -------------------------
    message
-  -------------------------*/
+  ------------------------- */
 .message__content {
   display: flex;
   flex-direction: column;
@@ -687,41 +687,41 @@ html {
 
 .message__title {
   font-weight: 600;
-  font-size: 20px;
+  font-size: 1.25em;
 }
 @media screen and (min-width: 768px) {
   .message__title {
-    font-size: 22px;
+    font-size: 1.375em;
   }
 }
 @media screen and (min-width: 900px) {
   .message__title {
-    font-size: 25px;
+    font-size: 1.5625em;
   }
 }
 @media screen and (min-width: 1200px) {
   .message__title {
-    font-size: 28px;
+    font-size: 1.75em;
   }
 }
 
 .message__text {
   margin-top: 22px;
-  font-size: 14px;
+  font-size: 0.875em;
 }
 @media screen and (min-width: 768px) {
   .message__text {
     margin-top: 36px;
-    font-size: 16px;
+    font-size: 1em;
   }
 }
 
-/*-------------------------
+/* -------------------------
    contact
-  -------------------------*/
-/*-------------------------
+  ------------------------- */
+/* -------------------------
  contact
-  -------------------------*/
+  ------------------------- */
 .contact {
   background: url("../img/bg_contact01_pc.jpg") no-repeat top center/cover;
   padding-top: 56px;
@@ -752,7 +752,7 @@ html {
 
 .contact__note {
   font-weight: 600;
-  font-size: 14px;
+  font-size: 0.875em;
   text-align: center;
 }
 
@@ -800,7 +800,7 @@ html {
   padding: 4px 16px;
   color: #fff;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 0.875em;
 }
 @media screen and (min-width: 768px) {
   .form-label {
@@ -810,7 +810,7 @@ html {
     padding-bottom: 4px;
     padding-left: 4px;
     width: 100%;
-    font-size: 18px;
+    font-size: 1.125em;
     -webkit-clip-path: polygon(0 0, 97% 0, 100% 50%, 97% 100%, 0% 100%);
             clip-path: polygon(0 0, 97% 0, 100% 50%, 97% 100%, 0% 100%);
   }
@@ -819,11 +819,11 @@ html {
 .form-label__required {
   color: #e7728e;
   font-weight: 600;
-  font-size: 10px;
+  font-size: 0.625em;
 }
 @media screen and (min-width: 768px) {
   .form-label__required {
-    font-size: 12px;
+    font-size: 0.75em;
   }
 }
 
@@ -834,7 +834,7 @@ html {
 }
 
 .form-text {
-  box-shadow: 5px 6px 16px 0px rgba(96, 96, 96, 0.16);
+  box-shadow: 5px 6px 16px 0 rgba(96, 96, 96, 0.16);
   border: 0;
   background: #fff;
   width: 100%;
@@ -842,7 +842,7 @@ html {
 }
 .form-text:focus {
   outline: #3ea1d1 auto 1px;
-  box-shadow: 5px 6px 16px 0px rgba(62, 161, 209, 0.16);
+  box-shadow: 5px 6px 16px 0 rgba(62, 161, 209, 0.16);
 }
 
 .contact-control__radios {
@@ -867,7 +867,7 @@ html {
 }
 .form-radio__input:focus + .form-radio__text {
   outline: #3ea1d1 auto 1px;
-  box-shadow: 5px 6px 16px 0px rgba(62, 161, 209, 0.32);
+  box-shadow: 5px 6px 16px 0 rgba(62, 161, 209, 0.32);
 }
 
 .form-radio__text {
@@ -882,17 +882,17 @@ html {
 
 .form-textarea {
   margin-top: 1px;
-  box-shadow: 5px 6px 16px 0px rgba(96, 96, 96, 0.16);
+  box-shadow: 5px 6px 16px 0 rgba(96, 96, 96, 0.16);
   border: 0;
   background: #fff;
   width: 100%;
   height: 122px;
   resize: vertical;
-  font-size: 16px;
+  font-size: 1em;
 }
 .form-textarea:focus {
   outline: #3ea1d1 auto 1px;
-  box-shadow: 5px 6px 16px 0px rgba(62, 161, 209, 0.16);
+  box-shadow: 5px 6px 16px 0 rgba(62, 161, 209, 0.16);
 }
 
 .contact__footer {
@@ -924,7 +924,7 @@ html {
 }
 .form-checkbox__input:focus + .form-checkbox__text::before {
   outline: #3ea1d1 auto 1px;
-  box-shadow: 5px 6px 16px 0px rgba(62, 161, 209, 0.16);
+  box-shadow: 5px 6px 16px 0 rgba(62, 161, 209, 0.16);
 }
 
 .form-checkbox__text {
@@ -953,7 +953,7 @@ html {
 .form-checkbox__text::after {
   left: 1.29px;
   opacity: 0;
-  background: url(../img/icon_checkbox01.png) no-repeat center center/contain;
+  background: url("../img/icon_checkbox01.png") no-repeat center center/contain;
   width: 19.414px;
   height: 14.621px;
 }
@@ -962,9 +962,9 @@ html {
   margin-top: 23px;
 }
 
-/*-------------------------
+/* -------------------------
    footer
-  -------------------------*/
+  ------------------------- */
 .footer {
   background: #f7f7f7;
   padding-top: 35px;
@@ -1008,7 +1008,7 @@ html {
 }
 
 .footer__menu-link {
-  font-size: 12px;
+  font-size: 0.75em;
 }
 @media screen and (min-width: 768px) {
   .footer__menu-link {
@@ -1042,5 +1042,5 @@ html {
 
 .footer__copyright {
   color: #888;
-  font-size: 12px;
+  font-size: 0.75em;
 }

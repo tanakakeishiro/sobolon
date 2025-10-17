@@ -1,23 +1,27 @@
 @use "sass:map";
 
-// $main-color: #3ea1d1;
 $main-color: #3ea1d1;
 $font-base: "Noto Serif JP", serif;
-$color-base: #333333;
-$background-base: #ffffff;
-$font-size-base: 16px;
+$color-base: #333;
+$background-base: #fff;
+$font-size-base: 1em; // 16px = 1em
 $line-height-base: 1.7;
-//ヘッダーの高さは後、E��ぁE��もしれなぁE�Eで
-$header-height-sp: 60px; //spのとき�Eヘッダーセクションの高さぁE0pxだと、デザインカンプにあるため、E
-$header-height-pc: 70px;
+$font-weight-base: 300;
 
+@function px-to-rem($pixels, $baseFontSize: 16) {
+  @return math.div($pixels, $baseFontSize) * 1rem;
+}
+
+$header-height-sp: 60px;
+$header-height-pc: 70px;
 $width-inner: 1280px;
-// $breakpoints: (
-//   sm: "screen and (min-width: 600px)",
-//   pc: "screen and (min-width: 768px)",
-//   lg: "screen and (min-width: 900px)",
-//   xl: "screen and (min-width: 1200px)",
-// );
+
+// 色の共通値
+$color-text-gray: #888;
+$color-text-light-gray: #989898;
+$color-accent: #e7728e;
+$color-bg-footer: #f7f7f7;
+$color-overlay: rgb(0 0 0 / 12%);
 $breakpoints: (
   sm: "screen and (min-width: 600px)",
   pc: "screen and (min-width: 768px)",
@@ -31,21 +35,40 @@ $breakpoints: (
   }
 }
 
+// 重なり順の定義
+$layer: (
+  // ローディング
+  loading: 300,
+  // モーダル
+  modal: 100,
+  // ドロワー
+  drawer: 40,
+  // フローティング
+  floating: 30,
+  // ヘッダー
+  header: 20,
+  // フッター
+  footer: 10,
+  default: 1
+);
+
 body {
   font-family: $font-base;
   color: $color-base;
   background-color: $background-base;
   font-size: $font-size-base;
   line-height: $line-height-base;
-  font-weight: 300;
+  font-weight: $font-weight-base;
 }
 
 .inner {
   padding-inline: 15px;
-  //pcの最大幁E��1200pxであり、左右の余白を担保しつつ、�E側めE200pxにするため、E
+
+  // pcの最大幁E��1200pxであり、左右の余白を担保しつつ、�E側めE200pxにするため、E
   @include mq(pc) {
     max-width: calc(1200px + 40px * 2);
-    //要素を左右中央揁E��にするため。このスタイルを適用すると、指定した要素の左右のマ�Eジンが同等になり、結果として要素はそ�E親要素冁E��中央に配置される、E
+
+    // 要素を左右中央揁E��にするため。このスタイルを適用すると、指定した要素の左右のマ�Eジンが同等になり、結果として要素はそ�E親要素冁E��中央に配置される、E
     margin-inline: auto;
     padding-inline: 40px;
   }
@@ -68,16 +91,16 @@ body {
 }
 
 .heading {
-  font-size: 30px;
+  font-size: 1.875em;
   font-weight: 600;
   display: flex;
   flex-direction: column;
   gap: 28px;
   align-items: center;
-  line-height: 100%;
+  line-height: 1;
 
   @include mq(pc) {
-    font-size: 40px;
+    font-size: 2.5em;
     gap: 24px;
   }
 
@@ -130,14 +153,16 @@ body {
   justify-content: center;
   border: 1px solid $main-color;
   background: #fff;
-  font-size: 14px;
+  font-size: 0.875em;
   color: $main-color;
   width: 158px;
-
-  transition: background-color 0.3s, color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 
   @include mq(pc) {
     margin-top: 44px;
+
     &:hover {
       background-color: $main-color;
       color: #fff;
@@ -146,7 +171,7 @@ body {
   }
 }
 
-// 吁E��クションの見�Eしにとぶ、E
+// 吁E��クションの見�Eしにとぶ、E
 // section::before {
 //   content: "";
 //   display: block;
@@ -187,13 +212,14 @@ html {
 //   }
 // }
 
-/*-------------------------
+/* -------------------------
    ヘッダー
-  -------------------------*/
+  ------------------------- */
 
 .header {
   height: $header-height-sp;
-  // スクロールしても、�EチE��ーを上部に固定できる、E
+
+  // スクロールしても、�EチE��ーを上部に固定できる、E
   position: sticky;
   top: 0;
   left: 0;
@@ -207,14 +233,17 @@ html {
 }
 
 .header__inner {
-  //要素の高さを親要素から継承する。これにより、Eheader__innerの高さは親要素の.headerと同じになる、E
+  // 要素の高さを親要素から継承する。これにより、Eheader__innerの高さは親要素の.headerと同じになる、E
   height: inherit;
-  //親要素に対して子要素を横並びにする、E
+
+  // 親要素に対して子要素を横並びにする、E
   display: flex;
-  //横並びの要素を両端揁E��で坁E��に配置する、E
+
+  // 横並びの要素を両端揁E��で坁E��に配置する、E
   justify-content: space-between;
+
   // height: $header-height-sp;
-  // 子要素�E�ElexアイチE���E�を上下中央に揁E��る指定です。親要素�E�ElexコンチE���E��E中で中央揁E��になります、E
+  // 子要素�E�ElexアイチE���E�を上下中央に揁E��る指定です。親要素�E�ElexコンチE���E��E中で中央揁E��になります、E
   align-items: center;
 }
 
@@ -222,13 +251,15 @@ html {
   a {
     img {
       width: 120px;
-      //ブロチE��レベルの特性を与える。これにより、画像が親要素の幁E��っぱぁE��庁E��る、E
+
+      // ブロチE��レベルの特性を与える。これにより、画像が親要素の幁E��っぱぁE��庁E��る、E
       display: block;
     }
   }
 
   @include mq(pc) {
     transition: opacity 0.3s;
+
     &:hover {
       opacity: 0.6;
     }
@@ -238,73 +269,86 @@ html {
 .header__nav {
   background: $main-color;
   width: 270px;
-  //全体�E高さからヘッダーの高さを引いた値
+
+  // 全体�E高さからヘッダーの高さを引いた値
   height: calc(100% - $header-height-sp);
-  //HTML要素を画面上�E固定位置に配置するため。これにより要素がスクロールしても画面上�E持E��された位置に固定される、E
+
+  // HTML要素を画面上�E固定位置に配置するため。これにより要素がスクロールしても画面上�E持E��された位置に固定される、E
   position: fixed;
   right: 0;
   top: $header-height-sp;
   padding: calc(40px - 8px) 15px;
-  // X 軸�E�横方向）�E位置を画面の右側に見えなぁE��ぁE��移動させる
+
+  // X 軸�E�横方向）�E位置を画面の右側に見えなぁE��ぁE��移動させる
   transform: translateX(100%);
-  //transformの変化は0.4秒間で行われ、変化の速度は一定！Einear�E�E
+
+  // transformの変化は0.4秒間で行われ、変化の速度は一定！Einear�E�E
   transition: transform 0.4s linear;
 
   &.is-checked {
-    //要素は允E�E位置�E�水平方向に0%刁E��動）に戻る。画面の外に隠した要素を画面冁E��表示する、E
+    // 要素は允E�E位置�E�水平方向に0%刁E��動）に戻る。画面の外に隠した要素を画面冁E��表示する、E
     transform: translateX(0);
   }
-  //これで消えてぁE��メニューが戻ってくる、E
+
+  // これで消えてぁE��メニューが戻ってくる、E
   @include mq(pc) {
-    //背景を透�Eにする、E
+    // 背景を透�Eにする、E
     background: transparent;
     width: auto;
     height: auto;
-    //要素の位置を通常の斁E��フローに設定する。これにより、要素はposition: fixed;やposition: absolute;などの他�E位置持E��から解除され、E��常の斁E��フローに従って配置される、E
+
+    // 要素の位置を通常の斁E��フローに設定する。これにより、要素はposition: fixed;やposition: absolute;などの他�E位置持E��から解除され、E��常の斁E��フローに従って配置される、E
     position: static;
-    //パディングは取られる。パチE��ングとは余白のことで、padding プロパティを指定しなぁE��合�E、余白部刁E�E要素の背景色が適用される、E
+
+    // パディングは取られる。パチE��ングとは余白のことで、padding プロパティを指定しなぁE��合�E、余白部刁E�E要素の背景色が適用される、E
     padding: 0;
-    //要素は允E�E位置�E�水平方向に0%刁E��動）に戻る。こぁE��なぁE��メニューが�Eの位置に戻らなぁE��E
+
+    // 要素は允E�E位置�E�水平方向に0%刁E��動）に戻る。こぁE��なぁE��メニューが�Eの位置に戻らなぁE��E
     transform: translateX(0);
   }
 }
 
 .header__lists {
   display: flex;
-  //要素を上から下に垂直方向に並べめE
+
+  // 要素を上から下に垂直方向に並べめE
   flex-direction: column;
-  //フレチE��スアイチE��を交差軸�E�この場合�E水平軸�E��E終端に配置。これにより、フレチE��スアイチE��は吁E���E右端に揁E��られる、E
+
+  // フレチE��スアイチE��を交差軸�E�この場合�E水平軸�E��E終端に配置。これにより、フレチE��スアイチE��は吁E���E右端に揁E��られる、E
   align-items: flex-end;
   gap: calc(32px - 8px * 2);
 
   @include mq(pc) {
-    //要素を左から右に並べめE
+    // 要素を左から右に並べめE
     flex-direction: row;
     align-items: center;
     gap: 47px;
     margin-top: 4px;
   }
 }
+
 .header__list {
 }
+
 .header__link {
-  //要素をインラインブロチE��として表示します。これにより、要素はインライン要素のように行�Eに配置されますが、ブロチE��要素のように幁E��高さを指定できます、E
+  // 要素をインラインブロチE��として表示します。これにより、要素はインライン要素のように行�Eに配置されますが、ブロチE��要素のように幁E��高さを指定できます、E
   display: inline-block;
   padding-block: 8px;
   color: #fff;
-  font-size: 18px;
+  font-size: 1.125em; // 18px / 16px
 
   @include mq(pc) {
     color: $color-base;
     font-size: $font-size-base;
     transition: color 0.3s;
 
-    // ホバーすると斁E���E色が変わる、E
+    // ホバーすると斁E���E色が変わる、E
     &:hover {
       color: $main-color;
     }
   }
 }
+
 .drawer-content__link {
 }
 
@@ -318,8 +362,10 @@ html {
 .drawer-icon {
   width: 30px;
   height: 18px;
-  //position: relative;を設定した要素は、その子要素にposition: absolute;が設定されてぁE��場合�E基準点�E��EジショニングコンチE��スト）となります。これ�E、絶対位置持E��された子要素が、この相対位置持E��された親要素に対して位置を決定するため�E基準となめE
+
+  // position: relative;を設定した要素は、その子要素にposition: absolute;が設定されてぁE��場合�E基準点�E��EジショニングコンチE��スト）となります。これ�E、絶対位置持E��された子要素が、この相対位置持E��された親要素に対して位置を決定するため�E基準となめE
   position: relative;
+
   // z-index: 51;
   margin-top: -3px;
 
@@ -349,7 +395,9 @@ html {
   width: 30px;
   height: 2px;
   background: $main-color;
-  transition: transform 0.4s linear, top 0.4s linear;
+  transition:
+    transform 0.4s linear,
+    top 0.4s linear;
 
   &:nth-of-type(1) {
   }
@@ -363,16 +411,16 @@ html {
   }
 }
 
-/*-------------------------
+/* -------------------------
    ファーストビュー
-  -------------------------*/
+  ------------------------- */
 
 .fv {
   // position: relative;
 }
 
 .fv__inner {
-  //動画
+  // 動画
   position: relative;
 }
 
@@ -380,13 +428,15 @@ html {
 }
 
 .fv__image {
-  //動画
+  // 動画
   @include mq(pc) {
     max-width: 990px;
-    //margin-left: auto を使用すると、使用可能なスペ�Eスのすべてを左マ�Eジンとして使用するため、要素は右側に移動する、E
+
+    // margin-left: auto を使用すると、使用可能なスペ�Eスのすべてを左マ�Eジンとして使用するため、要素は右側に移動する、E
     margin-left: auto;
     display: block;
   }
+
   　 img {
     // width: 345px;
     // display: block;
@@ -400,6 +450,7 @@ html {
 
 .fv__message {
   margin-top: 30px;
+
   // @include mq(pc) {
   //   position: absolute;
   //   margin-block: 171px;
@@ -415,21 +466,25 @@ html {
 
   @include mq(pc) {
     position: absolute;
-    //notion解説
+
+    // notion解説
     inset-block: 0;
-    //notion解説
+
+    // notion解説
     margin-block: auto;
     left: 0;
     padding: 80px 40px;
     background: #fff;
-    //notion解説
+
+    // notion解説
     height: fit-content;
   }
 }
+
 .fv__title {
-  // margin-top: 30px;　messageの方にぁE��る、E
+  // margin-top: 30px;　messageの方にぁE��る、E
   margin-left: -1px;
-  font-size: 26px;
+  font-size: 1.625em; // 26px / 16px
   font-weight: 600;
 }
 
@@ -438,9 +493,9 @@ html {
   margin-top: 16px;
 }
 
-/*-------------------------
+/* -------------------------
    concept
-  -------------------------*/
+  ------------------------- */
 
 .concept {
   margin-top: 94px;
@@ -459,64 +514,68 @@ html {
 .concept__content {
   flex-direction: column;
   display: flex;
+
   // 動画
   gap: 34px;
 
   @include mq(pc) {
     // gap: 80px;
-    //レスポンシブチェチE��したときにただの80pxだと、大きすぎて表示が崩れるから、E
+    // レスポンシブチェチE��したときにただの80pxだと、大きすぎて表示が崩れるから、E
     gap: calc(80px / 1200px * 100%);
     flex-direction: row;
-    //動画
+
+    // 動画
     align-items: center;
   }
 }
 
 .concept__image {
-  //動画
+  // 動画
   text-align: center;
 
   @include mq(pc) {
-    //動画
-    //親要素であるconcept__contentの幁E��1200pxだから、E00pxになる。だから、割合で出す、E
-    //calc(600px / 1200px * 100%)とぁE��式�E、E00pxめE200pxで割った後、その結果めE00倍してパ�EセンチE�Eジを求めてぁE��す。つまり、要素の幁E��親要素の幁E��対する50%に設定しようとしてぁE��す、E
+    // 動画
+    // 親要素であるconcept__contentの幁E��1200pxだから、E00pxになる。だから、割合で出す、E
+    // calc(600px / 1200px * 100%)とぁE��式�E、E00pxめE200pxで割った後、その結果めE00倍してパ�EセンチE�Eジを求めてぁE��す。つまり、要素の幁E��親要素の幁E��対する50%に設定しようとしてぁE��す、E
     width: calc(600px / 1200px * 100%);
-    //画像が縮まなぁE��ぁE��するため、E
+
+    // 画像が縮まなぁE��ぁE��するため、E
     flex-shrink: 0;
+
     // width: 600px;
   }
 
   img {
-    //動画
+    // 動画
     width: 100%;
   }
 }
 
 .concept__message {
-  //pcの時に横並びにしたぁE��ら、スマ�Eのとき�Eflex-direction: column;で縦に並べるため忁E��なぁE
+  // pcの時に横並びにしたぁE��ら、スマ�Eのとき�Eflex-direction: column;で縦に並べるため忁E��なぁE
   // margin-top: 34px;
 
   @include mq(pc) {
     // padding-top: 67px;
     // margin-block: auto;
 
-    //動画
+    // 動画
     flex-grow: 1;
   }
 }
 
 .concept__sub-title {
-  font-size: 20px;
+  font-size: 1.25em;
   font-weight: 600;
 
   // 動画
 
   @include mq(pc) {
-    font-size: 18px;
+    font-size: 1.125em; // 18px / 16px
   }
 
   @include mq(lg) {
-    font-size: 20px;
+    font-size: 1.375em; // 22px / 16px
   }
 }
 
@@ -528,9 +587,9 @@ html {
   }
 }
 
-/*-------------------------
+/* -------------------------
    feature
-  -------------------------*/
+  ------------------------- */
 
 .feature {
 }
@@ -549,7 +608,8 @@ html {
     flex-direction: row;
     margin-top: 65px;
   }
-  //レスポンシブ対応。動画を観て写した、E
+
+  // レスポンシブ対応。動画を観て写した、E
   @include mq(lg) {
     gap: 60px;
   }
@@ -561,25 +621,28 @@ html {
 
 .feature__card {
   background: #fff;
-  box-shadow: 3px 3px 15px 0px rgba(96, 96, 96, 0.16);
+  box-shadow: 3px 3px 15px 0 rgb(96 96 96 / 16%);
 }
+
 .feature-card__image {
   img {
-    //動画では持E��なぁE
+    // 動画では持E��なぁE
     width: 100%;
   }
 }
+
 .feature-card__body {
   padding-block: 26px;
 }
+
 .feature-card__text {
   font-weight: 600;
   text-align: center;
 }
 
-/*-------------------------
+/* -------------------------
    about
-  -------------------------*/
+  ------------------------- */
 
 // .history {
 // }
@@ -632,7 +695,7 @@ html {
 // }
 
 .about {
-  // backgroundで画像を記述。background-imageにすると、画像が表示されなぁE��E
+  // backgroundで画像を記述。background-imageにすると、画像が表示されなぁE��E
   background: url("../img/bg_about01_sp.jpg") no-repeat top center / cover;
   position: relative;
   padding-block: 180px 50px;
@@ -649,7 +712,7 @@ html {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.12);
+    background: rgb(0 0 0 / 12%);
     z-index: 1;
   }
 }
@@ -664,25 +727,27 @@ html {
     width: calc(600px / 1200px * 100%);
   }
 }
+
 .about__title {
-  font-size: 20px;
+  font-size: 1.25em;
 
   @include mq(pc) {
-    font-size: 22px;
+    font-size: 1.375em;
   }
 }
+
 .about__text {
-  font-size: 14px;
+  font-size: 0.875em;
   margin-top: 24px;
 
   @include mq(pc) {
-    font-size: $font-size-base;
+    font-size: 1em;
   }
 }
 
-/*-------------------------
+/* -------------------------
    products
-  -------------------------*/
+  ------------------------- */
 
 .products {
   margin-top: 97px;
@@ -694,7 +759,8 @@ html {
 
 .products__inner {
   padding-inline: 56px;
-  //動画を観てから
+
+  // 動画を観てから
   @include mq(pc) {
     max-width: calc(940px + 40px * 2);
     padding-inline: 40px;
@@ -736,7 +802,7 @@ html {
   }
 
   @include mq(pc) {
-    // 画像がホバーで拡大したときにはみ出さなぁE��ぁE��する、E
+    // 画像がホバーで拡大したときにはみ出さなぁE��ぁE��する、E
     overflow: hidden;
 
     img {
@@ -747,16 +813,18 @@ html {
 
 .products-card__body {
   margin-top: 21px;
-  font-size: 14px;
+  font-size: 0.875em;
 
   @include mq(pc) {
     margin-top: 18px;
   }
 }
+
 .products-card__title {
 }
+
 .products-card__price {
-  color: #989898;
+  color: $color-text-light-gray;
   margin-top: 10px;
 
   @include mq(pc) {
@@ -765,7 +833,7 @@ html {
 }
 
 .products__button {
-  // 動画ではtext-align: center;でボタンの位置を中央にしてぁE��、E
+  // 動画ではtext-align: center;でボタンの位置を中央にしてぁE��、E
   // text-align: center;
   margin-top: 42px;
   @include mq(pc) {
@@ -773,9 +841,9 @@ html {
   }
 }
 
-/*-------------------------
+/* -------------------------
    news
-  -------------------------*/
+  ------------------------- */
 
 .news {
 }
@@ -816,7 +884,7 @@ html {
     // }
   }
 
-  //動画では
+  // 動画では
   // padding-bottom: 28px;
   // border-bottom: 1px solid #e0e0e0;
 
@@ -828,7 +896,7 @@ html {
 .news-card {
   padding-bottom: 28px;
   background: #fff;
-  box-shadow: 0px 1px 0px 0px #e0e0e0;
+  box-shadow: 0 1px 0 0 #e0e0e0;
 
   @include mq(pc) {
     display: flex;
@@ -856,51 +924,57 @@ html {
 
     @include mq(pc) {
       width: 260px;
-      //動画では
+
+      // 動画では
       // flex-shrink: 0;
-      // 画像がホバーで拡大したときにはみ出さなぁE��ぁE��する、E
+      // 画像がホバーで拡大したときにはみ出さなぁE��ぁE��する、E
       overflow: hidden;
       transition: transform 0.5s;
     }
   }
 }
+
 .news-card__body {
-  //動画では、Emargin-top: 16px;を当ててぁE��、E
+  // 動画では、Emargin-top: 16px;を当ててぁE��、E
   @include mq(pc) {
     max-width: 736px;
   }
 
-  //動画では
+  // 動画では
   // @include mq(pc) {
   //   flex-grow: 1;
   // }
 }
+
 .news-card__date {
-  font-size: 14px;
+  font-size: 0.875em;
   margin-top: 17px;
 
   @include mq(pc) {
     margin-top: 0;
   }
 }
+
 .news-card__title {
   font-weight: 600;
   margin-top: 9px;
 
   @include mq(pc) {
-    font-size: 18px;
+    font-size: 1.125em; // 18px / 16px
     margin-top: 16px;
   }
 }
+
 .news-card__text {
-  color: #888;
-  font-size: 14px;
+  color: $color-text-gray;
+  font-size: 0.875em;
   margin-top: 14px;
 
   @include mq(pc) {
     margin-top: 10px;
   }
 }
+
 .news-card__button {
   margin-top: 42px;
   @include mq(pc) {
@@ -908,9 +982,9 @@ html {
   }
 }
 
-/*-------------------------
+/* -------------------------
    message
-  -------------------------*/
+  ------------------------- */
 
 .message {
 }
@@ -919,7 +993,7 @@ html {
 }
 
 .message__content {
-  //pcの時にflexで横並びにするとき�E、spの時にflexを当てて、columnで縦並びしておく。そぁE��ることでpcに刁E��替えたときに、align-items: center;などが適刁E��働く、E
+  // pcの時にflexで横並びにするとき�E、spの時にflexを当てて、columnで縦並びしておく。そぁE��ることでpcに刁E��替えたときに、align-items: center;などが適刁E��働く、E
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -929,7 +1003,8 @@ html {
     align-items: center;
     gap: 40px;
   }
-  //動画を観てから
+
+  // 動画を観てから
   @include mq(lg) {
     gap: 60px;
   }
@@ -938,54 +1013,58 @@ html {
     gap: 80px;
   }
 }
+
 .message__image {
   img {
   }
 
   @include mq(pc) {
-    //動画を観てから
+    // 動画を観てから
     width: calc(600px / 1200px * 100%);
     flex-shrink: 0;
   }
 }
+
 .message__body {
   // margin-top: 32px;
   @include mq(pc) {
-    //動画を観てから
-    //親要素の残り空間をどれだけ�E割合で刁E��るかを決めるも�E。これにより、要素は親要素の残り空間を坁E��に刁E��て占有します、E
+    // 動画を観てから
+    // 親要素の残り空間をどれだけ�E割合で刁E��るかを決めるも�E。これにより、要素は親要素の残り空間を坁E��に刁E��て占有します、E
     flex-grow: 1;
   }
 }
+
 .message__title {
-  font-size: 20px;
+  font-size: 1.25em;
   font-weight: 600;
-  //動画を観てから
+
+  // 動画を観てから
   @include mq(pc) {
-    font-size: 22px;
+    font-size: 1.375em;
   }
 
   @include mq(lg) {
-    font-size: 25px;
+    font-size: 1.5625em; // 25px / 16px
   }
 
   @include mq(xl) {
-    font-size: 28px;
+    font-size: 1.75em; // 28px / 16px
   }
 }
 
 .message__text {
-  font-size: 14px;
+  font-size: 0.875em;
   margin-top: 22px;
 
   @include mq(pc) {
-    font-size: $font-size-base;
+    font-size: 1em;
     margin-top: 36px;
   }
 }
 
-/*-------------------------
+/* -------------------------
    contact
-  -------------------------*/
+  ------------------------- */
 
 // .contact {
 //   background: url("../img/bg_contact01_sp.jpg") no-repeat top center / cover;
@@ -1283,14 +1362,15 @@ html {
 //   }
 // }
 
-/*-------------------------
+/* -------------------------
  contact
-  -------------------------*/
+  ------------------------- */
 
 .contact {
-  //pcの画像をダウンロードすれ�EOK。sp用の画像�Eダウンロードする忁E��なし、E
+  // pcの画像をダウンロードすれ�EOK。sp用の画像�Eダウンロードする忁E��なし、E
   background: url("../img/bg_contact01_pc.jpg") no-repeat top center / cover;
-  //解説➀参�E、E
+
+  // 解説➀参�E、E
   padding-block: 56px;
 
   @include mq(pc) {
@@ -1299,7 +1379,7 @@ html {
 }
 
 .contact__inner {
-  //動画ではこっち。しかし、デザインカンプてきにはcontact__formの方が適刁E��E
+  // 動画ではこっち。しかし、デザインカンプてきにはcontact__formの方が適刁E��E
   @include mq(pc) {
     max-width: calc(510px + 40px * 2);
   }
@@ -1325,19 +1405,20 @@ html {
 }
 
 .contact__note {
-  font-size: 14px;
+  font-size: 0.875em;
   font-weight: 600;
   text-align: center;
 }
 
 .is-required {
   color: #e7728e;
-  //font-weight: 600;はつど書かなぁE��適用されなぁE��E
+
+  // font-weight: 600;はつど書かなぁE��適用されなぁE��E
   font-weight: 600;
 }
 
 .contact__items {
-  // margin-top: 28px;は名前の部刁E�E上�E余白。解説➁参照
+  // margin-top: 28px;は名前の部刁E�E上�E余白。解説➁参照
   margin-top: 28px;
   display: flex;
   flex-direction: column;
@@ -1349,8 +1430,9 @@ html {
 
 .contact__item {
 }
+
 .contact-control {
-  //contact-control__headと、contact-control__inputの間に3pxのスキマを作るため、E
+  // contact-control__headと、contact-control__inputの間に3pxのスキマを作るため、E
   display: flex;
   flex-direction: column;
   gap: 3px;
@@ -1364,7 +1446,8 @@ html {
 .contact-control__head {
   @include mq(pc) {
     width: 180px;
-    //画像が縮まなぁE��ぁE��するため、E
+
+    // 画像が縮まなぁE��ぁE��するため、E
     flex-shrink: 0;
   }
 }
@@ -1372,35 +1455,38 @@ html {
 .form-label {
   display: inline-flex;
   color: #fff;
-  //0.7透過させるため、E
+
+  // 0.7透過させるため、E
   background: rgba($main-color, 0.7);
   padding: 4px 16px;
-  font-size: 14px;
+  font-size: 0.875em;
   font-weight: 600;
-  //解説➂参照、E
+
+  // 解説➂参照、E
   gap: 3px;
   align-items: center;
 
   @include mq(pc) {
-    // width: 100%;にすることで、画面の幁E��変えたとしても、�E動で画面の幁E��合わせて画像�Eサイズが調整される。だから、レスポンシブデザインを実裁E��るときに便利、E
+    // width: 100%;にすることで、画面の幁E��変えたとしても、�E動で画面の幁E��合わせて画像�Eサイズが調整される。だから、レスポンシブデザインを実裁E��るときに便利、E
     width: 100%;
     justify-content: center;
-    font-size: 18px;
+    font-size: 1.125em;
     padding-top: 5px;
     padding-bottom: 4px;
     padding-inline: 4px;
-    //鉛筁E��たいなボックスを作�Eするため、E
+
+    // 鉛筁E��たいなボックスを作�Eするため、E
     clip-path: polygon(0 0, 97% 0, 100% 50%, 97% 100%, 0% 100%);
   }
 }
 
 .form-label__required {
-  color: #e7728e;
-  font-size: 10px;
+  color: $color-accent;
+  font-size: 0.625em; // 10px / 16px
   font-weight: 600;
 
   @include mq(pc) {
-    font-size: 12px;
+    font-size: 0.75em; // 12px / 16px
   }
 }
 
@@ -1411,43 +1497,48 @@ html {
 }
 
 .form-text {
-  //解説➁E��照
+  // 解説➁E��照
 
   width: 100%;
   height: 40px;
-  //要素の墁E��線をなくすため、E
+
+  // 要素の墁E��線をなくすため、E
   border: 0;
   background: #fff;
-  //右に5px、下に6px、E6px刁E��を庁E��る、Epx刁E��を追加する。透�E度ぁE.16の灰色
-  box-shadow: 5px 6px 16px 0px rgba(96, 96, 96, 0.16);
+
+  // 右に5px、下に6px、E6px刁E��を庁E��る、Epx刁E��を追加する。透�E度ぁE.16の灰色
+  box-shadow: 5px 6px 16px 0 rgb(96 96 96 / 16%);
 
   &:focus {
     outline: $main-color auto 1px;
-    box-shadow: 5px 6px 16px 0px rgba($main-color, 0.16);
+    box-shadow: 5px 6px 16px 0 rgba($main-color, 0.16);
   }
 }
 
-//解説➁E��照
+// 解説➁E��照
 .contact-control__radios {
   display: flex;
   align-items: center;
 }
 
 .form-radio {
-  //form-radio__inputのposition: absoluteの位置の基準として使ぁE��め、E
+  // form-radio__inputのposition: absoluteの位置の基準として使ぁE��め、E
   position: relative;
 }
-//チE��ォルト�Eradioボタンを非表示にするため、E
+
+// チE��ォルト�Eradioボタンを非表示にするため、E
 .form-radio__input {
   width: 1px;
   height: 1px;
   position: absolute;
-  //表示領域がなぁE��ぁE��する、E
+
+  // 表示領域がなぁE��ぁE��する、E
   clip: rect(0, 0, 0, 0);
-  // clip: rect(0, 0, 0, 0)により視覚的には全く見えなぁE��態になってぁE��すが、overflow: hidden;によりそ�E中の冁E��が要素の外にはみ出すことはありません、E
+
+  // clip: rect(0, 0, 0, 0)により視覚的には全く見えなぁE��態になってぁE��すが、overflow: hidden;によりそ�E中の冁E��が要素の外にはみ出すことはありません、E
   overflow: hidden;
 
-  //ボタンを押したときに反応する、E
+  // ボタンを押したときに反応する、E
 
   &:checked + .form-radio__text {
     background: $main-color;
@@ -1456,40 +1547,45 @@ html {
 
   &:focus + .form-radio__text {
     outline: $main-color auto 1px;
-    box-shadow: 5px 6px 16px 0px rgba($main-color, 0.32);
+    box-shadow: 5px 6px 16px 0 rgba($main-color, 0.32);
   }
 }
 
 .form-radio__text {
   background: #fff;
   color: $main-color;
-  //斁E���E間隔
+
+  // 斁E���E間隔
   letter-spacing: 0.026px;
-  //ボタンのサイズを調整、E
+
+  // ボタンのサイズを調整、E
   width: 80px;
   height: 40px;
-  //解説➁E��照、E
+
+  // 解説➁E��照、E
   display: grid;
   place-items: center;
 }
 
 .form-textarea {
-  // width: 100%;にすることで、画面の幁E��変えたとしても、�E動で画面の幁E��合わせて画像�Eサイズが調整される。だから、レスポンシブデザインを実裁E��るときに便利、E
+  // width: 100%;にすることで、画面の幁E��変えたとしても、�E動で画面の幁E��合わせて画像�Eサイズが調整される。だから、レスポンシブデザインを実裁E��るときに便利、E
   width: 100%;
   margin-top: 1px;
   height: 122px;
   border: 0;
-  font-size: 16px;
+  font-size: $font-size-base;
   background: #fff;
-  box-shadow: 5px 6px 16px 0px rgba(96, 96, 96, 0.16);
-  //ユーザーが要素のサイズを垂直方向に自由に変更できる、E
+  box-shadow: 5px 6px 16px 0 rgb(96 96 96 / 16%);
+
+  // ユーザーが要素のサイズを垂直方向に自由に変更できる、E
   resize: vertical;
 
   &:focus {
     outline: $main-color auto 1px;
-    box-shadow: 5px 6px 16px 0px rgba($main-color, 0.16);
+    box-shadow: 5px 6px 16px 0 rgba($main-color, 0.16);
   }
 }
+
 .contact__footer {
   margin-top: 26px;
 
@@ -1497,19 +1593,23 @@ html {
     margin-top: 32px;
   }
 }
+
 .contact__privacy {
   text-align: center;
 }
+
 .form-checkbox {
   position: relative;
 }
+
 .form-checkbox__input {
   width: 1px;
   height: 1px;
   position: absolute;
   clip: rect(0, 0, 0, 0);
   overflow: hidden;
-  //チェチE��ボックスボタンを押したら、見えなくなってぁE��矢印が見えるよぁE��なる、E
+
+  // チェチE��ボックスボタンを押したら、見えなくなってぁE��矢印が見えるよぁE��なる、E
   &:checked + .form-checkbox__text {
     &::after {
       opacity: 1;
@@ -1519,16 +1619,17 @@ html {
   &:focus + .form-checkbox__text {
     &::before {
       outline: $main-color auto 1px;
-      box-shadow: 5px 6px 16px 0px rgba($main-color, 0.16);
+      box-shadow: 5px 6px 16px 0 rgba($main-color, 0.16);
     }
   }
 }
 
 .form-checkbox__text {
-  // 解説➁E��照。チェチE��ボックスの幁E��22pxでチェチE��ボックスと、テキスト�E間に8pxの余白があるから、E
+  // 解説➁E��照。チェチE��ボックスの幁E��22pxでチェチE��ボックスと、テキスト�E間に8pxの余白があるから、E
   padding-left: 30px;
+
   a {
-    //チE��ストに下線を引く
+    // チE��ストに下線を引く
     text-decoration: underline;
     color: $main-color;
   }
@@ -1541,21 +1642,24 @@ html {
     inset-block: 0;
     margin-block: auto;
   }
-  //チェチE��ボックスをデザインする、E
+
+  // チェチE��ボックスをデザインする、E
   &::before {
     width: 22px;
     height: 22px;
     border: 1px solid $main-color;
     background: #fff;
   }
-  //チェチE��ボックスの中の矢印をデザインする、E
+
+  // チェチE��ボックスの中の矢印をデザインする、E
   &::after {
-    //矢印を完�Eに見えなくする。しかし、見えなぁE��けで、存在はしてぁE��ので、クリチE��などをすることで見えるよぁE��することができる、E
+    // 矢印を完�Eに見えなくする。しかし、見えなぁE��けで、存在はしてぁE��ので、クリチE��などをすることで見えるよぁE��することができる、E
     opacity: 0;
-  width: 19.414px;
-  height: 14.621px;
-  left: 1.29px;
-  background: url(../img/icon_checkbox01.png) no-repeat center center / contain;
+    width: 19.414px;
+    height: 14.621px;
+    left: 1.29px;
+    background: url("../img/icon_checkbox01.png") no-repeat center center /
+      contain;
   }
 }
 
@@ -1567,12 +1671,12 @@ html {
 //   margin-top: 44px;
 // }
 
-/*-------------------------
+/* -------------------------
    footer
-  -------------------------*/
+  ------------------------- */
 
 .footer {
-  background: #f7f7f7;
+  background: $color-bg-footer;
   padding-top: 35px;
   padding-bottom: 10px;
 
@@ -1595,6 +1699,7 @@ html {
 
   @include mq(pc) {
     transition: opacity 0.3s;
+
     &:hover {
       opacity: 0.6;
     }
@@ -1618,10 +1723,11 @@ html {
 }
 
 .footer__menu-link {
-  font-size: 12px;
+  font-size: 0.75em;
 
   @include mq(pc) {
     transition: opacity 0.3s;
+
     &:hover {
       opacity: 0.6;
     }
@@ -1657,6 +1763,6 @@ html {
 }
 
 .footer__copyright {
-  color: #888;
-  font-size: 12px;
+  color: $color-text-gray;
+  font-size: 0.75em;
 }
