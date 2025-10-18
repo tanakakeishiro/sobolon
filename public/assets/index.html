@@ -14,16 +14,27 @@
 
     <!-- ファビコン -->
     <link rel="icon" href="/favicon.ico" />
-    <!-- アップルタッチアイコン -->
-    <!-- <link rel="apple-touch-icon" sizes="180x180" href="/afavicon.ico" /> -->
+
     <!-- OGPタグ -->
-    <!-- <meta property="og:title" content="OHA!" />
+    <meta property="og:title" content="sobolon" />
     <meta
       property="og:description"
-      content="OHA!は、朝起きたい人と朝起こされたい人がランダムにマッチングしちゃう通話アプリです。"
+      content="海洋マイクロプラスチックを素材としたハンドメイドアクセサリー「sobolon」。可愛くてステキなのは当たり前、地球にやさしくあるのも当たり前。環境に配慮した一点物アクセサリーで、可愛いで地球を守りませんか？"
     />
-    <meta property="og:url" content="https://www.example.com/" />
-    <meta property="og:image" content="https://www.example.com/image.jpg" /> -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="sobolon" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:url" content="/" />
+    <meta property="og:image" content="./img/mv_fv01_pc.jpg" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="sobolon" />
+    <meta
+      name="twitter:description"
+      content="海洋マイクロプラスチックを素材としたハンドメイドアクセサリー「sobolon」。可愛くてステキなのは当たり前、地球にやさしくあるのも当たり前。環境に配慮した一点物アクセサリーで、可愛いで地球を守りませんか？"
+    />
+    <meta name="twitter:image" content="./img/mv_fv01_pc.jpg" />
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,10 +43,11 @@
       rel="stylesheet"
     />
     <!-- スタイルシート -->
-    <link rel="stylesheet" href="./css/lib/swiper-bundle.min.css" />
+
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/style.css" />
   </head>
+
   <body>
     <header class="header">
       <div class="header__inner inner">
@@ -49,7 +61,11 @@
           /></a>
         </h1>
 
-        <nav id="js-drawer-content" class="header__nav">
+        <nav
+          id="js-drawer-content"
+          class="header__nav"
+          aria-label="グローバルナビゲーション"
+        >
           <ul class="header__lists">
             <li class="header__list">
               <a href="#concept" class="header__link">Concept</a>
@@ -68,6 +84,7 @@
             </li>
           </ul>
         </nav>
+
         <button
           id="js-drawer-button"
           type="button"
@@ -79,38 +96,44 @@
         </button>
       </div>
     </header>
-    <!-- メインコンテンツだから、mainクラスをつける。 -->
+
     <main class="main">
       <div class="fv">
         <div class="fv__inner inner">
-          <picture class="fv__image">
-            <source
-              media="(max-width: 767px)"
-              srcset="img/mv_fv01_sp.jpg"
-              width="690"
-              height="828"
-            />
-            <img src="./img/mv_fv01_pc.jpg" alt="" width="1980" height="1320" />
-          </picture>
-          <!-- <div class="fv__content"> -->
-          <div class="fv__message">
-            <h2 class="fv__title">
-              “可愛い” で<br class="pc-br" />地球を守る！
-            </h2>
-            <p class="fv__text">
-              海洋マイクロプラスチックを素材とした<br />
-              ハンドメイドアクセサリー「sobolon」
-            </p>
+          <div class="fv-content">
+            <picture class="fv-content__image">
+              <source
+                media="(max-width: 767px)"
+                srcset="img/mv_fv01_sp.jpg"
+                width="690"
+                height="828"
+              />
+              <img
+                src="./img/mv_fv01_pc.jpg"
+                alt=""
+                width="1980"
+                height="1320"
+              />
+            </picture>
+            <div class="fv-content__message">
+              <h2 class="fv-content__title">
+                “可愛い” で<br class="pc-br" />地球を守る！
+              </h2>
+              <p class="fv-content__text">
+                海洋マイクロプラスチックを素材とした<br />
+                ハンドメイドアクセサリー「sobolon」
+              </p>
+            </div>
           </div>
+          <!-- /.fv-content -->
         </div>
       </div>
-      <section id="concept" class="concept section">
+
+      <section id="concept" class="concept spacing-section">
         <div class="concept__inner inner">
           <h2 class="heading">Concept</h2>
-          <!-- 動画を観て追加 -->
-          <div class="concept__content area">
-            <!-- pictureはいらなかった。カンプをよく確認する。 -->
-            <figure class="concept__image">
+          <div class="concept-content spacing-content">
+            <figure class="concept-content__image">
               <img
                 src="./img/image_concept01.jpg"
                 alt=""
@@ -118,14 +141,12 @@
                 height="460"
               />
             </figure>
-            <!-- 動画を観て追加 -->
-            <div class="concept__message">
-              <!-- <div class="concept__content"> -->
-              <p class="concept__sub-title">
+            <div class="concept-content__message">
+              <p class="concept-content__sub-title">
                 可愛くてステキなのは当たり前。 <br />
                 地球にやさしくあるのも当たり前。
               </p>
-              <p class="concept__text">
+              <p class="concept-content__text">
                 「sobolon」は、海洋汚染の要因であるマイクロプラスチックを回収<br
                   class="pc-br"
                 />し、それらを素材としたハンドメイドアクセサリーを製作しているブラ<br
@@ -137,19 +158,19 @@
         </div>
       </section>
 
-      <section id="feature" class="feature section">
+      <section id="feature" class="feature spacing-section">
         <div class="feature__inner inner">
           <h2 class="heading">Feature</h2>
-          <div class="feature__cards area">
+          <div class="feature__cards spacing-content">
             <div class="feature__card">
-              <div class="feature-card__image">
+              <figure class="feature-card__image">
                 <img
                   src="./img/image_feature01.jpg"
                   alt=""
                   width="680"
                   height="480"
                 />
-              </div>
+              </figure>
               <div class="feature-card__body">
                 <p class="feature-card__text">
                   素材は海で採れた<br />
@@ -158,14 +179,14 @@
               </div>
             </div>
             <div class="feature__card">
-              <div class="feature-card__image">
+              <figure class="feature-card__image">
                 <img
                   src="./img/image_feature02.jpg"
                   alt=""
                   width="680"
                   height="480"
                 />
-              </div>
+              </figure>
               <div class="feature-card__body">
                 <p class="feature-card__text">
                   個性あふれる<br />
@@ -174,14 +195,14 @@
               </div>
             </div>
             <div class="feature__card">
-              <div class="feature-card__image">
+              <figure class="feature-card__image">
                 <img
                   src="./img/image_feature03.jpg"
                   alt=""
                   width="680"
                   height="480"
                 />
-              </div>
+              </figure>
               <div class="feature-card__body">
                 <p class="feature-card__text">
                   世界にひとつだけの<br />
@@ -192,15 +213,14 @@
           </div>
         </div>
       </section>
-      <!-- 動画を観てから、作成。 -->
-      <div class="about section">
+
+      <div class="about spacing-section">
         <div class="about__inner inner">
           <div class="about__content">
             <p class="about__title">
               消費者である私たちが、<br />
               地球環境のためにできることは何か？
             </p>
-            <!-- htmlの時点でデザインカンプ通りにbrで改行する。 -->
             <p class="about__text">
               そんな視点からこのブランドは生まれました。<br />
               オシャレを楽しむ気持ちを大切にしながらも、<br />
@@ -215,48 +235,13 @@
           </div>
         </div>
       </div>
-      <!-- <section class="history section"> -->
-      <!-- <div class="history__section section"> -->
-      <!-- <div class="history__box">
-          <picture class="history__image">
-            <source
-              media="(max-width: 767px)"
-              srcset="img/bg_about01_sp.jpg"
-              class="sp"
-            />
-            <img
-              src="./img/bg_about01_pc.jpg"
-              alt=""
-              width="2560"
-              height="956"
-              class="sp"
-            />
-          </picture>
-          <div class="history__story">
-            <p class="history__title">
-              消費者である私たちが、 <br />
-              地球環境のためにできることは何か？
-            </p>
-            <p class="history__text">
-              そんな視点からこのブランドは生まれました。<br />オシャレを楽しむ気持ちを大切にしながらも、<br />ただ可愛いだけじゃない環境にやさしいアクセサリー<br
-                class="sp-br"
-              />を選ぶ人が増えていったら…<br />
-              その変化は少しずつ、だけども本質的に、<br
-                class="sp-br"
-              />この世界をHappyに変えていくのだと、<br class="pc-br" />
-              私たちは考え<br class="sp-br" />ます。
-            </p>
-          </div>
-        </div> -->
-      <!-- </div> -->
-      <!-- </section> -->
-      <!-- 動画を観てから、書き直し。クラスが一つ多かった。 -->
-      <section id="products" class="products section">
+
+      <section id="products" class="products spacing-section">
         <div class="products__inner inner">
           <h2 class="heading">Products</h2>
-          <div class="products__cards area">
+          <div class="products__cards spacing-content">
             <a href="" class="products__card products-card">
-              <div class="products-card__image">
+              <figure class="products-card__image">
                 <img
                   src="./img/image_product01.jpg"
                   alt=""
@@ -271,10 +256,10 @@
                   </p>
                   <p class="products-card__price">￥3,695</p>
                 </div>
-              </div>
+              </figure>
             </a>
             <a href="" class="products__card products-card">
-              <div class="products-card__image">
+              <figure class="products-card__image">
                 <img
                   src="./img/image_product02.jpg"
                   alt=""
@@ -289,10 +274,10 @@
                   </p>
                   <p class="products-card__price">￥2,390</p>
                 </div>
-              </div>
+              </figure>
             </a>
             <a href="" class="products__card products-card">
-              <div class="products-card__image">
+              <figure class="products-card__image">
                 <img
                   src="./img/image_product03.jpg"
                   alt=""
@@ -309,7 +294,7 @@
                   </p>
                   <p class="products-card__price">￥2,580</p>
                 </div>
-              </div>
+              </figure>
             </a>
           </div>
           <div class="products__button">
@@ -318,21 +303,20 @@
         </div>
       </section>
 
-      <!-- <article class="news section"> -->
-      <section id="news" class="news section">
+      <section id="news" class="news spacing-section">
         <div class="news__inner inner">
           <h2 class="heading">News</h2>
-          <div class="news__cards area">
+          <div class="news__cards spacing-content">
             <article class="news__card">
               <a href="" class="news-card">
-                <div class="news-card__image">
+                <figure class="news-card__image">
                   <img
                     src="./img/image_news01.jpg"
                     alt=""
                     width="690"
                     height="426"
                   />
-                </div>
+                </figure>
                 <div class="news-card__body">
                   <p class="news-card__date">2020年2月4日</p>
                   <h3 class="news-card__title">
@@ -345,14 +329,14 @@
                 </div>
               </a>
               <a href="" class="news-card">
-                <div class="news-card__image">
+                <figure class="news-card__image">
                   <img
                     src="./img/image_news02.jpg"
                     alt=""
                     width="690"
                     height="426"
                   />
-                </div>
+                </figure>
                 <div class="news-card__body">
                   <p class="news-card__date">2020年1月20日</p>
                   <h3 class="news-card__title">
@@ -368,14 +352,14 @@
                 </div>
               </a>
               <a href="" class="news-card">
-                <div class="news-card__image">
+                <figure class="news-card__image">
                   <img
                     src="./img/image_news03.jpg"
                     alt=""
                     width="690"
                     height="425"
                   />
-                </div>
+                </figure>
                 <div class="news-card__body">
                   <p class="news-card__date">2020年1月20日</p>
                   <h3 class="news-card__title">sobolonの矛盾</h3>
@@ -394,40 +378,38 @@
         </div>
       </section>
 
-      <section class="message section">
+      <section class="message spacing-section">
         <div class="message__inner inner">
-          <div class="message__content">
-            <div class="message__image">
-              <img
-                src="./img/image_concept02.jpg"
-                alt=""
-                width="690"
-                height="461"
-              />
-            </div>
-            <div class="message__body">
-              <p class="message__title">
-                合言葉は、<br />
-                「 “可愛い” で 地球を守る！」
-              </p>
-              <p class="message__text">
-                深刻化している環境問題に対して、否定や制限、禁止といった強制的な<br
-                  class="pc-br"
-                />方法ではなく、明るく幸せな未来を目指して、「可愛い」「楽しい」の<br　class
-                  ="pc-br"
-                />力を信じて、愛に<br
-                  class="sp-br"
-                />つながる選択を世の中に増やしていきます。
-              </p>
-            </div>
+          <figure class="message__image">
+            <img
+              src="./img/image_concept02.jpg"
+              alt=""
+              width="690"
+              height="461"
+            />
+          </figure>
+          <div class="message__body">
+            <p class="message__title">
+              合言葉は、<br />
+              「 “可愛い” で 地球を守る！」
+            </p>
+            <p class="message__text">
+              深刻化している環境問題に対して、否定や制限、禁止といった強制的な<br
+                class="pc-br"
+              />方法ではなく、明るく幸せな未来を目指して、「可愛い」「楽しい」の<br
+                class="pc-br"
+              />力を信じて、愛に<br
+                class="sp-br"
+              />つながる選択を世の中に増やしていきます。
+            </p>
           </div>
         </div>
       </section>
-      <!-- contact -->
-      <section id="contact" class="contact section">
+
+      <section id="contact" class="contact spacing-section">
         <div class="contact__inner inner">
           <h2 class="contact__heading heading">Contact</h2>
-          <div class="contact__content area">
+          <div class="contact__content spacing-content">
             <form action="" class="contact__form">
               <p class="contact__note">
                 <span class="is-required">＊</span>は入力必須項目です
@@ -702,8 +684,10 @@
       </nav>
     </div> -->
 
-    <script src="./js/lib/swiper-bundle.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script src="./js/script.js"></script>
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      defer
+    ></script>
+    <script src="./js/script.js" defer></script>
   </body>
 </html>
