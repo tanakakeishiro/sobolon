@@ -62,20 +62,20 @@ body {
   content: "";
 }
 
-.section {
+.spacing-section {
   margin-top: 96px;
 }
 @media screen and (min-width: 768px) {
-  .section {
+  .spacing-section {
     margin-top: 160px;
   }
 }
 
-.area {
+.spacing-content {
   margin-top: 46px;
 }
 @media screen and (min-width: 768px) {
-  .area {
+  .spacing-content {
     margin-top: 64px;
   }
 }
@@ -255,22 +255,23 @@ html {
 /* -------------------------
    ファーストビュー
   ------------------------- */
-.fv__inner {
+.fv-content {
   position: relative;
 }
 
 @media screen and (min-width: 768px) {
-  .fv__image {
+  .fv-content__image {
     display: block;
     margin-left: auto;
     max-width: 990px;
   }
 }
-.fv__message {
+
+.fv-content__message {
   margin-top: 30px;
 }
 @media screen and (min-width: 768px) {
-  .fv__message {
+  .fv-content__message {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -285,13 +286,13 @@ html {
   }
 }
 
-.fv__title {
+.fv-content__title {
   margin-left: -1px;
   font-weight: 600;
   font-size: 1.625em;
 }
 
-.fv__text {
+.fv-content__text {
   margin-top: 16px;
 }
 
@@ -307,58 +308,58 @@ html {
   }
 }
 
-.concept__content {
+.concept-content {
   display: flex;
   flex-direction: column;
   gap: 34px;
 }
 @media screen and (min-width: 768px) {
-  .concept__content {
+  .concept-content {
     flex-direction: row;
     align-items: center;
     gap: 6.6666666667%;
   }
 }
 
-.concept__image {
+.concept-content__image {
   text-align: center;
 }
 @media screen and (min-width: 768px) {
-  .concept__image {
+  .concept-content__image {
     flex-shrink: 0;
     width: 50%;
   }
 }
-.concept__image img {
+.concept-content__image img {
   width: 100%;
 }
 
 @media screen and (min-width: 768px) {
-  .concept__message {
+  .concept-content__message {
     flex-grow: 1;
   }
 }
 
-.concept__sub-title {
+.concept-content__sub-title {
   font-weight: 600;
   font-size: 1.25em;
 }
 @media screen and (min-width: 768px) {
-  .concept__sub-title {
+  .concept-content__sub-title {
     font-size: 1.125em;
   }
 }
 @media screen and (min-width: 900px) {
-  .concept__sub-title {
+  .concept-content__sub-title {
     font-size: 1.375em;
   }
 }
 
-.concept__text {
+.concept-content__text {
   margin-top: 21px;
 }
 @media screen and (min-width: 768px) {
-  .concept__text {
+  .concept-content__text {
     margin-top: 40px;
   }
 }
@@ -649,25 +650,25 @@ html {
 /* -------------------------
    message
   ------------------------- */
-.message__content {
+.message__inner {
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
 @media screen and (min-width: 768px) {
-  .message__content {
+  .message__inner {
     flex-direction: row-reverse;
     align-items: center;
     gap: 40px;
   }
 }
 @media screen and (min-width: 900px) {
-  .message__content {
+  .message__inner {
     gap: 60px;
   }
 }
 @media screen and (min-width: 1200px) {
-  .message__content {
+  .message__inner {
     gap: 80px;
   }
 }

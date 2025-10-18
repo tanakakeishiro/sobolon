@@ -64,11 +64,8 @@ body {
 .inner {
   padding-inline: 15px;
 
-  // pcの最大幁E��1200pxであり、左右の余白を担保しつつ、�E側めE200pxにするため、E
   @include mq(pc) {
     max-width: calc(1200px + 40px * 2);
-
-    // 要素を左右中央揁E��にするため。このスタイルを適用すると、指定した要素の左右のマ�Eジンが同等になり、結果として要素はそ�E親要素冁E��中央に配置される、E
     margin-inline: auto;
     padding-inline: 40px;
   }
@@ -112,7 +109,7 @@ body {
   }
 }
 
-.section {
+.spacing-section {
   margin-top: 96px;
 
   @include mq(pc) {
@@ -129,21 +126,13 @@ body {
 //   }
 // }
 
-.area {
+.spacing-content {
   margin-top: 46px;
 
   @include mq(pc) {
     margin-top: 64px;
   }
 }
-
-// .section__content {
-//   margin-top: 46px;
-
-//   @include mq(pc) {
-//     margin-top: 64px;
-//   }
-// }
 
 .button {
   letter-spacing: 0.02px;
@@ -415,81 +404,50 @@ html {
    ファーストビュー
   ------------------------- */
 
-.fv {
-  // position: relative;
-}
+// .fv {
+ 
+// }
 
-.fv__inner {
-  // 動画
+// .fv__inner {
+// }
+
+.fv-content {
   position: relative;
 }
 
-.inner {
-}
-
-.fv__image {
-  // 動画
+.fv-content__image {
   @include mq(pc) {
     max-width: 990px;
-
-    // margin-left: auto を使用すると、使用可能なスペ�Eスのすべてを左マ�Eジンとして使用するため、要素は右側に移動する、E
     margin-left: auto;
     display: block;
   }
 
-  　 img {
-    // width: 345px;
-    // display: block;
-
-    // @include mq(pc) {
-    //   width: 990px;
-    //   float: right;
-    // }
-  }
+  // 　 img {
+   
+  // }
 }
 
-.fv__message {
+.fv-content__message {
   margin-top: 30px;
-
-  // @include mq(pc) {
-  //   position: absolute;
-  //   margin-block: 171px;
-  //   background: rgb(255, 255, 255, 1);
-  //   left: 0;
-  //   width: 367px;
-  //   height: 318px;
-  //   padding: 50px 40px;
-  //   flex-direction: column;
-  //   justify-content: center;
-  //   align-items: flex-start;
-  // }
 
   @include mq(pc) {
     position: absolute;
-
-    // notion解説
     inset-block: 0;
-
-    // notion解説
     margin-block: auto;
     left: 0;
     padding: 80px 40px;
     background: #fff;
-
-    // notion解説
     height: fit-content;
   }
 }
 
-.fv__title {
-  // margin-top: 30px;　messageの方にぁE��る、E
+.fv-content__title {
   margin-left: -1px;
   font-size: 1.625em; // 26px / 16px
   font-weight: 600;
 }
 
-.fv__text {
-  // padding-top: 16px;
+.fv-content__text {
   margin-top: 16px;
 }
 
@@ -505,70 +463,44 @@ html {
   }
 }
 
-.concept__inner {
-}
+// .concept__inner {
+// }
 
-.heading {
-}
-
-.concept__content {
+.concept-content {
   flex-direction: column;
   display: flex;
-
-  // 動画
   gap: 34px;
 
   @include mq(pc) {
-    // gap: 80px;
-    // レスポンシブチェチE��したときにただの80pxだと、大きすぎて表示が崩れるから、E
     gap: calc(80px / 1200px * 100%);
     flex-direction: row;
-
-    // 動画
     align-items: center;
   }
 }
 
-.concept__image {
-  // 動画
+.concept-content__image {
   text-align: center;
 
   @include mq(pc) {
-    // 動画
-    // 親要素であるconcept__contentの幁E��1200pxだから、E00pxになる。だから、割合で出す、E
-    // calc(600px / 1200px * 100%)とぁE��式�E、E00pxめE200pxで割った後、その結果めE00倍してパ�EセンチE�Eジを求めてぁE��す。つまり、要素の幁E��親要素の幁E��対する50%に設定しようとしてぁE��す、E
     width: calc(600px / 1200px * 100%);
-
-    // 画像が縮まなぁE��ぁE��するため、E
     flex-shrink: 0;
-
-    // width: 600px;
   }
 
   img {
-    // 動画
     width: 100%;
   }
 }
 
-.concept__message {
-  // pcの時に横並びにしたぁE��ら、スマ�Eのとき�Eflex-direction: column;で縦に並べるため忁E��なぁE
-  // margin-top: 34px;
+.concept-content__message {
 
   @include mq(pc) {
-    // padding-top: 67px;
-    // margin-block: auto;
-
-    // 動画
     flex-grow: 1;
   }
 }
 
-.concept__sub-title {
+.concept-content__sub-title {
   font-size: 1.25em;
   font-weight: 600;
-
-  // 動画
 
   @include mq(pc) {
     font-size: 1.125em; // 18px / 16px
@@ -579,7 +511,7 @@ html {
   }
 }
 
-.concept__text {
+.concept-content__text {
   margin-top: 21px;
 
   @include mq(pc) {
@@ -591,11 +523,11 @@ html {
    feature
   ------------------------- */
 
-.feature {
-}
+// .feature {
+// }
 
-.feature__inner {
-}
+// .feature__inner {
+// }
 
 .feature__cards {
   display: flex;
@@ -609,7 +541,6 @@ html {
     margin-top: 65px;
   }
 
-  // レスポンシブ対応。動画を観て写した、E
   @include mq(lg) {
     gap: 60px;
   }
@@ -619,14 +550,13 @@ html {
   }
 }
 
-.feature__card {
+.feature-card {
   background: #fff;
   box-shadow: 3px 3px 15px 0 rgb(96 96 96 / 16%);
 }
 
 .feature-card__image {
   img {
-    // 動画では持E��なぁE
     width: 100%;
   }
 }
@@ -643,59 +573,7 @@ html {
 /* -------------------------
    about
   ------------------------- */
-
-// .history {
-// }
-
-// // .history__area {
-// // }
-
-// .history__box {
-//   position: relative;
-// }
-
-// .history__image {
-//   position: absolute;
-
-//   background: url("../img/bg_about01_sp.jpg") lightgray 50% / cover no-repeat;
-// }
-
-// .sp {
-//   background: rgba(0, 0, 0, 0.12);
-// }
-
-// .history__story {
-//   position: absolute;
-//   color: #fff;
-//   font-weight: 600;
-//   padding-inline: 15px;
-//   padding-top: 180px;
-
-//   @include mq(pc) {
-//     padding-inline: 40px;
-//     padding-top: 123px;
-//   }
-// }
-// .history__title {
-//   font-size: 20px;
-
-//   @include mq(pc) {
-//     font-size: 22px;
-//   }
-// }
-// .history__text {
-//   font-size: 14px;
-
-//   padding-top: 24px;
-//   // padding-bottom: 50px;
-
-//   @include mq(pc) {
-//     font-size: $font-base;
-//   }
-// }
-
 .about {
-  // backgroundで画像を記述。background-imageにすると、画像が表示されなぁE��E
   background: url("../img/bg_about01_sp.jpg") no-repeat top center / cover;
   position: relative;
   padding-block: 180px 50px;
@@ -717,7 +595,7 @@ html {
   }
 }
 
-.about__content {
+.about-content {
   position: relative;
   z-index: 2;
   color: #fff;
@@ -728,7 +606,7 @@ html {
   }
 }
 
-.about__title {
+.about-content__title {
   font-size: 1.25em;
 
   @include mq(pc) {
@@ -736,7 +614,7 @@ html {
   }
 }
 
-.about__text {
+.about-content__text {
   font-size: 0.875em;
   margin-top: 24px;
 
@@ -760,7 +638,6 @@ html {
 .products__inner {
   padding-inline: 56px;
 
-  // 動画を観てから
   @include mq(pc) {
     max-width: calc(940px + 40px * 2);
     padding-inline: 40px;
@@ -783,7 +660,7 @@ html {
   }
 }
 
-.products__card {
+.products-card {
   @include mq(pc) {
     &:hover {
       .products-card__image {
@@ -797,12 +674,10 @@ html {
 
 .products-card__image {
   img {
-    // 動画を観てから
     width: 100%;
   }
 
   @include mq(pc) {
-    // 画像がホバーで拡大したときにはみ出さなぁE��ぁE��する、E
     overflow: hidden;
 
     img {
@@ -820,21 +695,15 @@ html {
   }
 }
 
-.products-card__title {
-}
+// .products-card__title {
+// }
 
 .products-card__price {
   color: $color-text-light-gray;
   margin-top: 10px;
-
-  @include mq(pc) {
-    // padding-top: 12px;
-  }
 }
 
 .products__button {
-  // 動画ではtext-align: center;でボタンの位置を中央にしてぁE��、E
-  // text-align: center;
   margin-top: 42px;
   @include mq(pc) {
     margin-top: 44px;
@@ -845,8 +714,8 @@ html {
    news
   ------------------------- */
 
-.news {
-}
+// .news {
+// }
 
 .news__inner {
   @include mq(pc) {
@@ -855,45 +724,21 @@ html {
   }
 }
 
-.news__cards {
-  // //動画では
-  // display: flex;
-  // flex-direction: column;
-  // gap: 28px;
+// .news__cards {
 
-  // @include mq(pc) {
-  //   gap: 28px;
-  // }
-}
+// }
 
-.news__card {
+.news-card {
   display: flex;
   flex-direction: column;
   gap: 28px;
 
   @include mq(pc) {
-    // flex-direction: row;
     gap: 24px;
-
-    // &:hover {
-    //   .news-card__image {
-    //     img {
-    //       transform: scale(1.1);
-    //     }
-    //   }
-    // }
   }
-
-  // 動画では
-  // padding-bottom: 28px;
-  // border-bottom: 1px solid #e0e0e0;
-
-  // @include mq(pc) {
-  //   padding-bottom: 24px;
-  // }
 }
 
-.news-card {
+.news-card__link {
   padding-bottom: 28px;
   background: #fff;
   box-shadow: 0 1px 0 0 #e0e0e0;
@@ -910,11 +755,6 @@ html {
         }
       }
     }
-
-    // 動画では
-    // display: flex;
-    // align-items: flex-start;
-    // gap: 40px;
   }
 }
 
@@ -924,10 +764,6 @@ html {
 
     @include mq(pc) {
       width: 260px;
-
-      // 動画では
-      // flex-shrink: 0;
-      // 画像がホバーで拡大したときにはみ出さなぁE��ぁE��する、E
       overflow: hidden;
       transition: transform 0.5s;
     }
@@ -935,15 +771,9 @@ html {
 }
 
 .news-card__body {
-  // 動画では、Emargin-top: 16px;を当ててぁE��、E
   @include mq(pc) {
     max-width: 736px;
   }
-
-  // 動画では
-  // @include mq(pc) {
-  //   flex-grow: 1;
-  // }
 }
 
 .news-card__date {
@@ -986,14 +816,10 @@ html {
    message
   ------------------------- */
 
-.message {
-}
+// .message {
+// }
 
-.message__inner {
-}
-
-.message__content {
-  // pcの時にflexで横並びにするとき�E、spの時にflexを当てて、columnで縦並びしておく。そぁE��ることでpcに刁E��替えたときに、align-items: center;などが適刁E��働く、E
+.message-content {
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -1004,7 +830,6 @@ html {
     gap: 40px;
   }
 
-  // 動画を観てから
   @include mq(lg) {
     gap: 60px;
   }
@@ -1014,31 +839,23 @@ html {
   }
 }
 
-.message__image {
-  img {
-  }
-
+.message-content__image {
   @include mq(pc) {
-    // 動画を観てから
     width: calc(600px / 1200px * 100%);
     flex-shrink: 0;
   }
 }
 
-.message__body {
-  // margin-top: 32px;
+.message-content__body {
   @include mq(pc) {
-    // 動画を観てから
-    // 親要素の残り空間をどれだけ�E割合で刁E��るかを決めるも�E。これにより、要素は親要素の残り空間を坁E��に刁E��て占有します、E
     flex-grow: 1;
   }
 }
 
-.message__title {
+.message-content__title {
   font-size: 1.25em;
   font-weight: 600;
 
-  // 動画を観てから
   @include mq(pc) {
     font-size: 1.375em;
   }
@@ -1052,7 +869,7 @@ html {
   }
 }
 
-.message__text {
+.message-content__text {
   font-size: 0.875em;
   margin-top: 22px;
 
@@ -1063,314 +880,11 @@ html {
 }
 
 /* -------------------------
-   contact
-  ------------------------- */
-
-// .contact {
-//   background: url("../img/bg_contact01_sp.jpg") no-repeat top center / cover;
-
-//   @include mq(pc) {
-//     background-image: url("../img/bg_contact01_pc.jpg");
-//   }
-// }
-
-// .contact__inner {
-//   padding-top: 56px;
-
-//   @include mq(pc) {
-//     padding-top: 80px;
-//   }
-// }
-
-// .contact__heading {
-//   color: $main-color;
-// }
-
-// .contact__content {
-// }
-
-// .contact__note {
-//   font-size: 14px;
-//   font-weight: 600;
-//   text-align: center;
-// }
-
-// .contact__note span {
-//   color: #e7728e;
-// }
-
-// .contact__form {
-//   display: flex;
-//   flex-direction: column;
-//   @include mq(pc) {
-//     margin-inline: auto;
-//     align-items: center;
-//     width: 510px;
-//   }
-// }
-
-// .contact__head {
-//   display: flex;
-//   flex-direction: column;
-//   gap: 32px;
-
-//   @include mq(pc) {
-//     width: 510px;
-//   }
-// }
-
-// .contact__field-1 {
-//   color: #fff;
-//   margin-top: 28px;
-
-//   @include mq(pc) {
-//     display: flex;
-//     flex-direction: row;
-//     margin-top: 19px;
-//     gap: 10px;
-//   }
-// }
-
-// .contact-field__label-1 {
-//   background: $main-color;
-//   padding: 4px 16px;
-//   font-size: 14px;
-//   font-weight: 600;
-//   width: calc(345px + 16px * 2);
-
-//   @include mq(pc) {
-//     background: url("../img/bg_label01_pc.png") no-repeat center center / cover;
-//     width: 180px;
-//     height: 40px;
-//     text-align: center;
-//     font-size: 18px;
-//   }
-// }
-
-// .contact-field__label-1 span {
-//   color: #e7728e;
-//   font-size: 10px;
-//   padding-left: 4px;
-
-//   @include mq(pc) {
-//     font-size: 12px;
-//   }
-// }
-
-// .contact-field__text {
-//   display: flex;
-//   margin-top: 3px;
-//   width: calc(345px + 3px * 2);
-//   border: 1px solid #fff;
-
-//   @include mq(pc) {
-//     width: 320px;
-//   }
-// }
-
-// .contact__field {
-//   color: #fff;
-//   @include mq(pc) {
-//     display: flex;
-//     flex-direction: row;
-//     gap: 10px;
-//   }
-// }
-
-// .contact-field__label-2 {
-//   background: $main-color;
-//   padding: 4px 16px;
-//   font-size: 14px;
-//   font-weight: 600;
-
-//   @include mq(pc) {
-//     background: url("../img/bg_label01_pc.png") no-repeat center center / cover;
-//     width:180px;
-//     height: 40px;
-//     font-size: 18px;
-//     text-align: center;
-//   }
-// }
-
-// .contact-field__label-2 span {
-//   color: #e7728e;
-//   font-size: 10px;
-//   padding-left: 4px;
-
-//   @include mq(pc) {
-//     font-size: 12px;
-//   }
-// }
-
-// .contact-field__head {
-//   max-width: calc(118px + 16px * 2);
-
-//   @include mq(pc) {
-//     max-width: none;
-//   }
-// }
-
-// .contact-field__label {
-//   background: $main-color;
-//   padding: 4px 16px;
-//   font-size: 14px;
-//   font-weight: 600;
-
-//   @include mq(pc) {
-//     background: url("../img/bg_label01_pc.png") no-repeat center center / cover;
-//     width: calc(180px + 16px * 2);
-//     height: calc(40px + 4px * 2);
-//     font-size: 18px;
-//     text-align: center;
-//   }
-// }
-
-// .contact-field__label span {
-//   color: #e7728e;
-//   font-size: 10px;
-//   padding-left: 4px;
-//   @include mq(pc) {
-//     font-size: 12px;
-//   }
-// }
-
-// .contact-field__box {
-//   display: flex;
-//   flex-direction: row;
-//   gap: 0;
-//   width: calc(160px + 1px * 2);
-//   border: 1px solid #fff;
-//   margin-top: 3px;
-// }
-
-// .contact-field__box label {
-//   background: #fff;
-//   color: $main-color;
-//   padding: 7px 24px 6px 24px;
-// }
-
-// .contact-field__box input:checked + label {
-//   background: $main-color;
-//   color: #fff;
-// }
-
-// .contact-field__box input {
-//   display: none;
-// }
-
-// .contact-field__label-3 {
-//   background: $main-color;
-//   padding: 4px 16px;
-//   font-size: 14px;
-//   font-weight: 600;
-
-//   @include mq(pc) {
-//     background: url("../img/bg_label01_pc.png") no-repeat center center / cover;
-//     width: calc(180px );
-//     height: 40px;
-//     font-size: 18px;
-//     text-align: center;
-//   }
-// }
-
-// .contact-field__label-3 span {
-//   color: #e7728e;
-//   font-size: 10px;
-//   padding-left: 4px;
-
-//   @include mq(pc) {
-//     font-size: 12px;
-//   }
-// }
-
-// .contact-field__textarea {
-//   border: 1px solid #fff;
-//   margin-top: 3px;
-//   width: calc(345px + 3px * 2);
-//   height: calc(122px + 3px * 2);
-
-//   @include mq(pc) {
-//     width: calc(320px + 3px * 2);
-//   }
-// }
-// .contact-field__privacy {
-//   margin-top: 28px;
-//   text-align: center;
-
-//   @include mq(pc) {
-//     margin-top: 32px;
-//   }
-// }
-// .contact-field__checkbox {
-// }
-// .contact-field__input {
-//   width: 1px;
-//   height: 1px;
-//   position: absolute;
-//   clip: rect(0, 0, 0, 0);
-//   overflow: hidden;
-// }
-
-// .contact-field__input:checked + .contact-checkbox__text::after {
-//   opacity: 1;
-// }
-
-// .contact-checkbox__text {
-//   position: relative;
-//   padding-left: 30px;
-
-//   a {
-//     text-decoration: underline;
-//     font-weight: inherit;
-//     transition: color 0.3s;
-//     color: $main-color;
-//   }
-// }
-
-// .contact-checkbox__text::before,
-// .contact-checkbox__text::after {
-//   content: "";
-//   position: absolute;
-//   left: 0;
-//   top: 50%;
-//   transform: translateY(-50%);
-// }
-
-// .contact-checkbox__text::before {
-//   width: 22px;
-//   height: 22px;
-//   border: 1px solid $main-color;
-//   background: #fff;
-// }
-
-// .contact-checkbox__text::after {
-//   width: calc(19.414px + 1.29px * 2);
-//   height: calc(14.621px + 3.69px * 2);
-//   padding-inline: 1.29px;
-//   padding-block: 3.69px;
-//   background: url(../img/icon_checkbox01.png) no-repeat center center / contain;
-//   opacity: 0;
-// }
-
-// .button {
-//   margin-top: 23px;
-//   margin-bottom: 56px;
-
-//   @include mq(pc) {
-//     margin-top: 44px;
-//     margin-bottom: 80px;
-//   }
-// }
-
-/* -------------------------
  contact
   ------------------------- */
 
 .contact {
-  // pcの画像をダウンロードすれ�EOK。sp用の画像�Eダウンロードする忁E��なし、E
   background: url("../img/bg_contact01_pc.jpg") no-repeat top center / cover;
-
-  // 解説➀参�E、E
   padding-block: 56px;
 
   @include mq(pc) {
@@ -1379,7 +893,6 @@ html {
 }
 
 .contact__inner {
-  // 動画ではこっち。しかし、デザインカンプてきにはcontact__formの方が適刁E��E
   @include mq(pc) {
     max-width: calc(510px + 40px * 2);
   }
@@ -1393,18 +906,10 @@ html {
     gap: 23px;
   }
 }
+// .contact-form {
+// }
 
-.contact__content {
-}
-
-.contact__form {
-  // @include mq(pc) {
-  //   max-width: 510px;
-  //   margin-inline: auto;
-  // }
-}
-
-.contact__note {
+.contact-form__note {
   font-size: 0.875em;
   font-weight: 600;
   text-align: center;
@@ -1412,13 +917,10 @@ html {
 
 .is-required {
   color: #e7728e;
-
-  // font-weight: 600;はつど書かなぁE��適用されなぁE��E
   font-weight: 600;
 }
 
-.contact__items {
-  // margin-top: 28px;は名前の部刁E�E上�E余白。解説➁参照
+.contact-form__items {
   margin-top: 28px;
   display: flex;
   flex-direction: column;
@@ -1428,12 +930,7 @@ html {
   }
 }
 
-.contact__item {
-}
-
-.contact-control {
-  // contact-control__headと、contact-control__inputの間に3pxのスキマを作るため、E
-  display: flex;
+.contact-item {
   flex-direction: column;
   gap: 3px;
 
@@ -1443,11 +940,9 @@ html {
   }
 }
 
-.contact-control__head {
+.contact-item__head {
   @include mq(pc) {
     width: 180px;
-
-    // 画像が縮まなぁE��ぁE��するため、E
     flex-shrink: 0;
   }
 }
@@ -1455,27 +950,20 @@ html {
 .form-label {
   display: inline-flex;
   color: #fff;
-
-  // 0.7透過させるため、E
   background: rgba($main-color, 0.7);
   padding: 4px 16px;
   font-size: 0.875em;
   font-weight: 600;
-
-  // 解説➂参照、E
   gap: 3px;
   align-items: center;
 
   @include mq(pc) {
-    // width: 100%;にすることで、画面の幁E��変えたとしても、�E動で画面の幁E��合わせて画像�Eサイズが調整される。だから、レスポンシブデザインを実裁E��るときに便利、E
     width: 100%;
     justify-content: center;
     font-size: 1.125em;
     padding-top: 5px;
     padding-bottom: 4px;
     padding-inline: 4px;
-
-    // 鉛筁E��たいなボックスを作�Eするため、E
     clip-path: polygon(0 0, 97% 0, 100% 50%, 97% 100%, 0% 100%);
   }
 }
@@ -1490,23 +978,17 @@ html {
   }
 }
 
-.contact-control__input {
+.contact-item__input {
   @include mq(pc) {
     flex-grow: 1;
   }
 }
 
 .form-text {
-  // 解説➁E��照
-
   width: 100%;
   height: 40px;
-
-  // 要素の墁E��線をなくすため、E
   border: 0;
   background: #fff;
-
-  // 右に5px、下に6px、E6px刁E��を庁E��る、Epx刁E��を追加する。透�E度ぁE.16の灰色
   box-shadow: 5px 6px 16px 0 rgb(96 96 96 / 16%);
 
   &:focus {
@@ -1515,30 +997,21 @@ html {
   }
 }
 
-// 解説➁E��照
-.contact-control__radios {
+.contact-item__radios {
   display: flex;
   align-items: center;
 }
 
 .form-radio {
-  // form-radio__inputのposition: absoluteの位置の基準として使ぁE��め、E
   position: relative;
 }
 
-// チE��ォルト�Eradioボタンを非表示にするため、E
 .form-radio__input {
   width: 1px;
   height: 1px;
   position: absolute;
-
-  // 表示領域がなぁE��ぁE��する、E
   clip: rect(0, 0, 0, 0);
-
-  // clip: rect(0, 0, 0, 0)により視覚的には全く見えなぁE��態になってぁE��すが、overflow: hidden;によりそ�E中の冁E��が要素の外にはみ出すことはありません、E
   overflow: hidden;
-
-  // ボタンを押したときに反応する、E
 
   &:checked + .form-radio__text {
     background: $main-color;
@@ -1553,22 +1026,15 @@ html {
 
 .form-radio__text {
   background: #fff;
-  color: $main-color;
-
-  // 斁E���E間隔
+  color: $main-color; 
   letter-spacing: 0.026px;
-
-  // ボタンのサイズを調整、E
   width: 80px;
   height: 40px;
-
-  // 解説➁E��照、E
   display: grid;
   place-items: center;
 }
 
 .form-textarea {
-  // width: 100%;にすることで、画面の幁E��変えたとしても、�E動で画面の幁E��合わせて画像�Eサイズが調整される。だから、レスポンシブデザインを実裁E��るときに便利、E
   width: 100%;
   margin-top: 1px;
   height: 122px;
@@ -1576,8 +1042,6 @@ html {
   font-size: $font-size-base;
   background: #fff;
   box-shadow: 5px 6px 16px 0 rgb(96 96 96 / 16%);
-
-  // ユーザーが要素のサイズを垂直方向に自由に変更できる、E
   resize: vertical;
 
   &:focus {
@@ -1586,7 +1050,7 @@ html {
   }
 }
 
-.contact__footer {
+.contact-form__footer {
   margin-top: 26px;
 
   @include mq(pc) {
@@ -1594,7 +1058,7 @@ html {
   }
 }
 
-.contact__privacy {
+.contact-form__privacy {
   text-align: center;
 }
 
@@ -1609,7 +1073,6 @@ html {
   clip: rect(0, 0, 0, 0);
   overflow: hidden;
 
-  // チェチE��ボックスボタンを押したら、見えなくなってぁE��矢印が見えるよぁE��なる、E
   &:checked + .form-checkbox__text {
     &::after {
       opacity: 1;
@@ -1622,14 +1085,13 @@ html {
       box-shadow: 5px 6px 16px 0 rgba($main-color, 0.16);
     }
   }
+
 }
 
 .form-checkbox__text {
-  // 解説➁E��照。チェチE��ボックスの幁E��22pxでチェチE��ボックスと、テキスト�E間に8pxの余白があるから、E
   padding-left: 30px;
 
   a {
-    // チE��ストに下線を引く
     text-decoration: underline;
     color: $main-color;
   }
@@ -1643,7 +1105,6 @@ html {
     margin-block: auto;
   }
 
-  // チェチE��ボックスをデザインする、E
   &::before {
     width: 22px;
     height: 22px;
@@ -1651,9 +1112,7 @@ html {
     background: #fff;
   }
 
-  // チェチE��ボックスの中の矢印をデザインする、E
   &::after {
-    // 矢印を完�Eに見えなくする。しかし、見えなぁE��けで、存在はしてぁE��ので、クリチE��などをすることで見えるよぁE��することができる、E
     opacity: 0;
     width: 19.414px;
     height: 14.621px;
@@ -1663,13 +1122,10 @@ html {
   }
 }
 
-.contact__submit {
+.contact-form__submit {
   margin-top: 23px;
 }
 
-// .button {
-//   margin-top: 44px;
-// }
 
 /* -------------------------
    footer
@@ -1685,12 +1141,15 @@ html {
   }
 }
 
-.footer__inner {
+// .footer__inner {
+// }
+
+.footer-content {
   display: grid;
   place-items: center;
 }
 
-.footer__logo {
+.footer-content__logo {
   a {
     img {
       width: 120px;
@@ -1706,7 +1165,7 @@ html {
   }
 }
 
-.footer__menu-items {
+.footer-content__menu-items {
   display: flex;
   flex-direction: column;
   gap: 11px;
@@ -1719,10 +1178,10 @@ html {
   }
 }
 
-.footer__menu-item {
-}
+// .footer-content__menu-item {
+// }
 
-.footer__menu-link {
+.footer-content__menu-link {
   font-size: 0.75em;
 
   @include mq(pc) {
@@ -1734,7 +1193,7 @@ html {
   }
 }
 
-.footer__nav-list {
+.footer-content__nav-list {
   display: flex;
   gap: 40px;
   margin-top: 13px;
@@ -1744,16 +1203,16 @@ html {
   }
 }
 
-.footer__nav-item {
-}
+// .footer-content__nav-item {
+// }
 
-.footer__nav-link {
-}
+// .footer-content__nav-link {
+// }
 
-.footer__sns-img {
-}
+// .footer-content__sns-img {
+// }
 
-.footer__wrapper {
+.footer-wrapper {
   margin-top: 19px;
   text-align: center;
 
@@ -1762,7 +1221,7 @@ html {
   }
 }
 
-.footer__copyright {
+.footer-wrapper__copyright {
   color: $color-text-gray;
   font-size: 0.75em;
 }
