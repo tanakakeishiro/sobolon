@@ -27,6 +27,7 @@
   switchViewport();
 })();
 
+
 jQuery("#js-drawer-button").on("click", function (e) {
   e.preventDefault();
   jQuery("#js-drawer-button").toggleClass("is-checked");
