@@ -38,3 +38,4 @@ jQuery('#js-drawer-content a[href^="#"]').on("click", function (e) {
   jQuery("#js-drawer-icon").removeClass("is-checked");
   jQuery("#js-drawer-content").removeClass("is-checked");
 });
+
