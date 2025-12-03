@@ -33,7 +33,7 @@ jQuery("#js-drawer-button").on("click", function (e) {
   jQuery("#js-drawer-content").toggleClass("is-checked");
 });
 
-// sp表示のときにドロワーメニューが開いている状態でリンクをクリックしたときに、ドロワーメニューを閉じるようにするためのコードです。
+// sp表示のときにドロワーメニューが開いている状態でリンクをクリックしたときに、ドロワーメニューを閉じるようにするためのコード。
 jQuery('#js-drawer-content a[href^="#"]').on("click", function (e) {
   jQuery("#js-drawer-icon").removeClass("is-checked");
   jQuery("#js-drawer-content").removeClass("is-checked");
