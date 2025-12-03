@@ -23,11 +23,16 @@ git merge $SubBranch
 git push $Remote $MainBranch
 
 # ➆ mainブランチを GitHub にプルリクエスト（gh CLI 使用）
-gh pr create `
-  --base $MainBranch `
-  --head $SubBranch `
-  --title "merge sub into main" `
-  --body "PR created by git-flow script."
+# gh コマンドが存在する場合のみ PR を作成
+if (Get-Command gh -ErrorAction SilentlyContinue) {
+  gh pr create `
+    --base $MainBranch `
+    --head $SubBranch `
+    --title "merge sub into main" `
+    --body "PR created by git-flow script."
+} else {
+  Write-Host "[INFO] GitHub CLI (gh) is not installed. Please create PR manually on GitHub."
+}
 
 # ⑧ subブランチに戻る
 git checkout $SubBranch
