@@ -437,33 +437,33 @@ html {
   content: "";
 }
 
-.about-content {
+.about__content {
   position: relative;
   z-index: 2;
   color: #fff;
   font-weight: 600;
 }
 @media screen and (min-width: 768px) {
-  .about-content {
+  .about__content {
     width: 50%;
   }
 }
 
-.about-content__title {
+.about__title {
   font-size: 1.25em;
 }
 @media screen and (min-width: 768px) {
-  .about-content__title {
+  .about__title {
     font-size: 1.375em;
   }
 }
 
-.about-content__text {
+.about__text {
   margin-top: 24px;
   font-size: 0.875em;
 }
 @media screen and (min-width: 768px) {
-  .about-content__text {
+  .about__text {
     font-size: 1em;
   }
 }
@@ -651,68 +651,68 @@ html {
 /* -------------------------
    message
   ------------------------- */
-.message-content {
+.message__content {
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
 @media screen and (min-width: 768px) {
-  .message-content {
+  .message__content {
     flex-direction: row-reverse;
     align-items: center;
     gap: 40px;
   }
 }
 @media screen and (min-width: 900px) {
-  .message-content {
+  .message__content {
     gap: 60px;
   }
 }
 @media screen and (min-width: 1200px) {
-  .message-content {
+  .message__content {
     gap: 80px;
   }
 }
 
 @media screen and (min-width: 768px) {
-  .message-content__image {
+  .message__image {
     flex-shrink: 0;
     width: 50%;
   }
 }
 
 @media screen and (min-width: 768px) {
-  .message-content__body {
+  .message__body {
     flex-grow: 1;
   }
 }
 
-.message-content__title {
+.message__title {
   font-weight: 600;
   font-size: 1.25em;
 }
 @media screen and (min-width: 768px) {
-  .message-content__title {
+  .message__title {
     font-size: 1.375em;
   }
 }
 @media screen and (min-width: 900px) {
-  .message-content__title {
+  .message__title {
     font-size: 1.5625em;
   }
 }
 @media screen and (min-width: 1200px) {
-  .message-content__title {
+  .message__title {
     font-size: 1.75em;
   }
 }
 
-.message-content__text {
+.message__text {
   margin-top: 22px;
   font-size: 0.875em;
 }
 @media screen and (min-width: 768px) {
-  .message-content__text {
+  .message__text {
     margin-top: 36px;
     font-size: 1em;
   }
@@ -879,7 +879,6 @@ html {
 }
 
 .form-textarea {
-  margin-top: 1px;
   box-shadow: 5px 6px 16px 0 rgba(96, 96, 96, 0.16);
   border: 0;
   background: #fff;
@@ -891,6 +890,10 @@ html {
 .form-textarea:focus {
   outline: #3ea1d1 auto 1px;
   box-shadow: 5px 6px 16px 0 rgba(62, 161, 209, 0.16);
+}
+
+.contact-item__textarea {
+  margin-top: 1px;
 }
 
 .contact-form__footer {
@@ -974,24 +977,24 @@ html {
   }
 }
 
-.footer-content {
+.footer__content {
   display: grid;
   place-items: center;
 }
 
-.footer-content__logo a img {
+.footer__logo a img {
   width: 120px;
 }
 @media screen and (min-width: 768px) {
-  .footer-content__logo {
+  .footer__logo {
     transition: opacity 0.3s;
   }
-  .footer-content__logo:hover {
+  .footer__logo:hover {
     opacity: 0.6;
   }
 }
 
-.footer-content__menu-items {
+.footer__menu-items {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -999,46 +1002,49 @@ html {
   margin-top: 22px;
 }
 @media screen and (min-width: 768px) {
-  .footer-content__menu-items {
+  .footer__menu-items {
     flex-direction: row;
     gap: 32px;
   }
 }
 
-.footer-content__menu-link {
+.footer__menu-link {
   font-size: 0.75em;
 }
 @media screen and (min-width: 768px) {
-  .footer-content__menu-link {
+  .footer__menu-link {
     transition: opacity 0.3s;
   }
-  .footer-content__menu-link:hover {
+  .footer__menu-link:hover {
     opacity: 0.6;
   }
 }
 
-.footer-content__nav-list {
-  display: flex;
-  gap: 40px;
+.footer__nav-list {
   margin-top: 13px;
 }
 @media screen and (min-width: 768px) {
-  .footer-content__nav-list {
+  .footer__nav-list {
     margin-top: 14px;
   }
 }
 
-.footer-wrapper {
+.footer-list {
+  display: flex;
+  gap: 40px;
+}
+
+.footer__wrapper {
   margin-top: 19px;
   text-align: center;
 }
 @media screen and (min-width: 768px) {
-  .footer-wrapper {
+  .footer__wrapper {
     margin-top: 21px;
   }
 }
 
-.footer-wrapper__copyright {
+.footer__copyright {
   color: #888;
   font-size: 0.75em;
 }
