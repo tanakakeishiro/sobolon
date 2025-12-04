@@ -375,18 +375,20 @@ html {
    concept
   ------------------------- */
 
-.concept {
+.concept-section {
   margin-top: 94px;
-
   @include mq(pc) {
     margin-top: 160px;
   }
 }
 
+// .concept {
+// }
+
 // .concept__inner {
 // }
 
-.concept-content {
+.concept__content {
   flex-direction: column;
   display: flex;
   gap: 34px;
@@ -398,7 +400,7 @@ html {
   }
 }
 
-.concept-content__image {
+.concept__image {
   text-align: center;
 
   @include mq(pc) {
@@ -411,13 +413,13 @@ html {
   }
 }
 
-.concept-content__message {
+.concept__message {
   @include mq(pc) {
     flex-grow: 1;
   }
 }
 
-.concept-content__sub-title {
+.concept__sub-title {
   font-size: 1.25em;
   font-weight: 600;
 
@@ -430,7 +432,7 @@ html {
   }
 }
 
-.concept-content__text {
+.concept__text {
   margin-top: 21px;
 
   @include mq(pc) {
@@ -546,13 +548,15 @@ html {
    products
   ------------------------- */
 
-.products {
+.products-section {
   margin-top: 97px;
-
   @include mq(pc) {
     margin-top: 157px;
   }
 }
+
+// .products {
+// }
 
 .products__inner {
   padding-inline: 56px;

@@ -299,67 +299,67 @@ html {
 /* -------------------------
    concept
   ------------------------- */
-.concept {
+.concept-section {
   margin-top: 94px;
 }
 @media screen and (min-width: 768px) {
-  .concept {
+  .concept-section {
     margin-top: 160px;
   }
 }
 
-.concept-content {
+.concept__content {
   display: flex;
   flex-direction: column;
   gap: 34px;
 }
 @media screen and (min-width: 768px) {
-  .concept-content {
+  .concept__content {
     flex-direction: row;
     align-items: center;
     gap: 6.6666666667%;
   }
 }
 
-.concept-content__image {
+.concept__image {
   text-align: center;
 }
 @media screen and (min-width: 768px) {
-  .concept-content__image {
+  .concept__image {
     flex-shrink: 0;
     width: 50%;
   }
 }
-.concept-content__image img {
+.concept__image img {
   width: 100%;
 }
 
 @media screen and (min-width: 768px) {
-  .concept-content__message {
+  .concept__message {
     flex-grow: 1;
   }
 }
 
-.concept-content__sub-title {
+.concept__sub-title {
   font-weight: 600;
   font-size: 1.25em;
 }
 @media screen and (min-width: 768px) {
-  .concept-content__sub-title {
+  .concept__sub-title {
     font-size: 1.125em;
   }
 }
 @media screen and (min-width: 900px) {
-  .concept-content__sub-title {
+  .concept__sub-title {
     font-size: 1.375em;
   }
 }
 
-.concept-content__text {
+.concept__text {
   margin-top: 21px;
 }
 @media screen and (min-width: 768px) {
-  .concept-content__text {
+  .concept__text {
     margin-top: 40px;
   }
 }
@@ -471,11 +471,11 @@ html {
 /* -------------------------
    products
   ------------------------- */
-.products {
+.products-section {
   margin-top: 97px;
 }
 @media screen and (min-width: 768px) {
-  .products {
+  .products-section {
     margin-top: 157px;
   }
 }
