@@ -844,6 +844,13 @@ html {
   text-align: center;
 }
 
+.contact-form__error-message {
+  margin-top: 6px;
+  font-size: 0.875em;
+  font-weight: 600;
+  color: $color-accent;
+}
+
 .is-required {
   color: #e7728e;
   font-weight: 600;
@@ -920,6 +927,11 @@ html {
   background: #fff;
   box-shadow: 5px 6px 16px 0 rgb(96 96 96 / 16%);
 
+  &.is-invalid {
+    outline: $color-accent auto 1px;
+    box-shadow: 5px 6px 16px 0 rgba($color-accent, 0.32);
+  }
+
   &:focus {
     outline: $main-color auto 1px;
     box-shadow: 5px 6px 16px 0 rgba($main-color, 0.16);
@@ -972,6 +984,11 @@ html {
   box-shadow: 5px 6px 16px 0 rgb(96 96 96 / 16%);
   resize: vertical;
 
+  &.is-invalid {
+    outline: $color-accent auto 1px;
+    box-shadow: 5px 6px 16px 0 rgba($color-accent, 0.32);
+  }
+
   &:focus {
     outline: $main-color auto 1px;
     box-shadow: 5px 6px 16px 0 rgba($main-color, 0.16);
@@ -1015,6 +1032,14 @@ html {
     &::before {
       outline: $main-color auto 1px;
       box-shadow: 5px 6px 16px 0 rgba($main-color, 0.16);
+    }
+  }
+
+  &.is-invalid + .form-checkbox__text {
+    &::before {
+      border-color: $color-accent;
+      background: rgba($color-accent, 0.4);
+      box-shadow: 5px 6px 16px 0 rgba($color-accent, 0.32);
     }
   }
 }

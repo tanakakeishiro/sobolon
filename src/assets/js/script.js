@@ -27,7 +27,6 @@
   switchViewport();
 })();
 
-
 jQuery("#js-drawer-button").on("click", function (e) {
   e.preventDefault();
   jQuery("#js-drawer-button").toggleClass("is-checked");
@@ -39,4 +38,139 @@ jQuery('#js-drawer-content a[href^="#"]').on("click", function (e) {
   jQuery("#js-drawer-button").removeClass("is-checked");
   jQuery("#js-drawer-content").removeClass("is-checked");
 });
+// =============================
+// フォームバリデーション（jQuery）
+// =============================
 
+jQuery(function ($) {
+  const $form = $("#js-contact-form");
+  if (!$form.length) return;
+
+  const $inputName = $("#your-name");
+  const $inputEmail = $("#your-email");
+  const $inputMessage = $("#your-message");
+  const $inputPrivacy = $("#your-privacy");
+
+  const $errorName = $("#js-error-name");
+  const $errorEmail = $("#js-error-email");
+  const $errorMessage = $("#js-error-message");
+  const $errorPrivacy = $("#js-error-privacy");
+
+  function scrollToElement($el) {
+    const el = $el.get(0);
+    if (!el) return;
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  function clearError($input, $errorEl) {
+    $input.removeClass("is-invalid");
+    if ($errorEl && $errorEl.length) {
+      $errorEl.text("");
+    }
+  }
+
+  function setError($input, $errorEl, message) {
+    $input.addClass("is-invalid");
+    if ($errorEl && $errorEl.length) {
+      $errorEl.text(message);
+    }
+  }
+
+  // blur / focus 時の簡易バリデーション
+  $inputName.on("blur", function () {
+    if (!$inputName.val().trim()) {
+      setError($inputName, $errorName, "必須項目です。");
+    }
+  });
+
+  $inputName.on("focus", function () {
+    clearError($inputName, $errorName);
+  });
+
+  $inputEmail.on("blur", function () {
+    if (!$inputEmail.val().includes("@")) {
+      setError(
+        $inputEmail,
+        $errorEmail,
+        "メールアドレスの形式でご入力ください。"
+      );
+    }
+  });
+
+  $inputEmail.on("focus", function () {
+    clearError($inputEmail, $errorEmail);
+  });
+
+  $inputMessage.on("blur", function () {
+    if (!$inputMessage.val().trim()) {
+      setError($inputMessage, $errorMessage, "必須項目です。");
+    }
+  });
+
+  $inputMessage.on("focus", function () {
+    clearError($inputMessage, $errorMessage);
+  });
+
+  if ($inputPrivacy.length) {
+    $inputPrivacy.on("change", function () {
+      if ($inputPrivacy.prop("checked")) {
+        clearError($inputPrivacy, $errorPrivacy);
+      } else {
+        setError($inputPrivacy, $errorPrivacy, "必須項目です。");
+      }
+    });
+  }
+
+  $form.on("submit", function (event) {
+    let hasError = false;
+
+    clearError($inputName, $errorName);
+    clearError($inputEmail, $errorEmail);
+    clearError($inputMessage, $errorMessage);
+    if ($inputPrivacy.length) {
+      clearError($inputPrivacy, $errorPrivacy);
+    }
+
+    if (!$inputName.val().trim()) {
+      setError($inputName, $errorName, "必須項目です。");
+      if (!hasError) {
+        scrollToElement($inputName);
+      }
+      hasError = true;
+    }
+
+    if (!$inputEmail.val().includes("@")) {
+      setError(
+        $inputEmail,
+        $errorEmail,
+        "メールアドレスの形式でご入力ください。"
+      );
+      if (!hasError) {
+        scrollToElement($inputEmail);
+      }
+      hasError = true;
+    }
+
+    if (!$inputMessage.val().trim()) {
+      setError($inputMessage, $errorMessage, "必須項目です。");
+      if (!hasError) {
+        scrollToElement($inputMessage);
+      }
+      hasError = true;
+    }
+
+    if (!$inputPrivacy.length || !$inputPrivacy.prop("checked")) {
+      if ($inputPrivacy.length) {
+        setError($inputPrivacy, $errorPrivacy);
+        if (!hasError) {
+          scrollToElement($inputPrivacy);
+        }
+        hasError = true;
+      }
+    }
+
+    if (hasError) {
+      event.preventDefault();
+    }
+  });
+});

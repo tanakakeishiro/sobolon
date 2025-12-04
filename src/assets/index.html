@@ -411,7 +411,11 @@
       <section id="contact" class="contact spacing-section">
         <div class="contact__inner inner">
           <h2 class="contact__heading heading">Contact</h2>
-          <form action="" class="contact-form spacing-content">
+          <form
+            action=""
+            class="contact-form spacing-content"
+            id="js-contact-form"
+          >
             <p class="contact-form__note">
               <span class="is-required">＊</span>は入力必須項目です
             </p>
@@ -429,6 +433,7 @@
                     id="your-name"
                     class="form-text"
                   />
+                  <p class="contact-form__error-message" id="js-error-name"></p>
                 </div>
               </div>
               <div class="contact-item">
@@ -446,6 +451,10 @@
                     id="your-email"
                     class="form-text"
                   />
+                  <p
+                    class="contact-form__error-message"
+                    id="js-error-email"
+                  ></p>
                 </div>
               </div>
               <div class="contact-item">
@@ -496,6 +505,10 @@
                     rows="5"
                     class="form-textarea contact-item__textarea"
                   ></textarea>
+                  <p
+                    class="contact-form__error-message"
+                    id="js-error-message"
+                  ></p>
                 </div>
               </div>
             </div>
@@ -513,6 +526,10 @@
                     >に同意します。</span
                   >
                 </label>
+                <p
+                  class="contact-form__error-message"
+                  id="js-error-privacy"
+                ></p>
               </div>
               <div class="contact-form__submit">
                 <button type="submit" class="button">送信</button>
