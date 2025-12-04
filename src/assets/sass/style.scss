@@ -16,7 +16,6 @@ $header-height-sp: 60px;
 $header-height-pc: 70px;
 $width-inner: 1280px;
 
-// 色の共通値
 $color-text-gray: #888;
 $color-text-light-gray: #989898;
 $color-accent: #e7728e;
@@ -160,19 +159,6 @@ body {
   }
 }
 
-// 吁E��クションの見�Eしにとぶ、E
-// section::before {
-//   content: "";
-//   display: block;
-//   padding-top: $header-height-sp;
-//   margin-top: -$header-height-sp;
-
-//   @include mq(pc) {
-//     padding-top: $header-height-pc;
-//     margin-top: -$header-height-pc;
-//   }
-// }
-
 // スムーススクロール
 html {
   scroll-behavior: smooth;
@@ -182,33 +168,12 @@ html {
   }
 }
 
-// .button {
-//   display: inline-block;
-//   min-width: 158px;
-//   padding: calc(12px - 1px);
-//   text-align: center;
-//   border: 1px solid $main-color;
-//   background: #fff;
-//   color: $main-color;
-//   font-size: 14px;
-//   letter-spacing: 0.02px;
-//   transition: background-color 0.3s, color 0.3s;
-
-//   &:hover {
-//     background-color: $main-color;
-//     color: #fff;
-
-//   }
-// }
-
 /* -------------------------
    ヘッダー
   ------------------------- */
 
 .header {
   height: $header-height-sp;
-
-  // スクロールしても、�EチE��ーを上部に固定できる、E
   position: sticky;
   top: 0;
   left: 0;
@@ -222,17 +187,9 @@ html {
 }
 
 .header__inner {
-  // 要素の高さを親要素から継承する。これにより、Eheader__innerの高さは親要素の.headerと同じになる、E
   height: inherit;
-
-  // 親要素に対して子要素を横並びにする、E
   display: flex;
-
-  // 横並びの要素を両端揁E��で坁E��に配置する、E
   justify-content: space-between;
-
-  // height: $header-height-sp;
-  // 子要素�E�ElexアイチE���E�を上下中央に揁E��る指定です。親要素�E�ElexコンチE���E��E中で中央揁E��になります、E
   align-items: center;
 }
 
@@ -240,8 +197,6 @@ html {
   a {
     img {
       width: 120px;
-
-      // ブロチE��レベルの特性を与える。これにより、画像が親要素の幁E��っぱぁE��庁E��る、E
       display: block;
     }
   }
@@ -258,57 +213,34 @@ html {
 .header__nav {
   background: $main-color;
   width: 270px;
-
-  // 全体�E高さからヘッダーの高さを引いた値
   height: calc(100% - $header-height-sp);
-
-  // HTML要素を画面上�E固定位置に配置するため。これにより要素がスクロールしても画面上�E持E��された位置に固定される、E
   position: fixed;
   right: 0;
   top: $header-height-sp;
   padding: calc(40px - 8px) 15px;
-
-  // X 軸�E�横方向）�E位置を画面の右側に見えなぁE��ぁE��移動させる
   transform: translateX(100%);
-
-  // transformの変化は0.4秒間で行われ、変化の速度は一定！Einear�E�E
   transition: transform 0.4s linear;
 
   &.is-checked {
-    // 要素は允E�E位置�E�水平方向に0%刁E��動）に戻る。画面の外に隠した要素を画面冁E��表示する、E
     transform: translateX(0);
   }
 
-  // これで消えてぁE��メニューが戻ってくる、E
   @include mq(pc) {
-    // 背景を透�Eにする、E
     background: transparent;
     width: auto;
     height: auto;
-
-    // 要素の位置を通常の斁E��フローに設定する。これにより、要素はposition: fixed;やposition: absolute;などの他�E位置持E��から解除され、E��常の斁E��フローに従って配置される、E
     position: static;
-
-    // パディングは取られる。パチE��ングとは余白のことで、padding プロパティを指定しなぁE��合�E、余白部刁E�E要素の背景色が適用される、E
     padding: 0;
-
-    // 要素は允E�E位置�E�水平方向に0%刁E��動）に戻る。こぁE��なぁE��メニューが�Eの位置に戻らなぁE��E
     transform: translateX(0);
   }
 }
 
 .header__lists {
   display: flex;
-
-  // 要素を上から下に垂直方向に並べめE
   flex-direction: column;
-
-  // フレチE��スアイチE��を交差軸�E�この場合�E水平軸�E��E終端に配置。これにより、フレチE��スアイチE��は吁E���E右端に揁E��られる、E
   align-items: flex-end;
   gap: calc(32px - 8px * 2);
-
   @include mq(pc) {
-    // 要素を左から右に並べめE
     flex-direction: row;
     align-items: center;
     gap: 47px;
@@ -316,11 +248,10 @@ html {
   }
 }
 
-.header__list {
-}
+// .header__list {
+// }
 
 .header__link {
-  // 要素をインラインブロチE��として表示します。これにより、要素はインライン要素のように行�Eに配置されますが、ブロチE��要素のように幁E��高さを指定できます、E
   display: inline-block;
   padding-block: 8px;
   color: #fff;
@@ -331,18 +262,16 @@ html {
     font-size: $font-size-base;
     transition: color 0.3s;
 
-    // ホバーすると斁E���E色が変わる、E
     &:hover {
       color: $main-color;
     }
   }
 }
 
-.drawer-content__link {
-}
+// .drawer-content__link {
+// }
 
 .header__open {
-  // margin-top: 2px;
   @include mq(pc) {
     display: none;
   }
@@ -351,11 +280,7 @@ html {
 .drawer-icon {
   width: 30px;
   height: 18px;
-
-  // position: relative;を設定した要素は、その子要素にposition: absolute;が設定されてぁE��場合�E基準点�E��EジショニングコンチE��スト）となります。これ�E、絶対位置持E��された子要素が、この相対位置持E��された親要素に対して位置を決定するため�E基準となめE
   position: relative;
-
-  // z-index: 51;
   margin-top: -3px;
 
   &.is-checked {
@@ -487,7 +412,6 @@ html {
 }
 
 .concept-content__message {
-
   @include mq(pc) {
     flex-grow: 1;
   }
@@ -901,6 +825,7 @@ html {
     gap: 23px;
   }
 }
+
 // .contact-form {
 // }
 
@@ -1021,7 +946,7 @@ html {
 
 .form-radio__text {
   background: #fff;
-  color: $main-color; 
+  color: $main-color;
   letter-spacing: 0.026px;
   width: 80px;
   height: 40px;
@@ -1080,7 +1005,6 @@ html {
       box-shadow: 5px 6px 16px 0 rgba($main-color, 0.16);
     }
   }
-
 }
 
 .form-checkbox__text {
@@ -1120,7 +1044,6 @@ html {
 .contact-form__submit {
   margin-top: 23px;
 }
-
 
 /* -------------------------
    footer
