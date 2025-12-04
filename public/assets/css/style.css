@@ -255,23 +255,23 @@ html {
 /* -------------------------
    ファーストビュー
   ------------------------- */
-.fv-content {
+.fv__content {
   position: relative;
 }
 
 @media screen and (min-width: 768px) {
-  .fv-content__image {
+  .fv__image {
     display: block;
     margin-left: auto;
     max-width: 990px;
   }
 }
 
-.fv-content__message {
+.fv__message {
   margin-top: 30px;
 }
 @media screen and (min-width: 768px) {
-  .fv-content__message {
+  .fv__message {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -286,13 +286,13 @@ html {
   }
 }
 
-.fv-content__title {
+.fv__title {
   margin-left: -1px;
   font-weight: 600;
   font-size: 1.625em;
 }
 
-.fv-content__text {
+.fv__text {
   margin-top: 16px;
 }
 

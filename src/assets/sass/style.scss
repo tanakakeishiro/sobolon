@@ -388,8 +388,8 @@ html {
     transform 0.4s linear,
     top 0.4s linear;
 
-  &:nth-of-type(1) {
-  }
+  // &:nth-of-type(1) {
+  // }
 
   &:nth-of-type(2) {
     top: 8px;
@@ -405,29 +405,24 @@ html {
   ------------------------- */
 
 // .fv {
- 
 // }
 
 // .fv__inner {
 // }
 
-.fv-content {
+.fv__content {
   position: relative;
 }
 
-.fv-content__image {
+.fv__image {
   @include mq(pc) {
     max-width: 990px;
     margin-left: auto;
     display: block;
   }
-
-  // 　 img {
-   
-  // }
 }
 
-.fv-content__message {
+.fv__message {
   margin-top: 30px;
 
   @include mq(pc) {
@@ -441,13 +436,13 @@ html {
   }
 }
 
-.fv-content__title {
+.fv__title {
   margin-left: -1px;
   font-size: 1.625em; // 26px / 16px
   font-weight: 600;
 }
 
-.fv-content__text {
+.fv__text {
   margin-top: 16px;
 }
 
