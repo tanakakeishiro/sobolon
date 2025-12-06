@@ -65,10 +65,14 @@
           id="js-drawer-button"
           type="button"
           class="header__open drawer-icon"
+          aria-controls="js-drawer-content"
+          aria-expanded="false"
+          aria-haspopup="menu"
         >
           <span class="drawer-icon__bar"></span>
           <span class="drawer-icon__bar"></span>
           <span class="drawer-icon__bar"></span>
+          <span class="drawer-icon__text">メニュー</span>
         </button>
 
         <nav
@@ -93,6 +97,7 @@
               <a href="#contact" class="header__link">Contact</a>
             </li>
           </ul>
+          <div id="js-focus-trap" tabindex="0"></div>
         </nav>
       </div>
     </header>

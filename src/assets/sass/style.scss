@@ -57,6 +57,11 @@ body {
   font-size: $font-size-base;
   line-height: $line-height-base;
   font-weight: $font-weight-base;
+  padding-top: $header-height-sp;
+
+  @include mq(pc) {
+    padding-top: 0;
+  }
 }
 
 .inner {
@@ -173,7 +178,7 @@ html {
 
 .header {
   height: $header-height-sp;
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -182,6 +187,7 @@ html {
 
   @include mq(pc) {
     height: $header-height-pc;
+    position: sticky;
   }
 }
 
@@ -225,9 +231,11 @@ html {
   padding: calc(40px - 8px) 15px;
   transform: translateX(100%);
   transition: transform 0.4s linear;
+  visibility: hidden;
 
   &.is-checked {
     transform: translateX(0);
+    visibility: visible;
   }
 
   @include mq(pc) {
@@ -237,7 +245,20 @@ html {
     position: static;
     padding: 0;
     transform: translateX(0);
+    visibility: visible;
   }
+}
+
+#js-focus-trap {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .header__lists {
@@ -328,6 +349,18 @@ html {
   &:nth-of-type(3) {
     top: 16px;
   }
+}
+
+.drawer-icon__text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* -------------------------

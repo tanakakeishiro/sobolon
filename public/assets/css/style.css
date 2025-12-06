@@ -1,11 +1,17 @@
 @charset "UTF-8";
 body {
   background-color: #fff;
+  padding-top: 60px;
   color: #333;
   font-weight: 300;
   font-size: 1em;
   line-height: 1.7;
   font-family: "Noto Serif JP", serif;
+}
+@media screen and (min-width: 768px) {
+  body {
+    padding-top: 0;
+  }
 }
 
 .inner {
@@ -119,8 +125,7 @@ html {
    ヘッダー
   ------------------------- */
 .header {
-  position: -webkit-sticky;
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 3;
@@ -130,6 +135,8 @@ html {
 }
 @media screen and (min-width: 768px) {
   .header {
+    position: -webkit-sticky;
+    position: sticky;
     height: 70px;
   }
 }
@@ -169,6 +176,7 @@ html {
   top: 60px;
   right: 0;
   transform: translateX(100%);
+  visibility: hidden;
   transition: transform 0.4s linear;
   background: #3ea1d1;
   padding: 32px 15px;
@@ -177,16 +185,30 @@ html {
 }
 .header__nav.is-checked {
   transform: translateX(0);
+  visibility: visible;
 }
 @media screen and (min-width: 768px) {
   .header__nav {
     position: static;
     transform: translateX(0);
+    visibility: visible;
     background: transparent;
     padding: 0;
     width: auto;
     height: auto;
   }
+}
+
+#js-focus-trap {
+  position: absolute;
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  white-space: nowrap;
 }
 
 .header__lists {
@@ -260,6 +282,18 @@ html {
 }
 .drawer-icon__bar:nth-of-type(3) {
   top: 16px;
+}
+
+.drawer-icon__text {
+  position: absolute;
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  white-space: nowrap;
 }
 
 /* -------------------------

@@ -27,16 +27,94 @@
   switchViewport();
 })();
 
-jQuery("#js-drawer-button").on("click", function (e) {
+// メニュー展開時に背景を固定
+const backgroundFix = (bool) => {
+  const scrollingElement = () => {
+    const browser = window.navigator.userAgent.toLowerCase();
+    if ("scrollingElement" in document) return document.scrollingElement;
+    return document.documentElement;
+  };
+
+  const scrollY = bool
+    ? scrollingElement().scrollTop
+    : parseInt(document.body.style.top || "0");
+
+  const fixedStyles = {
+    height: "100vh",
+    position: "fixed",
+    top: `${scrollY * -1}px`,
+    left: "0",
+    width: "100vw",
+  };
+
+  Object.keys(fixedStyles).forEach((key) => {
+    document.body.style[key] = bool ? fixedStyles[key] : "";
+  });
+
+  if (!bool) {
+    window.scrollTo(0, scrollY * -1);
+  }
+};
+
+// 変数定義
+const CLASS = "is-checked";
+let flg = false;
+const $hamburger = jQuery("#js-drawer-button");
+const $menu = jQuery("#js-drawer-content");
+const $focusTrap = jQuery("#js-focus-trap");
+const $firstLink = jQuery(".header__link").first();
+
+// メニュー開閉制御
+$hamburger.on("click", function (e) {
   e.preventDefault();
-  jQuery("#js-drawer-button").toggleClass("is-checked");
-  jQuery("#js-drawer-content").toggleClass("is-checked");
+  $hamburger.toggleClass(CLASS);
+  $menu.toggleClass(CLASS);
+
+  if (flg) {
+    // メニューを閉じる
+    backgroundFix(false);
+    $hamburger.attr("aria-expanded", "false");
+    $hamburger.focus();
+    flg = false;
+  } else {
+    // メニューを開く
+    backgroundFix(true);
+    $hamburger.attr("aria-expanded", "true");
+    flg = true;
+    // メニューが開いたら先頭のリンクにフォーカスを移動
+    // visibility: visibleになるのを待つため、少し遅延を入れる
+    setTimeout(function () {
+      if ($firstLink.length) {
+        $firstLink.focus();
+      }
+    }, 100);
+  }
+});
+
+// エスケープキーでメニューを閉じる
+jQuery(window).on("keydown", function (e) {
+  if (e.key === "Escape" && flg) {
+    $hamburger.removeClass(CLASS);
+    $menu.removeClass(CLASS);
+    backgroundFix(false);
+    $hamburger.attr("aria-expanded", "false");
+    $hamburger.focus();
+    flg = false;
+  }
+});
+
+// フォーカストラップ制御
+$focusTrap.on("focus", function () {
+  $hamburger.focus();
 });
 
 // sp表示のときにドロワーメニューが開いている状態でリンクをクリックしたときに、ドロワーメニューを閉じるようにするためのコード。
 jQuery('#js-drawer-content a[href^="#"]').on("click", function (e) {
-  jQuery("#js-drawer-button").removeClass("is-checked");
-  jQuery("#js-drawer-content").removeClass("is-checked");
+  $hamburger.removeClass(CLASS);
+  $menu.removeClass(CLASS);
+  backgroundFix(false);
+  $hamburger.attr("aria-expanded", "false");
+  flg = false;
 });
 // =============================
 // フォームバリデーション（jQuery）
