@@ -56,7 +56,6 @@ const backgroundFix = (bool) => {
   }
 };
 
-// 変数定義
 const CLASS = "is-checked";
 let flg = false;
 const $hamburger = jQuery("#js-drawer-button");
@@ -74,12 +73,14 @@ $hamburger.on("click", function (e) {
     // メニューを閉じる
     backgroundFix(false);
     $hamburger.attr("aria-expanded", "false");
+    $hamburger.attr("aria-haspopup", "menu");
     $hamburger.focus();
     flg = false;
   } else {
     // メニューを開く
     backgroundFix(true);
     $hamburger.attr("aria-expanded", "true");
+    $hamburger.removeAttr("aria-haspopup");
     flg = true;
     // メニューが開いたら先頭のリンクにフォーカスを移動
     // visibility: visibleになるのを待つため、少し遅延を入れる
@@ -98,6 +99,7 @@ jQuery(window).on("keydown", function (e) {
     $menu.removeClass(CLASS);
     backgroundFix(false);
     $hamburger.attr("aria-expanded", "false");
+    $hamburger.attr("aria-haspopup", "menu");
     $hamburger.focus();
     flg = false;
   }
@@ -114,6 +116,7 @@ jQuery('#js-drawer-content a[href^="#"]').on("click", function (e) {
   $menu.removeClass(CLASS);
   backgroundFix(false);
   $hamburger.attr("aria-expanded", "false");
+  $hamburger.attr("aria-haspopup", "menu");
   flg = false;
 });
 // =============================
