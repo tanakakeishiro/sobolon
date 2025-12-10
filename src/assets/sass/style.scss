@@ -74,6 +74,14 @@ body {
   }
 }
 
+.xl-br {
+  display: none;
+
+  @include mq(xl) {
+    display: block;
+  }
+}
+
 .pc-br {
   display: none;
 
@@ -130,7 +138,7 @@ body {
 // }
 
 .spacing-content {
-  margin-top: 46px;
+  margin-top: 45px;
 
   @include mq(pc) {
     margin-top: 64px;
@@ -358,8 +366,17 @@ html {
 // .fv {
 // }
 
-// .fv__inner {
-// }
+.fv__inner {
+  padding-left: 15px;
+  padding-right: 15px;
+  @include mq(pc) {
+    padding-left: 0;
+    padding-right: 40px;
+
+    // max-width: calc(1200px + 40px * 2);
+    // margin-inline: auto;
+  }
+}
 
 .fv__content {
   position: relative;
@@ -367,7 +384,9 @@ html {
 
 .fv__image {
   @include mq(pc) {
-    max-width: 990px;
+    // 1280px → 990px, 1920px → 1635px の線形補間
+    // 計算式: (1635 - 990) / (1920 - 1280) = 645 / 640
+    width: clamp(990px, calc(645 / 640 * 100vw - 300px), 1635px);
     margin-left: auto;
     display: block;
   }
@@ -400,19 +419,12 @@ html {
 /* -------------------------
    concept
   ------------------------- */
-
-.concept-section {
-  margin-top: 94px;
-  @include mq(pc) {
-    margin-top: 160px;
-  }
-}
-
 // .concept {
 // }
 
-// .concept__inner {
-// }
+.concept__inner {
+  margin-top: -2px;
+}
 
 .concept__content {
   flex-direction: column;
@@ -454,7 +466,7 @@ html {
   }
 
   @include mq(lg) {
-    font-size: 1.375em; // 22px / 16px
+    font-size: 1.25em; // 20px / 16px
   }
 }
 
@@ -563,7 +575,7 @@ html {
 
 .about__text {
   font-size: 0.875em;
-  margin-top: 24px;
+  margin-top: 26px;
 
   @include mq(pc) {
     font-size: 1em;
@@ -574,13 +586,6 @@ html {
    products
   ------------------------- */
 
-.products-section {
-  margin-top: 97px;
-  @include mq(pc) {
-    margin-top: 157px;
-  }
-}
-
 // .products {
 // }
 
@@ -590,13 +595,14 @@ html {
   @include mq(pc) {
     max-width: calc(940px + 40px * 2);
     padding-inline: 40px;
+    margin-top: -3px;
   }
 }
 
 .products__cards {
   display: flex;
   flex-direction: column;
-  gap: 39px;
+  gap: 40px;
 
   @include mq(pc) {
     flex-direction: row;
@@ -653,7 +659,7 @@ html {
 }
 
 .products__button {
-  margin-top: 42px;
+  margin-top: 41px;
   @include mq(pc) {
     margin-top: 44px;
   }
@@ -754,7 +760,7 @@ html {
   }
 }
 
-.news-card__button {
+.news__button {
   margin-top: 42px;
   @include mq(pc) {
     margin-top: 44px;
@@ -878,16 +884,18 @@ html {
 }
 
 .contact-form__items {
-  margin-top: 28px;
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 31px;
   @include mq(pc) {
     margin-top: 19px;
+    gap: 27px;
   }
 }
 
 .contact-item {
+  display: flex;
   flex-direction: column;
   gap: 3px;
 
@@ -1024,7 +1032,7 @@ html {
   margin-top: 26px;
 
   @include mq(pc) {
-    margin-top: 32px;
+    margin-top: 28px;
   }
 }
 

@@ -28,6 +28,15 @@ body {
   }
 }
 
+.xl-br {
+  display: none;
+}
+@media screen and (min-width: 1200px) {
+  .xl-br {
+    display: block;
+  }
+}
+
 .pc-br {
   display: none;
 }
@@ -78,7 +87,7 @@ body {
 }
 
 .spacing-content {
-  margin-top: 46px;
+  margin-top: 45px;
 }
 @media screen and (min-width: 768px) {
   .spacing-content {
@@ -287,6 +296,17 @@ html {
 /* -------------------------
    ファーストビュー
   ------------------------- */
+.fv__inner {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+@media screen and (min-width: 768px) {
+  .fv__inner {
+    padding-right: 40px;
+    padding-left: 0;
+  }
+}
+
 .fv__content {
   position: relative;
 }
@@ -295,7 +315,7 @@ html {
   .fv__image {
     display: block;
     margin-left: auto;
-    max-width: 990px;
+    width: clamp(990px, 100.78125vw - 300px, 1635px);
   }
 }
 
@@ -331,13 +351,8 @@ html {
 /* -------------------------
    concept
   ------------------------- */
-.concept-section {
-  margin-top: 94px;
-}
-@media screen and (min-width: 768px) {
-  .concept-section {
-    margin-top: 160px;
-  }
+.concept__inner {
+  margin-top: -2px;
 }
 
 .concept__content {
@@ -383,7 +398,7 @@ html {
 }
 @media screen and (min-width: 900px) {
   .concept__sub-title {
-    font-size: 1.375em;
+    font-size: 1.25em;
   }
 }
 
@@ -491,7 +506,7 @@ html {
 }
 
 .about__text {
-  margin-top: 24px;
+  margin-top: 26px;
   font-size: 0.875em;
 }
 @media screen and (min-width: 768px) {
@@ -503,21 +518,13 @@ html {
 /* -------------------------
    products
   ------------------------- */
-.products-section {
-  margin-top: 97px;
-}
-@media screen and (min-width: 768px) {
-  .products-section {
-    margin-top: 157px;
-  }
-}
-
 .products__inner {
   padding-right: 56px;
   padding-left: 56px;
 }
 @media screen and (min-width: 768px) {
   .products__inner {
+    margin-top: -3px;
     padding-right: 40px;
     padding-left: 40px;
     max-width: 1020px;
@@ -527,7 +534,7 @@ html {
 .products__cards {
   display: flex;
   flex-direction: column;
-  gap: 39px;
+  gap: 40px;
 }
 @media screen and (min-width: 768px) {
   .products__cards {
@@ -576,7 +583,7 @@ html {
 }
 
 .products__button {
-  margin-top: 42px;
+  margin-top: 41px;
 }
 @media screen and (min-width: 768px) {
   .products__button {
@@ -671,11 +678,11 @@ html {
   }
 }
 
-.news-card__button {
+.news__button {
   margin-top: 42px;
 }
 @media screen and (min-width: 768px) {
-  .news-card__button {
+  .news__button {
     margin-top: 44px;
   }
 }
@@ -802,16 +809,18 @@ html {
 .contact-form__items {
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  margin-top: 28px;
+  gap: 31px;
+  margin-top: 30px;
 }
 @media screen and (min-width: 768px) {
   .contact-form__items {
+    gap: 27px;
     margin-top: 19px;
   }
 }
 
 .contact-item {
+  display: flex;
   flex-direction: column;
   gap: 3px;
 }
@@ -948,7 +957,7 @@ html {
 }
 @media screen and (min-width: 768px) {
   .contact-form__footer {
-    margin-top: 32px;
+    margin-top: 28px;
   }
 }
 
