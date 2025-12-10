@@ -462,13 +462,13 @@ html {
   ------------------------- */
 .about {
   position: relative;
-  background: url("../img/bg_about01_sp.jpg") no-repeat top center/cover;
+  background: url("../img/bg_about01_sp.webp") no-repeat top center/cover;
   padding-top: 180px;
   padding-bottom: 50px;
 }
 @media screen and (min-width: 768px) {
   .about {
-    background-image: url("../img/bg_about01_pc.jpg");
+    background-image: url("../img/bg_about01_pc.webp");
     padding-top: 123px;
     padding-bottom: 122px;
   }
@@ -761,7 +761,7 @@ html {
  contact
   ------------------------- */
 .contact {
-  background: url("../img/bg_contact01_pc.jpg") no-repeat top center/cover;
+  background: url("../img/bg_contact01_pc.webp") no-repeat top center/cover;
   padding-top: 56px;
   padding-bottom: 56px;
 }
@@ -1015,7 +1015,7 @@ html {
 .form-checkbox__text::after {
   left: 1.29px;
   opacity: 0;
-  background: url("../img/icon_checkbox01.png") no-repeat center center/contain;
+  background: url("../img/icon_checkbox01.webp") no-repeat center center/contain;
   width: 19.414px;
   height: 14.621px;
 }

@@ -533,12 +533,12 @@ html {
    about
   ------------------------- */
 .about {
-  background: url("../img/bg_about01_sp.jpg") no-repeat top center / cover;
+  background: url("../img/bg_about01_sp.webp") no-repeat top center / cover;
   position: relative;
   padding-block: 180px 50px;
 
   @include mq(pc) {
-    background-image: url("../img/bg_about01_pc.jpg");
+    background-image: url("../img/bg_about01_pc.webp");
     padding-block: 123px 122px;
   }
 
@@ -839,7 +839,7 @@ html {
   ------------------------- */
 
 .contact {
-  background: url("../img/bg_contact01_pc.jpg") no-repeat top center / cover;
+  background: url("../img/bg_contact01_pc.webp") no-repeat top center / cover;
   padding-block: 56px;
 
   @include mq(pc) {
@@ -1102,7 +1102,7 @@ html {
     width: 19.414px;
     height: 14.621px;
     left: 1.29px;
-    background: url("../img/icon_checkbox01.png") no-repeat center center /
+    background: url("../img/icon_checkbox01.webp") no-repeat center center /
       contain;
   }
 }
