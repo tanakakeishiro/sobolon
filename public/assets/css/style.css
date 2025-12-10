@@ -809,7 +809,7 @@ html {
 .contact-form__items {
   display: flex;
   flex-direction: column;
-  gap: 31px;
+  gap: 26px;
   margin-top: 30px;
 }
 @media screen and (min-width: 768px) {
