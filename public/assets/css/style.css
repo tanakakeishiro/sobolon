@@ -870,7 +870,6 @@ html {
     padding: 5px 4px 4px;
     width: 100%;
     font-size: 1.125em;
-    -webkit-clip-path: polygon(0 0, 97% 0, 100% 50%, 97% 100%, 0% 100%);
     clip-path: polygon(0 0, 97% 0, 100% 50%, 97% 100%, 0% 100%);
   }
 }
@@ -1016,7 +1015,6 @@ html {
 }
 
 .form-checkbox__text a {
-  -webkit-text-decoration: underline;
   color: #3ea1d1;
   text-decoration: underline;
 }
