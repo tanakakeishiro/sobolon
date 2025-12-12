@@ -149,8 +149,11 @@ html {
 }
 @media screen and (min-width: 768px) {
   .header {
+    /* autoprefixer: off */
     position: sticky;
     height: 70px;
+
+    /* autoprefixer: on */
   }
 }
 
@@ -221,6 +224,7 @@ html {
   width: 1px;
   height: 1px;
   overflow: hidden;
+  -webkit-clip-path: inset(50%);
   clip-path: inset(50%);
   border: 0;
   white-space: nowrap;
@@ -329,7 +333,7 @@ html {
   .fv__image {
     display: block;
     margin-left: auto;
-    width: clamp(990px, 100.7813vw - 300px, 1635px);
+    width: clamp(990px, 100vw - 300px, 1635px);
   }
 }
 
@@ -346,7 +350,11 @@ html {
     margin-bottom: auto;
     background: #fff;
     padding: 80px 40px;
+
+    /* autoprefixer: off */
     height: fit-content;
+
+    /* autoprefixer: on */
   }
 }
 
@@ -376,7 +384,7 @@ html {
   .concept__content {
     flex-direction: row;
     align-items: center;
-    gap: 6.6667%;
+    gap: 6.67%;
   }
 }
 
@@ -870,6 +878,7 @@ html {
     padding: 5px 4px 4px;
     width: 100%;
     font-size: 1.125em;
+    -webkit-clip-path: polygon(0 0, 97% 0, 100% 50%, 97% 100%, 0% 100%);
     clip-path: polygon(0 0, 97% 0, 100% 50%, 97% 100%, 0% 100%);
   }
 }
@@ -922,6 +931,7 @@ html {
   position: absolute;
   width: 1px;
   height: 1px;
+  -webkit-clip-path: inset(50%);
   clip-path: inset(50%);
   overflow: hidden;
 }
@@ -991,6 +1001,7 @@ html {
   position: absolute;
   width: 1px;
   height: 1px;
+  -webkit-clip-path: inset(50%);
   clip-path: inset(50%);
   overflow: hidden;
 }
@@ -1015,6 +1026,7 @@ html {
 }
 
 .form-checkbox__text a {
+  -webkit-text-decoration: underline;
   color: #3ea1d1;
   text-decoration: underline;
 }

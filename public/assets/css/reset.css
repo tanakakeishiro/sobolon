@@ -61,10 +61,11 @@ img {
   vertical-align: middle;
   max-width: 100%;
   height: auto;
-} 
+}
 
 a {
   color: inherit;
+  -webkit-text-decoration: none;
   text-decoration: none;
 }
 

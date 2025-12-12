@@ -7,7 +7,6 @@ import * as sass from "sass";
 // gulp-sassにSassモジュールを渡す
 const sassCompiler = gulpSass(sass);
 import postcss from "gulp-postcss";
-import autoprefixer from "autoprefixer";
 import cssSorter from "css-declaration-sorter";
 import mmq from "gulp-merge-media-queries";
 import browserSync from "browser-sync";
@@ -18,6 +17,7 @@ import stylelint from "stylelint";
 import prettier from "gulp-prettier";
 import reporter from "postcss-reporter";
 import postcssPresetEnv from "postcss-preset-env";
+import postcssDiscardDuplicates from "postcss-discard-duplicates";
 import { deleteAsync } from "del";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -56,17 +56,13 @@ function compileSass() {
     .pipe(sassCompiler().on("error", sassCompiler.logError)) // ここで使うのは 'sassCompiler'
     .pipe(
       postcss([
-        autoprefixer({
-          // package.jsonのbrowserslistを自動読み込み（last 3 versionsのまま）
-          // 不要なベンダープレフィックスを自動削除
-          remove: true, // 不要なベンダープレフィックスを削除（デフォルト: true）
-          // 標準化済みプロパティのベンダープレフィックスを抑制
-          flexbox: "no-2009", // 古いflexbox構文を無効化
-          grid: false, // CSS Gridのベンダープレフィックスを無効化（既に標準化済み）
-        }),
-        cssSorter({ order: "concentric-css" }),
+        // 1. まず論理プロパティなどの変換を行う（autoprefixerはpreset-env内で実行）
         postcssPresetEnv({
           stage: 0,
+          autoprefixer: {
+            flexbox: "no-2009", // 古いflexbox構文を無効化
+            grid: false, // CSS Gridのベンダープレフィックスを無効化
+          },
           features: {
             "logical-properties-and-values": true,
             "gap-properties": true,
@@ -74,6 +70,10 @@ function compileSass() {
             clamp: true,
           },
         }),
+        // 2. ソートで宣言順序を整える
+        cssSorter({ order: "concentric-css" }),
+        // 3. 最後に重複宣言を削除
+        postcssDiscardDuplicates(),
       ])
     )
     .pipe(gulp.dest(paths.styles.dest))

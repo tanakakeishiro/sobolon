@@ -195,7 +195,11 @@ html {
 
   @include mq(pc) {
     height: $header-height-pc;
+
+    /* autoprefixer: off */
     position: sticky;
+
+    /* autoprefixer: on */
   }
 }
 
@@ -384,9 +388,7 @@ html {
 
 .fv__image {
   @include mq(pc) {
-    // 1280px → 990px, 1920px → 1635px の線形補間
-    // 計算式: (1635 - 990) / (1920 - 1280) = 645 / 640
-    width: clamp(990px, calc(645 / 640 * 100vw - 300px), 1635px);
+    width: clamp(990px, calc(100vw - 300px), 1635px);
     margin-left: auto;
     display: block;
   }
@@ -402,7 +404,11 @@ html {
     left: 0;
     padding: 80px 40px;
     background: #fff;
+
+    /* autoprefixer: off */
     height: fit-content;
+
+    /* autoprefixer: on */
   }
 }
 
@@ -432,7 +438,7 @@ html {
   gap: 34px;
 
   @include mq(pc) {
-    gap: calc(80px / 1200px * 100%);
+    gap: 6.67%;
     flex-direction: row;
     align-items: center;
   }
