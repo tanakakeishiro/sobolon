@@ -339,6 +339,7 @@ html {
 @media screen and (min-width: 1200px) {
   .fv__image {
     width: clamp(990px, 100vw - 300px, 1635px);
+    max-width: none;
   }
 }
 

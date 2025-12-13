@@ -394,6 +394,7 @@ html {
   }
 
   @include mq(xl) {
+    max-width: none;
     width: clamp(990px, calc(100vw - 300px), 1635px);
   }
 }
