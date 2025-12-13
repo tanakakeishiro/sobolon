@@ -333,6 +333,11 @@ html {
   .fv__image {
     display: block;
     margin-left: auto;
+    max-width: 990px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .fv__image {
     width: clamp(990px, 100vw - 300px, 1635px);
   }
 }
