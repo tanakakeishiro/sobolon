@@ -1,21 +1,5 @@
 @use "sass:map";
 
-@font-face {
-  font-family: "Noto Serif JP";
-  src: url("/NotoSerif-Light.woff2") format("woff2");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Noto Serif JP";
-  src: url("/NotoSerif-SemiBold.woff2") format("woff2");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
 $main-color: #3ea1d1;
 $font-base: "Noto Serif JP", serif;
 $color-base: #333;

@@ -15,22 +15,6 @@
     <!-- ファビコン -->
     <link rel="icon" href="/favicon.ico" />
 
-    <!-- フォントプリロード -->
-    <link
-      rel="preload"
-      href="/NotoSerif-Light.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/NotoSerif-SemiBold.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-
     <!-- OGPタグ -->
     <meta property="og:title" content="sobolon" />
     <meta
@@ -57,7 +41,23 @@
       content="https://sobolon.tanakakeishiro.com/img/mv_fv01_pc.webp"
     />
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;600&display=swap"
+      as="style"
+      fetchpriority="high"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;600&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
     <!-- スタイルシート -->
+
     <link rel="stylesheet" href="./css/reset.min.css" />
     <link rel="stylesheet" href="./css/style.min.css" />
   </head>
@@ -187,7 +187,6 @@
                   alt=""
                   width="680"
                   height="480"
-                  loading="lazy"
                 />
               </figure>
               <div class="feature-card__body">
@@ -204,7 +203,6 @@
                   alt=""
                   width="680"
                   height="480"
-                  loading="lazy"
                 />
               </figure>
               <div class="feature-card__body">
@@ -263,7 +261,6 @@
                   alt=""
                   width="520"
                   height="520"
-                  loading="lazy"
                 />
                 <div class="products-card__body">
                   <p class="products-card__title">
@@ -282,7 +279,6 @@
                   alt=""
                   width="520"
                   height="520"
-                  loading="lazy"
                 />
                 <div class="products-card__body">
                   <p class="products-card__title">
@@ -301,7 +297,6 @@
                   alt=""
                   width="520"
                   height="520"
-                  loading="lazy"
                 />
                 <div class="products-card__body">
                   <p class="products-card__title">
@@ -334,7 +329,6 @@
                     alt=""
                     width="690"
                     height="426"
-                    loading="lazy"
                   />
                 </figure>
                 <div class="news-card__body">
@@ -355,7 +349,6 @@
                     alt=""
                     width="690"
                     height="426"
-                    loading="lazy"
                   />
                 </figure>
                 <div class="news-card__body">
@@ -379,7 +372,6 @@
                     alt=""
                     width="690"
                     height="425"
-                    loading="lazy"
                   />
                 </figure>
                 <div class="news-card__body">
@@ -409,7 +401,6 @@
                 alt=""
                 width="690"
                 height="461"
-                loading="lazy"
               />
             </figure>
             <div class="message__body">
