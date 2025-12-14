@@ -57,9 +57,25 @@
       content="https://sobolon.tanakakeishiro.com/img/mv_fv01_pc.webp"
     />
 
-    <!-- スタイルシート -->
-    <link rel="stylesheet" href="./css/reset.min.css" />
-    <link rel="stylesheet" href="./css/style.min.css" />
+    <!-- スタイルシート（非ブロッキング読み込み） -->
+    <link
+      rel="stylesheet"
+      href="./css/reset.min.css"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="./css/reset.min.css" />
+    </noscript>
+    <link
+      rel="stylesheet"
+      href="./css/style.min.css"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="./css/style.min.css" />
+    </noscript>
   </head>
 
   <body>
