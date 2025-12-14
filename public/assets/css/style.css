@@ -1,4 +1,16 @@
 @charset "UTF-8";
+@font-face {
+  font-style: normal;
+  font-weight: 300;
+  src: url("../../NotoSerif-Light.ttf") format("truetype");
+  font-family: "Noto Serif JP";
+}
+@font-face {
+  font-style: normal;
+  font-weight: 600;
+  src: url("../../NotoSerif-SemiBold.ttf") format("truetype");
+  font-family: "Noto Serif JP";
+}
 
 body {
   background-color: #fff;

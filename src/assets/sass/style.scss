@@ -1,5 +1,19 @@
 @use "sass:map";
 
+@font-face {
+  font-family: "Noto Serif JP";
+  src: url("../../NotoSerif-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Noto Serif JP";
+  src: url("../../NotoSerif-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
 $main-color: #3ea1d1;
 $font-base: "Noto Serif JP", serif;
 $color-base: #333;
