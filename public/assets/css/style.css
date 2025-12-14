@@ -2,14 +2,14 @@
 @font-face {
   font-style: normal;
   font-weight: 300;
-  src: url("../../NotoSerif-Light.ttf") format("truetype");
+  src: url("/NotoSerif-Light.woff2") format("woff2");
   font-family: "Noto Serif JP";
   font-display: swap;
 }
 @font-face {
   font-style: normal;
   font-weight: 600;
-  src: url("../../NotoSerif-SemiBold.ttf") format("truetype");
+  src: url("/NotoSerif-SemiBold.woff2") format("woff2");
   font-family: "Noto Serif JP";
   font-display: swap;
 }
