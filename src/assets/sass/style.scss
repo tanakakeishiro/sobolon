@@ -627,7 +627,14 @@ html {
 }
 
 .products-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
   @include mq(pc) {
+    flex: 1 1 0;
+    max-width: calc((100% - 50px * 2) / 3);
+
     &:hover {
       .products-card__image {
         img {
@@ -635,6 +642,10 @@ html {
         }
       }
     }
+  }
+
+  @include mq(lg) {
+    max-width: calc((100% - 80px * 2) / 3);
   }
 }
 
@@ -725,11 +736,23 @@ html {
 }
 
 .news-card__image {
+  @include mq(pc) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+  }
+
+  @include mq(xl) {
+    width: 260px;
+    display: block;
+    flex: none;
+  }
+
   img {
     width: 100%;
 
     @include mq(pc) {
-      width: 260px;
       overflow: hidden;
       transition: transform 0.5s;
     }
@@ -739,6 +762,11 @@ html {
 .news-card__body {
   @include mq(pc) {
     max-width: 736px;
+    flex: 2;
+  }
+
+  @include mq(xl) {
+    flex: none;
   }
 }
 
