@@ -98,7 +98,7 @@ body {
 .button {
   display: flex;
   justify-content: center;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s ease-out, box-shadow 0.2s ease-out;
   margin-right: auto;
   margin-left: auto;
   border: 1px solid #3ea1d1;
@@ -109,12 +109,21 @@ body {
   font-size: 0.875em;
   letter-spacing: 0.02px;
 }
+.button:focus-visible {
+  outline: #3ea1d1 auto 1px;
+  box-shadow: 0 0 0 3px rgba(62, 161, 209, 0.24);
+}
+.button:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 0 0 0 rgba(62, 161, 209, 0);
+}
 @media screen and (min-width: 768px) {
   .button {
     margin-top: 44px;
   }
   .button:hover {
-    transform: scale(1.1, 1.1);
+    transform: scale(1.05);
+    box-shadow: 0 10px 24px 0 rgba(62, 161, 209, 0.28);
     background-color: #3ea1d1;
     color: #fff;
   }
@@ -130,6 +139,16 @@ html {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 /* -------------------------
    ヘッダー
   ------------------------- */
@@ -562,12 +581,15 @@ html {
   flex-direction: column;
   width: 100%;
 }
+.products-card:active {
+  transform: translateY(1px);
+}
 @media screen and (min-width: 768px) {
   .products-card {
     flex: 1 1 0;
     max-width: calc((100% - 100px) / 3);
   }
-  .products-card:hover .products-card__image img {
+  .products-card:hover .products-card__image img, .products-card:focus-visible .products-card__image img {
     transform: scale(1.1);
   }
 }
@@ -640,13 +662,16 @@ html {
   background: #fff;
   padding-bottom: 28px;
 }
+.news-card__link:active {
+  transform: translateY(1px);
+}
 @media screen and (min-width: 768px) {
   .news-card__link {
     display: flex;
     gap: 40px;
     padding-bottom: 24px;
   }
-  .news-card__link:hover .news-card__image img {
+  .news-card__link:hover .news-card__image img, .news-card__link:focus-visible .news-card__image img {
     transform: scale(1.1);
   }
 }
