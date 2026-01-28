@@ -421,7 +421,7 @@
           <form
             class="contact-form spacing-content"
             id="js-contact-form"
-            action="/php-form/mail.php"
+            action="mail.php"
             method="post"
           >
             <p class="contact-form__note">
@@ -481,6 +481,7 @@
                         name="法人/個人の選択"
                         id="your-type-corporate"
                         class="form-radio__input"
+                        value="法人"
                         checked
                       />
                       <span class="form-radio__text">法人</span>
@@ -491,6 +492,7 @@
                         name="法人/個人の選択"
                         id="your-type-individual"
                         class="form-radio__input"
+                        value="個人"
                       />
                       <span class="form-radio__text">個人</span>
                     </label>
@@ -528,6 +530,7 @@
                     name="プライバシーポリシーに同意する"
                     id="your-privacy"
                     class="form-checkbox__input"
+                    value="同意する"
                   />
                   <span class="form-checkbox__text"
                     ><a href="" target="_blank">プライバシーポリシー</a

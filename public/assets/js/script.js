@@ -109,20 +109,31 @@ jQuery(function ($) {
   const $form = $("#js-contact-form");
   if (!$form.length) return;
 
+  // PHP工房側の必須設定（$require）に合わせてクライアント側もチェック
   const fields = [
     {
+      // お名前（必須）
       $input: $("#your-name"),
       $error: $("#js-error-name"),
       validate: (val) => val.trim() !== "",
       message: "必須項目です。",
     },
     {
+      // メールアドレス（必須＋形式チェック）
       $input: $("#your-email"),
       $error: $("#js-error-email"),
-      validate: (val) => val.includes("@"),
-      message: "メールアドレスの形式でご入力ください。",
+      validate: (val) => {
+        const value = val.trim();
+        if (!value) return false;
+        // mail.php 内の checkMail() を簡略化したパターンに近い形でチェック
+        const emailPattern =
+          /^[.!#%&\-_0-9a-zA-Z?\/+]+@[!#%&\-_0-9a-zA-Z]+(\.[!#%&\-_0-9a-zA-Z]+)+$/;
+        return emailPattern.test(value);
+      },
+      message: "メールアドレスの形式が正しくありません。",
     },
     {
+      // お問い合わせ内容（必須）
       $input: $("#your-message"),
       $error: $("#js-error-message"),
       validate: (val) => val.trim() !== "",
