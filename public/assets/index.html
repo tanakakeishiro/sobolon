@@ -418,7 +418,12 @@
       <section id="contact" class="contact spacing-section">
         <div class="contact__inner inner">
           <h2 class="contact__heading heading">Contact</h2>
-          <form class="contact-form spacing-content" id="js-contact-form">
+          <form
+            class="contact-form spacing-content"
+            id="js-contact-form"
+            action="/php-form/mail.php"
+            method="post"
+          >
             <p class="contact-form__note">
               <span class="is-required">＊</span>は入力必須項目です
             </p>
@@ -432,7 +437,7 @@
                 <div class="contact-item__input">
                   <input
                     type="text"
-                    name="your-name"
+                    name="お名前"
                     id="your-name"
                     class="form-text"
                   />
@@ -450,7 +455,7 @@
                 <div class="contact-item__input">
                   <input
                     type="email"
-                    name="your-email"
+                    name="メールアドレス"
                     id="your-email"
                     class="form-text"
                   />
@@ -473,7 +478,7 @@
                     <label class="form-radio">
                       <input
                         type="radio"
-                        name="your-type"
+                        name="法人/個人の選択"
                         id="your-type-corporate"
                         class="form-radio__input"
                         checked
@@ -483,7 +488,7 @@
                     <label class="form-radio">
                       <input
                         type="radio"
-                        name="your-type"
+                        name="法人/個人の選択"
                         id="your-type-individual"
                         class="form-radio__input"
                       />
@@ -502,7 +507,7 @@
                 </div>
                 <div class="contact-item__input">
                   <textarea
-                    name="your-message"
+                    name="お問い合わせ内容"
                     id="your-message"
                     cols="30"
                     rows="5"
@@ -520,7 +525,7 @@
                 <label class="form-checkbox">
                   <input
                     type="checkbox"
-                    name="your-privacy"
+                    name="プライバシーポリシーに同意する"
                     id="your-privacy"
                     class="form-checkbox__input"
                   />
