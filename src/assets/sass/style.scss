@@ -159,9 +159,8 @@ body {
   font-size: 0.875em;
   color: $main-color;
   width: 158px;
+  /* 合成されるプロパティのみトランジション（background-color/color は CLS・カクつき防止のため即時変更） */
   transition:
-    background-color 0.3s,
-    color 0.3s,
     transform 0.2s ease-out,
     box-shadow 0.2s ease-out;
 

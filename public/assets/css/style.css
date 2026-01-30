@@ -112,7 +112,8 @@ body {
 .button {
   display: flex;
   justify-content: center;
-  transition: background-color 0.3s, color 0.3s, transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  /* 合成されるプロパティのみトランジション（background-color/color は CLS・カクつき防止のため即時変更） */
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
   margin-right: auto;
   margin-left: auto;
   border: 1px solid #3ea1d1;
