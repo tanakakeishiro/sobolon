@@ -41,21 +41,7 @@
       content="https://sobolon.tanakakeishiro.com/img/mv_fv01_pc.webp"
     />
 
-    <!-- Google Fonts（Noto Serif JP のみ・使用ウェイト 300,600 に限定して未使用 CSS 削減） -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;600&display=swap"
-      as="style"
-      fetchpriority="low"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;600&display=swap"
-      media="print"
-      onload="this.media='all'"
-    />
+    <!-- フォントは style.css 内の @font-face でローカル読み込み（高速化） -->
     <!-- クリティカルCSS（レンダリングブロック解消のためインライン化） -->
     <style>
       /* reset（1.1KB） */

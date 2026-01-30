@@ -8,10 +8,6 @@ $font-size-base: 1em; // 16px = 1em
 $line-height-base: 1.7;
 $font-weight-base: 300;
 
-@function px-to-rem($pixels, $baseFontSize: 16) {
-  @return math.div($pixels, $baseFontSize) * 1rem;
-}
-
 $header-height-sp: 60px;
 $header-height-pc: 70px;
 $width-inner: 1280px;
@@ -49,6 +45,23 @@ $layer: (
   footer: 10,
   default: 1
 );
+
+// ローカルフォント（Google Fonts リンクより高速・記事 https://itokoba.com/archives/1383 に準拠）
+@font-face {
+  font-family: "Noto Serif JP";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("../fonts/NotoSerifJP-Light.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Noto Serif JP";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/NotoSerifJP-SemiBold.woff2") format("woff2");
+}
 
 body {
   font-family: $font-base;

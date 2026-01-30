@@ -45,6 +45,10 @@ const paths = {
     src: "./src/assets/img/**/*",
     dest: "./public/assets/img/",
   },
+  fonts: {
+    src: "./src/assets/fonts/**/*",
+    dest: "./public/assets/fonts/",
+  },
 };
 
 // ===========================
@@ -118,6 +122,15 @@ function copyImage() {
   return gulp
     .src(paths.images.src, { encoding: false })
     .pipe(gulp.dest(paths.images.dest));
+}
+
+// ===========================
+// 📌 フォントのコピー
+// ===========================
+function copyFonts() {
+  return gulp
+    .src(paths.fonts.src, { encoding: false })
+    .pipe(gulp.dest(paths.fonts.dest));
 }
 
 // ===========================
@@ -218,6 +231,23 @@ function watchFiles() {
         browserSync.reload();
       });
     });
+
+  // フォントファイルの監視（削除も検知）
+  gulp
+    .watch(paths.fonts.src, { events: "all" }, function (cb) {
+      copyFonts();
+      cb();
+    })
+    .on("unlink", function (filepath) {
+      const filePathFromSrc = path.relative(
+        path.resolve("src/assets/fonts"),
+        filepath
+      );
+      const destFilePath = path.resolve(paths.fonts.dest, filePathFromSrc);
+      deleteAsync([destFilePath]).then(() => {
+        browserSync.reload();
+      });
+    });
 }
 
 // ===========================
@@ -235,6 +265,7 @@ export {
   minJS,
   formatHTML,
   copyImage,
+  copyFonts,
   watchFiles,
   browserInit,
   clean,
@@ -242,7 +273,7 @@ export {
 
 export const dev = gulp.series(
   clean,
-  gulp.parallel(compileSass, minJS, formatHTML, copyImage),
+  gulp.parallel(compileSass, minJS, formatHTML, copyImage, copyFonts),
   gulp.parallel(watchFiles, browserInit)
 );
 
@@ -253,5 +284,5 @@ gulp.task(
 
 export const build = gulp.series(
   clean,
-  gulp.parallel(compileSass, minJS, formatHTML, copyImage)
+  gulp.parallel(compileSass, minJS, formatHTML, copyImage, copyFonts)
 );
