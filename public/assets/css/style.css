@@ -409,6 +409,7 @@ html {
     flex-direction: row;
     align-items: center;
     gap: 6.67%;
+    max-width: none;
   }
 }
 

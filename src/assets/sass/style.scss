@@ -7,7 +7,6 @@ $background-base: #fff;
 $font-size-base: 1em; // 16px = 1em
 $line-height-base: 1.7;
 $font-weight-base: 300;
-
 $header-height-sp: 60px;
 $header-height-pc: 70px;
 $width-inner: 1280px;
@@ -140,15 +139,6 @@ body {
     margin-top: 160px;
   }
 }
-
-// .main {
-//   display: grid;
-//   gap: 96px;
-
-//   @include mq(pc) {
-//     gap: 160px;
-//   }
-// }
 
 .spacing-content {
   margin-top: 45px;
@@ -485,6 +475,7 @@ html {
     gap: 6.67%;
     flex-direction: row;
     align-items: center;
+    max-width: none;
   }
 }
 
