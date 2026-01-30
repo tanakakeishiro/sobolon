@@ -465,6 +465,8 @@ html {
   flex-direction: column;
   display: flex;
   gap: 34px;
+  max-width: 690px;
+  margin-inline: auto;
 
   @include mq(pc) {
     gap: 6.67%;
@@ -547,6 +549,8 @@ html {
 .feature-card {
   background: #fff;
   box-shadow: 3px 3px 15px 0 rgb(96 96 96 / 16%);
+  max-width: 600px;
+  margin-inline: auto;
 }
 
 .feature-card__image {
@@ -654,6 +658,8 @@ html {
   width: 100%;
   display: flex;
   flex-direction: column;
+  max-width: 500px;
+  margin-inline: auto;
 
   &:active {
     transform: translateY(1px);

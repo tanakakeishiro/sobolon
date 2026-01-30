@@ -386,6 +386,9 @@ html {
   display: flex;
   flex-direction: column;
   gap: 34px;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 690px;
 }
 @media screen and (min-width: 768px) {
   .concept__content {
@@ -466,8 +469,11 @@ html {
 }
 
 .feature-card {
+  margin-right: auto;
+  margin-left: auto;
   box-shadow: 3px 3px 15px 0 rgba(96, 96, 96, 0.16);
   background: #fff;
+  max-width: 600px;
 }
 
 .feature-card__image img {
@@ -579,7 +585,10 @@ html {
 .products-card {
   display: flex;
   flex-direction: column;
+  margin-right: auto;
+  margin-left: auto;
   width: 100%;
+  max-width: 500px;
 }
 .products-card:active {
   transform: translateY(1px);
