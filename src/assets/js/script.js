@@ -19,21 +19,24 @@
 
   addEventListener("resize", switchViewport, false);
 
-  switchViewport();
+  requestAnimationFrame(switchViewport);
 })();
 
 // =============================
 // ハンバーガーメニュー
 // =============================
-const backgroundFix = (bool) => {
-  const scrollingElement = () =>
-    "scrollingElement" in document
-      ? document.scrollingElement
-      : document.documentElement;
+const scrollingElement = () =>
+  "scrollingElement" in document
+    ? document.scrollingElement
+    : document.documentElement;
 
-  const scrollY = bool
-    ? scrollingElement().scrollTop
-    : parseInt(document.body.style.top || "0");
+const backgroundFix = (bool, scrollYFromClose) => {
+  const scrollY =
+    scrollYFromClose !== undefined
+      ? scrollYFromClose
+      : bool
+        ? scrollingElement().scrollTop
+        : parseInt(document.body.style.top || "0", 10);
 
   if (bool) {
     Object.assign(document.body.style, {
@@ -51,7 +54,10 @@ const backgroundFix = (bool) => {
       left: "",
       width: "",
     });
-    window.scrollTo(0, scrollY * -1);
+    const y = scrollYFromClose !== undefined ? scrollY : scrollY * -1;
+    requestAnimationFrame(() => {
+      window.scrollTo(0, y);
+    });
   }
 };
 
@@ -63,6 +69,7 @@ const $focusTrap = jQuery("#js-focus-trap");
 const $firstLink = jQuery(".header__link").first();
 
 const closeMenu = () => {
+  const scrollY = parseInt(document.body.style.top || "0", 10) * -1;
   $hamburger
     .removeClass(CLASS)
     .attr({
@@ -71,17 +78,17 @@ const closeMenu = () => {
     })
     .focus();
   $menu.removeClass(CLASS);
-  backgroundFix(false);
+  backgroundFix(false, scrollY);
   flg = false;
 };
 
 const openMenu = () => {
+  backgroundFix(true);
   $hamburger
     .addClass(CLASS)
     .attr("aria-expanded", "true")
     .removeAttr("aria-haspopup");
   $menu.addClass(CLASS);
-  backgroundFix(true);
   flg = true;
   setTimeout(() => $firstLink.length && $firstLink.focus(), 100);
 };
