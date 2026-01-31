@@ -394,6 +394,8 @@ html {
 
 .fv__content {
   position: relative;
+  max-width: $width-inner;
+  margin-inline: auto;
 }
 
 .fv__image {
@@ -404,7 +406,6 @@ html {
   }
 
   @include mq(xl) {
-    max-width: none;
     width: clamp(990px, calc(100vw - 300px), 1635px);
   }
 }
@@ -861,6 +862,10 @@ html {
 }
 
 .message__image {
+  img {
+    width: 100%;
+  }
+
   @include mq(pc) {
     width: calc(600px / 1200px * 100%);
     flex-shrink: 0;

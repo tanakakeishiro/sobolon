@@ -125,6 +125,60 @@ function copyImage() {
 }
 
 // ===========================
+// 📌 レスポンシブ画像の生成（LCP・画像配信最適化）
+// 表示幅ごとに最適サイズを出力
+// ===========================
+const RESPONSIVE_IMAGE_SETS = [
+  {
+    width: 260,
+    files: [
+      "image_news01.webp",
+      "image_news02.webp",
+      "image_news03.webp",
+      "image_product01.webp",
+      "image_product02.webp",
+      "image_product03.webp",
+    ],
+  },
+  {
+    width: 340,
+    files: [
+      "image_feature01.webp",
+      "image_feature02.webp",
+      "image_feature03.webp",
+    ],
+  },
+  {
+    width: 600,
+    files: ["image_concept01.webp"],
+  },
+];
+
+async function generateResponsiveImages() {
+  const sharp = (await import("sharp")).default;
+  const fs = await import("fs");
+  const imgSrcDir = path.resolve("src/assets/img");
+  const imgDestDir = path.resolve("public/assets/img");
+
+  fs.mkdirSync(imgDestDir, { recursive: true });
+
+  for (const { width, files } of RESPONSIVE_IMAGE_SETS) {
+    for (const filename of files) {
+      const srcPath = path.join(imgSrcDir, filename);
+      if (!fs.existsSync(srcPath)) continue;
+
+      const base = filename.replace(/\.webp$/, "");
+      const destPath = path.join(imgDestDir, `${base}_${width}w.webp`);
+
+      await sharp(srcPath)
+        .resize(width, null, { withoutEnlargement: true })
+        .webp()
+        .toFile(destPath);
+    }
+  }
+}
+
+// ===========================
 // 📌 フォントのコピー
 // ===========================
 function copyFonts() {
@@ -266,6 +320,7 @@ export {
   formatHTML,
   copyImage,
   copyFonts,
+  generateResponsiveImages,
   watchFiles,
   browserInit,
   clean,
@@ -273,7 +328,14 @@ export {
 
 export const dev = gulp.series(
   clean,
-  gulp.parallel(compileSass, minJS, formatHTML, copyImage, copyFonts),
+  gulp.parallel(
+    compileSass,
+    minJS,
+    formatHTML,
+    copyImage,
+    copyFonts,
+    generateResponsiveImages
+  ),
   gulp.parallel(watchFiles, browserInit)
 );
 
@@ -284,5 +346,12 @@ gulp.task(
 
 export const build = gulp.series(
   clean,
-  gulp.parallel(compileSass, minJS, formatHTML, copyImage, copyFonts)
+  gulp.parallel(
+    compileSass,
+    minJS,
+    formatHTML,
+    copyImage,
+    copyFonts,
+    generateResponsiveImages
+  )
 );
