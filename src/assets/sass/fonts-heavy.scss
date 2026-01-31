@@ -1,0 +1,8 @@
+// SemiBold のみ（初回ペイロード削減のため別ファイルで遅延読み込み・サブセット化なし）
+@font-face {
+  font-family: "Noto Serif JP";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/NotoSerifJP-SemiBold.woff2") format("woff2");
+}
