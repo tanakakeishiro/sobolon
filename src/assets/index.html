@@ -14,14 +14,21 @@
 
     <!-- ファビコン -->
     <link rel="icon" href="/favicon.ico" />
-    <!-- 初回表示用フォントのみ preload（SemiBold は遅延読み込みでペイロード削減） -->
+    <!-- Google Fonts: preconnect で接続を先行、preload で非ブロッキングかつ高優先取得 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="preload"
-      href="./fonts/NotoSerifJP-Light.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;600&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;600&display=swap"
+      />
+    </noscript>
 
     <!-- OGPタグ -->
     <meta property="og:title" content="sobolon" />
@@ -49,7 +56,6 @@
       content="https://sobolon.tanakakeishiro.com/img/mv_fv01_pc.webp"
     />
 
-    <!-- フォントは style.css 内の @font-face でローカル読み込み（高速化） -->
     <!-- クリティカルCSS（レンダリングブロック解消のためインライン化） -->
     <style>
       /* reset（1.1KB） */
@@ -399,26 +405,6 @@
       onload="this.media='all'"
     />
     <noscript><link rel="stylesheet" href="./css/style.min.css" /></noscript>
-    <!-- SemiBold はアイドル後に読み込み（初回ペイロード約半分・サブセット化なし） -->
-    <script>
-      (function () {
-        function loadFontsHeavy() {
-          var l = document.createElement("link");
-          l.rel = "stylesheet";
-          l.href = "./css/fonts-heavy.min.css";
-          l.media = "all";
-          document.head.appendChild(l);
-        }
-        if (window.requestIdleCallback) {
-          requestIdleCallback(loadFontsHeavy, { timeout: 2500 });
-        } else {
-          setTimeout(loadFontsHeavy, 1500);
-        }
-      })();
-    </script>
-    <noscript
-      ><link rel="stylesheet" href="./css/fonts-heavy.min.css"
-    /></noscript>
   </head>
 
   <body>

@@ -17,7 +17,17 @@
     }
   };
 
-  addEventListener("resize", switchViewport, false);
+  let resizeScheduled = false;
+  const onResize = () => {
+    if (resizeScheduled) return;
+    resizeScheduled = true;
+    requestAnimationFrame(() => {
+      switchViewport();
+      resizeScheduled = false;
+    });
+  };
+
+  addEventListener("resize", onResize, false);
 
   requestAnimationFrame(switchViewport);
 })();
@@ -153,9 +163,12 @@ jQuery(function ($) {
 
   const scrollToElement = ($el) => {
     const el = $el.get(0);
-    if (el) {
+    if (!el) return;
+    // DOM 更新（setError の addClass/text）後に幾何情報を読むと強制リフローになるため、
+    // 次のフレームで scrollIntoView を実行する
+    requestAnimationFrame(() => {
       el.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
+    });
   };
 
   const clearError = ($input, $errorEl) => {

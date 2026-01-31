@@ -45,16 +45,6 @@ $layer: (
   default: 1
 );
 
-// ローカルフォント（Google Fonts リンクより高速・記事 https://itokoba.com/archives/1383 に準拠）
-// Light のみメインCSSで読み込み（初回ペイロード削減）。SemiBold は fonts-heavy で遅延読み込み
-@font-face {
-  font-family: "Noto Serif JP";
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url("../fonts/NotoSerifJP-Light.woff2") format("woff2");
-}
-
 body {
   font-family: $font-base;
   color: $color-base;
