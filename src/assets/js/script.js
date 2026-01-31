@@ -33,90 +33,94 @@
 })();
 
 // =============================
-// ハンバーガーメニュー
+// ハンバーガーメニュー（メインスレッドの長時間ブロックを避けるため遅延初期化）
 // =============================
-const scrollingElement = () =>
-  "scrollingElement" in document
-    ? document.scrollingElement
-    : document.documentElement;
+function initHamburger() {
+  const scrollingElement = () =>
+    "scrollingElement" in document
+      ? document.scrollingElement
+      : document.documentElement;
 
-const backgroundFix = (bool, scrollYFromClose) => {
-  const scrollY =
-    scrollYFromClose !== undefined
-      ? scrollYFromClose
-      : bool
-        ? scrollingElement().scrollTop
-        : parseInt(document.body.style.top || "0", 10);
+  const backgroundFix = (bool, scrollYFromClose) => {
+    const scrollY =
+      scrollYFromClose !== undefined
+        ? scrollYFromClose
+        : bool
+          ? scrollingElement().scrollTop
+          : parseInt(document.body.style.top || "0", 10);
 
-  if (bool) {
-    Object.assign(document.body.style, {
-      height: "100vh",
-      position: "fixed",
-      top: `${scrollY * -1}px`,
-      left: "0",
-      width: "100vw",
-    });
-  } else {
-    Object.assign(document.body.style, {
-      height: "",
-      position: "",
-      top: "",
-      left: "",
-      width: "",
-    });
-    const y = scrollYFromClose !== undefined ? scrollY : scrollY * -1;
-    requestAnimationFrame(() => {
-      window.scrollTo(0, y);
-    });
-  }
-};
+    if (bool) {
+      Object.assign(document.body.style, {
+        height: "100vh",
+        position: "fixed",
+        top: `${scrollY * -1}px`,
+        left: "0",
+        width: "100vw",
+      });
+    } else {
+      Object.assign(document.body.style, {
+        height: "",
+        position: "",
+        top: "",
+        left: "",
+        width: "",
+      });
+      const y = scrollYFromClose !== undefined ? scrollY : scrollY * -1;
+      requestAnimationFrame(() => {
+        window.scrollTo(0, y);
+      });
+    }
+  };
 
-const CLASS = "is-checked";
-let flg = false;
-const $hamburger = jQuery("#js-drawer-button");
-const $menu = jQuery("#js-drawer-content");
-const $focusTrap = jQuery("#js-focus-trap");
-const $firstLink = jQuery(".header__link").first();
+  const CLASS = "is-checked";
+  let flg = false;
+  const $hamburger = jQuery("#js-drawer-button");
+  const $menu = jQuery("#js-drawer-content");
+  const $focusTrap = jQuery("#js-focus-trap");
+  const $firstLink = jQuery(".header__link").first();
 
-const closeMenu = () => {
-  const scrollY = parseInt(document.body.style.top || "0", 10) * -1;
-  $hamburger
-    .removeClass(CLASS)
-    .attr({
-      "aria-expanded": "false",
-      "aria-haspopup": "menu",
-    })
-    .focus();
-  $menu.removeClass(CLASS);
-  backgroundFix(false, scrollY);
-  flg = false;
-};
+  const closeMenu = () => {
+    const scrollY = parseInt(document.body.style.top || "0", 10) * -1;
+    $hamburger
+      .removeClass(CLASS)
+      .attr({
+        "aria-expanded": "false",
+        "aria-haspopup": "menu",
+      })
+      .focus();
+    $menu.removeClass(CLASS);
+    backgroundFix(false, scrollY);
+    flg = false;
+  };
 
-const openMenu = () => {
-  backgroundFix(true);
-  $hamburger
-    .addClass(CLASS)
-    .attr("aria-expanded", "true")
-    .removeAttr("aria-haspopup");
-  $menu.addClass(CLASS);
-  flg = true;
-  setTimeout(() => $firstLink.length && $firstLink.focus(), 100);
-};
+  const openMenu = () => {
+    backgroundFix(true);
+    $hamburger
+      .addClass(CLASS)
+      .attr("aria-expanded", "true")
+      .removeAttr("aria-haspopup");
+    $menu.addClass(CLASS);
+    flg = true;
+    setTimeout(() => $firstLink.length && $firstLink.focus(), 100);
+  };
 
-$hamburger.on("click", function (e) {
-  e.preventDefault();
-  flg ? closeMenu() : openMenu();
-});
+  $hamburger.on("click", function (e) {
+    e.preventDefault();
+    flg ? closeMenu() : openMenu();
+  });
 
-jQuery(window).on("keydown", (e) => {
-  if (e.key === "Escape" && flg) closeMenu();
-});
+  jQuery(window).on("keydown", (e) => {
+    if (e.key === "Escape" && flg) closeMenu();
+  });
 
-$focusTrap.on("focus", () => {
-  $hamburger.focus();
-});
+  $focusTrap.on("focus", () => {
+    $hamburger.focus();
+  });
 
-jQuery('#js-drawer-content a[href^="#"]').on("click", closeMenu);
+  jQuery('#js-drawer-content a[href^="#"]').on("click", closeMenu);
+}
+
+setTimeout(initHamburger, 0);
 
 // =============================
 // フォームバリデーション
@@ -126,112 +130,115 @@ jQuery(function ($) {
   const $form = $("#js-contact-form");
   if (!$form.length) return;
 
-  // PHP工房側の必須設定（$require）に合わせてクライアント側もチェック
-  const fields = [
-    {
-      // お名前（必須）
-      $input: $("#your-name"),
-      $error: $("#js-error-name"),
-      validate: (val) => val.trim() !== "",
-      message: "必須項目です。",
-    },
-    {
-      // メールアドレス（必須＋形式チェック）
-      $input: $("#your-email"),
-      $error: $("#js-error-email"),
-      validate: (val) => {
-        const value = val.trim();
-        if (!value) return false;
-        // mail.php 内の checkMail() を簡略化したパターンに近い形でチェック
-        const emailPattern =
-          /^[.!#%&\-_0-9a-zA-Z?\/+]+@[!#%&\-_0-9a-zA-Z]+(\.[!#%&\-_0-9a-zA-Z]+)+$/;
-        return emailPattern.test(value);
+  // フォーム初期化を次のタスクに回し、メインスレッドの長時間ブロックを避ける
+  setTimeout(function initForm() {
+    // PHP工房側の必須設定（$require）に合わせてクライアント側もチェック
+    const fields = [
+      {
+        // お名前（必須）
+        $input: $("#your-name"),
+        $error: $("#js-error-name"),
+        validate: (val) => val.trim() !== "",
+        message: "必須項目です。",
       },
-      message: "メールアドレスの形式が正しくありません。",
-    },
-    {
-      // お問い合わせ内容（必須）
-      $input: $("#your-message"),
-      $error: $("#js-error-message"),
-      validate: (val) => val.trim() !== "",
-      message: "必須項目です。",
-    },
-  ];
+      {
+        // メールアドレス（必須＋形式チェック）
+        $input: $("#your-email"),
+        $error: $("#js-error-email"),
+        validate: (val) => {
+          const value = val.trim();
+          if (!value) return false;
+          // mail.php 内の checkMail() を簡略化したパターンに近い形でチェック
+          const emailPattern =
+            /^[.!#%&\-_0-9a-zA-Z?\/+]+@[!#%&\-_0-9a-zA-Z]+(\.[!#%&\-_0-9a-zA-Z]+)+$/;
+          return emailPattern.test(value);
+        },
+        message: "メールアドレスの形式が正しくありません。",
+      },
+      {
+        // お問い合わせ内容（必須）
+        $input: $("#your-message"),
+        $error: $("#js-error-message"),
+        validate: (val) => val.trim() !== "",
+        message: "必須項目です。",
+      },
+    ];
 
-  const $inputPrivacy = $("#your-privacy");
-  const $errorPrivacy = $("#js-error-privacy");
+    const $inputPrivacy = $("#your-privacy");
+    const $errorPrivacy = $("#js-error-privacy");
 
-  const scrollToElement = ($el) => {
-    const el = $el.get(0);
-    if (!el) return;
-    // DOM 更新（setError の addClass/text）後に幾何情報を読むと強制リフローになるため、
-    // 次のフレームで scrollIntoView を実行する
-    requestAnimationFrame(() => {
-      el.scrollIntoView({ behavior: "smooth", block: "center" });
-    });
-  };
-
-  const clearError = ($input, $errorEl) => {
-    $input.removeClass("is-invalid");
-    $errorEl.length && $errorEl.text("");
-  };
-
-  const setError = ($input, $errorEl, message) => {
-    $input.addClass("is-invalid");
-    $errorEl.length && $errorEl.text(message);
-  };
-
-  fields.forEach(({ $input, $error, validate, message }) => {
-    $input
-      .on("blur", function () {
-        if (!validate($input.val())) {
-          setError($input, $error, message);
-        }
-      })
-      .on("focus", () => {
-        clearError($input, $error);
+    const scrollToElement = ($el) => {
+      const el = $el.get(0);
+      if (!el) return;
+      // DOM 更新（setError の addClass/text）後に幾何情報を読むと強制リフローになるため、
+      // 次のフレームで scrollIntoView を実行する
+      requestAnimationFrame(() => {
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
       });
-  });
+    };
 
-  if ($inputPrivacy.length) {
-    $inputPrivacy.on("change", function () {
-      $inputPrivacy.prop("checked")
-        ? clearError($inputPrivacy, $errorPrivacy)
-        : setError($inputPrivacy, $errorPrivacy, "必須項目です。");
-    });
-  }
+    const clearError = ($input, $errorEl) => {
+      $input.removeClass("is-invalid");
+      $errorEl.length && $errorEl.text("");
+    };
 
-  $form.on("submit", function (event) {
-    let hasError = false;
+    const setError = ($input, $errorEl, message) => {
+      $input.addClass("is-invalid");
+      $errorEl.length && $errorEl.text(message);
+    };
 
-    fields.forEach(({ $input, $error }) => {
-      clearError($input, $error);
+    fields.forEach(({ $input, $error, validate, message }) => {
+      $input
+        .on("blur", function () {
+          if (!validate($input.val())) {
+            setError($input, $error, message);
+          }
+        })
+        .on("focus", () => {
+          clearError($input, $error);
+        });
     });
 
     if ($inputPrivacy.length) {
-      clearError($inputPrivacy, $errorPrivacy);
+      $inputPrivacy.on("change", function () {
+        $inputPrivacy.prop("checked")
+          ? clearError($inputPrivacy, $errorPrivacy)
+          : setError($inputPrivacy, $errorPrivacy, "必須項目です。");
+      });
     }
 
-    fields.forEach(({ $input, $error, validate, message }) => {
-      if (!validate($input.val())) {
-        setError($input, $error, message);
+    $form.on("submit", function (event) {
+      let hasError = false;
+
+      fields.forEach(({ $input, $error }) => {
+        clearError($input, $error);
+      });
+
+      if ($inputPrivacy.length) {
+        clearError($inputPrivacy, $errorPrivacy);
+      }
+
+      fields.forEach(({ $input, $error, validate, message }) => {
+        if (!validate($input.val())) {
+          setError($input, $error, message);
+          if (!hasError) {
+            scrollToElement($input);
+            hasError = true;
+          }
+        }
+      });
+
+      if ($inputPrivacy.length && !$inputPrivacy.prop("checked")) {
+        setError($inputPrivacy, $errorPrivacy, "必須項目です。");
         if (!hasError) {
-          scrollToElement($input);
+          scrollToElement($inputPrivacy);
           hasError = true;
         }
       }
-    });
 
-    if ($inputPrivacy.length && !$inputPrivacy.prop("checked")) {
-      setError($inputPrivacy, $errorPrivacy, "必須項目です。");
-      if (!hasError) {
-        scrollToElement($inputPrivacy);
-        hasError = true;
+      if (hasError) {
+        event.preventDefault();
       }
-    }
-
-    if (hasError) {
-      event.preventDefault();
-    }
-  });
+    });
+  }, 0);
 });
