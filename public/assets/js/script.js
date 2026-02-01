@@ -117,7 +117,21 @@ function initHamburger() {
     $hamburger.focus();
   });
 
-  jQuery('#js-drawer-content a[href^="#"]').on("click", closeMenu);
+  // アンカーリンク: メニューを閉じたあと、該当セクションへスクロールする
+  jQuery('#js-drawer-content a[href^="#"]').on("click", function (e) {
+    const href = this.getAttribute("href");
+    if (!href || href === "#") return;
+    e.preventDefault();
+    const menuWasOpen = flg;
+    if (menuWasOpen) closeMenu();
+    const target = document.querySelector(href);
+    if (target) {
+      const scrollToTarget = () => {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      };
+      menuWasOpen ? setTimeout(scrollToTarget, 100) : scrollToTarget();
+    }
+  });
 }
 
 setTimeout(initHamburger, 0);

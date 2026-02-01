@@ -15,6 +15,20 @@ $color-text-light-gray: #989898;
 $color-accent: #e7728e;
 $color-bg-footer: #f7f7f7;
 $color-overlay: rgb(0 0 0 / 12%);
+
+// フォーカス表示用（WCAG 2.2.7 コントラスト比 3:1 以上・#fff 上で約 5.5:1 / 弱視対応）
+$color-focus: #0066a1;
+
+// 高コントラストモード用（prefers-contrast: more 時・#fff 上で約 12:1）
+$color-focus-high-contrast: #004080;
+
+// フォーカスリングの太さ・オフセット（弱視の人が見やすいよう 2px 以上・一括変更用）
+$focus-ring-width: 2px;
+$focus-ring-offset: 2px;
+
+// 高コントラスト時はより太く（3px）
+$focus-ring-width-high-contrast: 3px;
+$focus-ring-offset-high-contrast: 3px;
 $breakpoints: (
   sm: "screen and (min-width: 600px)",
   pc: "screen and (min-width: 768px)",
@@ -25,6 +39,27 @@ $breakpoints: (
 @mixin mq($breakpoint: pc) {
   @media #{map.get($breakpoints, $breakpoint)} {
     @content;
+  }
+}
+
+// フォーカスインジケーター（WCAG 2.4.7 / 弱視対応）
+// 1. コントラスト最優先（$color-focus） 2. 太さ 2px 以上（変数で一括管理）
+// 3. outline + box-shadow で二重輪郭（見逃し防止） 4. :focus-visible のみ表示
+// 5. prefers-contrast: more 時は 3px・高コントラスト色でさらに視認性を向上
+// 参考: https://zenn.dev/lancers/articles/1b6bbf1046a303
+@mixin focus-visible {
+  &:focus-visible {
+    outline: $focus-ring-width solid $color-focus;
+    outline-offset: $focus-ring-offset;
+    box-shadow: 0 0 0 $focus-ring-width $color-focus;
+
+    @media (prefers-contrast: more) {
+      outline-width: $focus-ring-width-high-contrast;
+      outline-offset: $focus-ring-offset-high-contrast;
+      outline-color: $color-focus-high-contrast;
+      box-shadow: 0 0 0 $focus-ring-width-high-contrast
+        $color-focus-high-contrast;
+    }
   }
 }
 
@@ -148,37 +183,46 @@ body {
     transform 0.2s ease-out,
     box-shadow 0.2s ease-out;
 
-  &:focus-visible {
-    outline: $main-color auto 1px;
-    box-shadow: 0 0 0 3px rgba($main-color, 0.24);
-  }
+  @include focus-visible;
 
   &:active {
     transform: translateY(1px) scale(0.98);
     box-shadow: 0 0 0 0 rgba($main-color, 0);
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    &:active {
+      transform: none;
+      box-shadow: none;
+    }
+
+    @include mq(pc) {
+      @media (hover: hover) {
+        &:hover {
+          transform: none;
+          box-shadow: none;
+        }
+      }
+    }
+  }
+
   @include mq(pc) {
     margin-top: 44px;
 
-    &:hover {
-      background-color: $main-color;
-      color: #fff;
-      transform: scale(1.05);
-      box-shadow: 0 10px 24px 0 rgba($main-color, 0.28);
+    @media (hover: hover) {
+      &:hover {
+        background-color: $main-color;
+        color: #fff;
+        transform: scale(1.05);
+        box-shadow: 0 10px 24px 0 rgba($main-color, 0.28);
+      }
     }
   }
 }
 
-// スムーススクロール
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: $header-height-sp;
-  @include mq(pc) {
-    scroll-padding-top: $header-height-pc;
-  }
-}
-
+// アクセシビリティ: 動きを減らす設定時（WCAG 2.3.3 / prefers-reduced-motion）
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -187,6 +231,31 @@ html {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+// マウス操作時は outline を非表示（:focus:not(:focus-visible) で古いブラウザにも対応）
+// .form-text / .form-textarea はクリック時用スタイルを別途持つため除外
+
+/* stylelint-disable selector-not-notation */
+:focus:not(:focus-visible):not(.form-text):not(.form-textarea) {
+  outline: none;
+}
+
+/* stylelint-enable selector-not-notation */
+
+// リンクのフォーカス（弱視対応・変数で一括・prefers-contrast で強化）
+a:focus-visible {
+  outline: $focus-ring-width solid $color-focus;
+  outline-offset: $focus-ring-offset;
+  box-shadow: 0 0 0 $focus-ring-width $color-focus;
+  border-radius: 4px;
+
+  @media (prefers-contrast: more) {
+    outline-width: $focus-ring-width-high-contrast;
+    outline-offset: $focus-ring-offset-high-contrast;
+    outline-color: $color-focus-high-contrast;
+    box-shadow: 0 0 0 $focus-ring-width-high-contrast $color-focus-high-contrast;
   }
 }
 
@@ -228,6 +297,9 @@ html {
 
 .header__logo {
   a {
+    display: block;
+    @include focus-visible;
+
     img {
       width: 120px;
       display: block;
@@ -237,8 +309,20 @@ html {
   @include mq(pc) {
     transition: opacity 0.3s;
 
-    &:hover {
-      opacity: 0.6;
+    @media (hover: hover) {
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+
+      @media (hover: hover) {
+        &:hover {
+          opacity: 1;
+        }
+      }
     }
   }
 }
@@ -258,6 +342,10 @@ html {
   &.is-checked {
     transform: translateX(0);
     visibility: visible;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
   }
 
   @include mq(pc) {
@@ -313,6 +401,10 @@ html {
     &:hover {
       color: $main-color;
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
 }
 
@@ -330,6 +422,8 @@ html {
   height: 18px;
   position: relative;
   margin-top: -3px;
+
+  @include focus-visible;
 
   &.is-checked {
     .drawer-icon__bar {
@@ -360,6 +454,10 @@ html {
   transition:
     transform 0.4s linear,
     top 0.4s linear;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 
   // &:nth-of-type(1) {
   // }
@@ -403,10 +501,6 @@ html {
     max-width: 990px;
     margin-left: auto;
     display: block;
-  }
-
-  @include mq(xl) {
-    width: clamp(990px, calc(100vw - 300px), 1635px);
   }
 }
 
@@ -467,7 +561,7 @@ html {
   text-align: center;
 
   @include mq(pc) {
-    width: calc(600px / 1200px * 100%);
+    width: 50%;
     flex-shrink: 0;
   }
 
@@ -657,7 +751,16 @@ html {
     flex: 1 1 0;
     max-width: calc((100% - 50px * 2) / 3);
 
-    &:hover,
+    @media (hover: hover) {
+      &:hover {
+        .products-card__image {
+          img {
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+
     &:focus-visible {
       .products-card__image {
         img {
@@ -666,6 +769,8 @@ html {
       }
     }
   }
+
+  @include focus-visible;
 
   @include mq(lg) {
     max-width: calc((100% - 80px * 2) / 3);
@@ -682,6 +787,10 @@ html {
 
     img {
       transition: transform 0.5s;
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
   }
 }
@@ -747,20 +856,37 @@ html {
     transform: translateY(1px);
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    &:active {
+      transform: none;
+    }
+  }
+
   @include mq(pc) {
     display: flex;
     gap: 40px;
     padding-bottom: 24px;
 
-    &:hover,
-    &:focus-visible {
-      .news-card__image {
-        img {
-          transform: scale(1.1);
+    @media (hover: hover) {
+      &:hover {
+        .news-card__image {
+          img {
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      @media (hover: hover) {
+        &:hover .news-card__image img {
+          transform: none;
         }
       }
     }
   }
+
+  @include focus-visible;
 }
 
 .news-card__image {
@@ -783,6 +909,10 @@ html {
     @include mq(pc) {
       overflow: hidden;
       transition: transform 0.5s;
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
   }
 }
@@ -1032,6 +1162,7 @@ html {
     box-shadow: 5px 6px 16px 0 rgba($color-accent, 0.32);
   }
 
+  // クリック/タップでフォーカス → メインカラーの薄い outline と影（JS で body.is-mouse-focus を付与）
   &:focus {
     outline: $main-color auto 1px;
     box-shadow: 5px 6px 16px 0 rgba($main-color, 0.16);
@@ -1059,9 +1190,27 @@ html {
     color: #fff;
   }
 
+  // クリック/タップでフォーカス → メインカラーの薄い outline と影
   &:focus + .form-radio__text {
     outline: $main-color auto 1px;
     box-shadow: 5px 6px 16px 0 rgba($main-color, 0.32);
+  }
+
+  // キーボードでフォーカス → フォーカスリング
+  body:not(.is-mouse-focus) &:focus-visible + .form-radio__text {
+    outline: $focus-ring-width solid $color-focus;
+    outline-offset: $focus-ring-offset;
+    box-shadow: 0 0 0 $focus-ring-width $color-focus;
+    position: relative;
+    z-index: 1;
+
+    @media (prefers-contrast: more) {
+      outline-width: $focus-ring-width-high-contrast;
+      outline-offset: $focus-ring-offset-high-contrast;
+      outline-color: $color-focus-high-contrast;
+      box-shadow: 0 0 0 $focus-ring-width-high-contrast
+        $color-focus-high-contrast;
+    }
   }
 }
 
@@ -1089,6 +1238,7 @@ html {
     box-shadow: 5px 6px 16px 0 rgba($color-accent, 0.32);
   }
 
+  // クリック/タップでフォーカス → メインカラーの薄い outline と影
   &:focus {
     outline: $main-color auto 1px;
     box-shadow: 5px 6px 16px 0 rgba($main-color, 0.16);
@@ -1128,10 +1278,28 @@ html {
     }
   }
 
-  &:focus + .form-checkbox__text {
+  // クリック/タップでフォーカス → メインカラーの薄い outline と影
+  body.is-mouse-focus &:focus + .form-checkbox__text {
     &::before {
       outline: $main-color auto 1px;
       box-shadow: 5px 6px 16px 0 rgba($main-color, 0.16);
+    }
+  }
+
+  // キーボードでフォーカス → フォーカスリング（$color-focus）
+  body:not(.is-mouse-focus) &:focus-visible + .form-checkbox__text {
+    &::before {
+      outline: $focus-ring-width solid $color-focus;
+      outline-offset: $focus-ring-offset;
+      box-shadow: 0 0 0 $focus-ring-width $color-focus;
+
+      @media (prefers-contrast: more) {
+        outline-width: $focus-ring-width-high-contrast;
+        outline-offset: $focus-ring-offset-high-contrast;
+        outline-color: $color-focus-high-contrast;
+        box-shadow: 0 0 0 $focus-ring-width-high-contrast
+          $color-focus-high-contrast;
+      }
     }
   }
 
@@ -1214,8 +1382,20 @@ html {
   @include mq(pc) {
     transition: opacity 0.3s;
 
-    &:hover {
-      opacity: 0.6;
+    @media (hover: hover) {
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+
+      @media (hover: hover) {
+        &:hover {
+          opacity: 1;
+        }
+      }
     }
   }
 }
@@ -1233,8 +1413,12 @@ html {
   }
 }
 
-// .footer-content__menu-item {
-// }
+.footer__menu-item {
+  a {
+    display: block;
+    @include focus-visible;
+  }
+}
 
 .footer__menu-link {
   font-size: 0.75em;
@@ -1242,8 +1426,20 @@ html {
   @include mq(pc) {
     transition: opacity 0.3s;
 
-    &:hover {
-      opacity: 0.6;
+    @media (hover: hover) {
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+
+      @media (hover: hover) {
+        &:hover {
+          opacity: 1;
+        }
+      }
     }
   }
 }
