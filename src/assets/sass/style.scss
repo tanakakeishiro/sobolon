@@ -287,12 +287,6 @@ a:focus-visible {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-inline: 15px;
-
-  @include mq(pc) {
-    margin-inline: auto;
-    padding-inline: 40px;
-  }
 }
 
 .header__logo {

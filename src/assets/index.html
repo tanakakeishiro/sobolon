@@ -161,6 +161,19 @@
           padding-top: 0;
         }
       }
+
+      .inner {
+        padding-inline: 15px;
+      }
+
+      @media screen and (min-width: 768px) {
+        .inner {
+          max-width: calc(1200px + 40px * 2);
+          margin-inline: auto;
+          padding-inline: 40px;
+        }
+      }
+
       .header {
         position: fixed;
         top: 0;
@@ -409,7 +422,7 @@
 
   <body>
     <header class="header">
-      <div class="header__inner">
+      <div class="header__inner inner">
         <h1 class="header__logo">
           <a href="#"
             ><img
